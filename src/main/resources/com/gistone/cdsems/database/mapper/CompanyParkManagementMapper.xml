@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.CompanyParkManagementMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.CompanyParkManagement" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="PARK_NAME" property="parkName" jdbcType="VARCHAR" />
+    <result column="PROVINCE_CODE" property="provinceCode" jdbcType="VARCHAR" />
+    <result column="CITY_CODE" property="cityCode" jdbcType="VARCHAR" />
+    <result column="COUNTY_CODE" property="countyCode" jdbcType="VARCHAR" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="TRAFFIC" property="traffic" jdbcType="VARCHAR" />
+    <result column="INFRASTRUCTURE" property="infrastructure" jdbcType="VARCHAR" />
+    <result column="ADVANTAGE" property="advantage" jdbcType="VARCHAR" />
+    <result column="CONTACT_NAME" property="contactName" jdbcType="VARCHAR" />
+    <result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="UPLOAD_TIME" property="uploadTime" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- 查询工业园列表 -->
+  <select id="SelectParkPollutantsList" resultType="hashMap" parameterType="hashMap">
+		SELECT  ID,
+				PARK_ID,
+				NVL(HEXAVALENTCHROMIUM,'0') HEXAVALENTCHROMIUM,
+				NVL(THE_TOTAL_CHROMIUM,'0') THE_TOTAL_CHROMIUM,
+				NVL(CADMIUM,'0') CADMIUM,
+				NVL(MERCURY,'0') MERCURY,
+				NVL(ARSENIC,'0') ARSENIC,
+				NVL(LEAD,'0') LEAD,
+				NVL(NICKEL,'0') NICKEL,
+				NVL(COPPER,'0') COPPER,
+				NVL(BENZOPYRENE,'0') BENZOPYRENE,
+				NVL(OILTYPE,'0') OILTYPE,
+				NVL(OTHERPOLLUTANTS,'0') OTHERPOLLUTANTS,
+				NVL(CREATE_USER_ID,'') CREATE_USER_ID,
+				NVL(CREATE_TIME,'') CREATE_TIME,
+				NVL(UPLOAD_TIME,'') UPLOAD_TIME 
+	
+	FROM T_COMPANY_PARK_POLLUTANTS WHERE PARK_ID = #{id}
+  </select>
+  <!-- 查询工业园列表 -->
+  <select id="listAll" resultType="hashMap" parameterType="hashMap">
+		SELECT * FROM (
+			SELECT ROWNUM RN,t3.TC_NAME PROVINCE_NAME,t4.TC_NAME CITY_NAME,t5.TC_NAME COUNTY_NAME,t1.* FROM (
+			SELECT  ID,PARK_NAME,PROVINCE_CODE,CITY_CODE,COUNTY_CODE,
+					AREA,ADDRESS,TRAFFIC,INFRASTRUCTURE,ADVANTAGE,CONTACT_NAME,
+					CONTACT_PHONE,UPLOAD_TIME,CREATE_USER_ID,CREATE_TIME,
+					UPDATE_USER_ID,UPDATE_TIME
+			 FROM T_COMPANY_PARK_MANAGEMENT) t1
+			LEFT JOIN TB_CITY t3
+			ON t1.PROVINCE_CODE = t3.TC_CODE
+			LEFT JOIN TB_CITY t4
+			ON t1.CITY_CODE = t4.TC_CODE
+			LEFT JOIN TB_CITY t5
+			ON t1.COUNTY_CODE = t5.TC_CODE
+			WHERE 1=1
+			<if test="cityCode!=null">
+				AND CITY_CODE = #{cityCode}
+			</if>
+			<if test="countyCode!=null">
+				AND COUNTY_CODE = #{countyCode}
+			</if>
+			<if test="parkName!=null">
+				AND PARK_NAME LIKE '%${parkName}%'
+			</if>
+			<if test="startTime!=null">
+				AND UPLOAD_TIME >= '${startTime} 00:00:00'
+			</if>
+			<if test="endTime!=null">
+				AND UPLOAD_TIME &lt;= '${endTime} 23:59:59'
+			</if>
+			
+		) 
+  </select>
+  <!-- 查询工业园列表 -->
+  <select id="SelectParkManagementList" resultType="hashMap" parameterType="hashMap">
+		SELECT * FROM (
+			SELECT ROWNUM RN,t3.TC_NAME PROVINCE_NAME,t4.TC_NAME CITY_NAME,t5.TC_NAME COUNTY_NAME,t1.* FROM (
+			SELECT  ID,
+					NVL(PARK_NAME,'') PARK_NAME,
+					NVL(PROVINCE_CODE,'') PROVINCE_CODE,
+					NVL(CITY_CODE,'') CITY_CODE,
+					NVL(COUNTY_CODE,'') COUNTY_CODE,
+					NVL(AREA,'') AREA,
+					NVL(ADDRESS,'') ADDRESS,
+					NVL(TRAFFIC,'') TRAFFIC,
+					NVL(INFRASTRUCTURE,'') INFRASTRUCTURE,
+					NVL(ADVANTAGE,'') ADVANTAGE,
+					NVL(CONTACT_NAME,'') CONTACT_NAME,
+					NVL(CONTACT_PHONE,'') CONTACT_PHONE,
+					NVL(UPLOAD_TIME,'') UPLOAD_TIME,
+					NVL(CREATE_USER_ID,'') CREATE_USER_ID,
+					NVL(CREATE_TIME,'') CREATE_TIME,
+					NVL(UPDATE_USER_ID,'') UPDATE_USER_ID,
+					NVL(UPDATE_TIME,'') UPDATE_TIME
+			 FROM T_COMPANY_PARK_MANAGEMENT ORDER BY CREATE_TIME DESC) t1
+			LEFT JOIN TB_CITY t3
+			ON t1.PROVINCE_CODE = t3.TC_CODE
+			LEFT JOIN TB_CITY t4
+			ON t1.CITY_CODE = t4.TC_CODE
+			LEFT JOIN TB_CITY t5
+			ON t1.COUNTY_CODE = t5.TC_CODE
+			WHERE 1=1
+			<if test="cityCode!=null">
+				AND CITY_CODE = #{cityCode}
+			</if>
+			<if test="countyCode!=null">
+				AND COUNTY_CODE = #{countyCode}
+			</if>
+			<if test="parkName!=null">
+				AND PARK_NAME LIKE '%${parkName}%'
+			</if>
+			<if test="startTime!=null">
+				AND UPLOAD_TIME >= '${startTime} 00:00:00'
+			</if>
+			<if test="endTime!=null">
+				AND UPLOAD_TIME &lt;= '${endTime} 23:59:59'
+			</if>
+			<if test="id!=null">
+				AND id = #{id}
+			</if>
+			<if test="suRegioncode!=null">
+				AND COUNTY_CODE = #{suRegioncode}
+			</if>
+			
+		) WHERE 1=1
+		<if test="number!=null">
+			AND RN >=#{number} 
+		</if>
+		<if test="size!=null">
+			AND RN &lt;=#{size}
+		</if>
+  </select>
+  <!-- 查询工业园列表总数  -->
+  <select id="SelectParkManagementListCount" resultType="hashMap" parameterType="hashMap">
+			SELECT COUNT(*) COUNT FROM (
+			SELECT  ID,PARK_NAME,PROVINCE_CODE,CITY_CODE,COUNTY_CODE,
+					AREA,ADDRESS,TRAFFIC,INFRASTRUCTURE,ADVANTAGE,CONTACT_NAME,
+					CONTACT_PHONE,UPLOAD_TIME,CREATE_USER_ID,CREATE_TIME,
+					UPDATE_USER_ID,UPDATE_TIME
+			 FROM T_COMPANY_PARK_MANAGEMENT) t1
+			LEFT JOIN TB_CITY t3
+			ON t1.PROVINCE_CODE = t3.TC_CODE
+			LEFT JOIN TB_CITY t4
+			ON t1.CITY_CODE = t4.TC_CODE
+			LEFT JOIN TB_CITY t5
+			ON t1.COUNTY_CODE = t5.TC_CODE
+			WHERE  1=1
+			<if test="cityCode!=null">
+				AND CITY_CODE = #{cityCode}
+			</if>
+			<if test="countyCode!=null">
+				AND COUNTY_CODE = #{countyCode}
+			</if>
+			<if test="parkName!=null">
+				AND PARK_NAME LIKE '%${parkName}%'
+			</if>
+			<if test="startTime!=null">
+				AND UPLOAD_TIME >= '${startTime} 00:00:00'
+			</if>
+			<if test="endTime!=null">
+				AND UPLOAD_TIME &lt;= '${endTime} 23:59:59'
+			</if>
+			<if test="suRegioncode!=null">
+				AND COUNTY_CODE = #{suRegioncode}
+			</if>
+  </select>
+  <!-- 查询工业园是否重名-->
+  <select id="SelectParkManagementInfor" resultType="hashMap" parameterType="hashMap">
+	SELECT * FROM T_COMPANY_PARK_MANAGEMENT WHERE PARK_NAME = #{parkName}
+  </select>
+  <select id="SelectParkManagementInforByid" resultType="hashMap" parameterType="hashMap">
+	SELECT * FROM T_COMPANY_PARK_MANAGEMENT WHERE PARK_NAME = #{parkName} AND ID != #{id}
+  </select>
+  
+  <delete id="delParkManagementInfor" parameterType="java.lang.String">
+  	DELETE T_COMPANY_PARK_MANAGEMENT WHERE ID in (${id})
+  </delete>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- 以上  自定义SQL -->
+  
+  <insert id="insertParkManagementInfor" parameterType="com.gistone.cdsems.database.entity.CompanyParkManagement" >
+		<selectKey resultType="Long" order="AFTER" keyProperty="id"> 
+            SELECT ID.CURRVAL as id from DUAL
+        </selectKey>
+  		INSERT INTO T_COMPANY_PARK_MANAGEMENT
+		(	 ID,
+			 PARK_NAME, 
+			 CITY_CODE, 
+			 COUNTY_CODE, 
+			 AREA, 
+			 ADDRESS, 
+			 TRAFFIC, 
+			 INFRASTRUCTURE, 
+		     ADVANTAGE, 
+		     CONTACT_NAME, 
+		     CONTACT_PHONE, 
+		     CREATE_USER_ID, 
+		     CREATE_TIME)
+			 VALUES 
+		(	ID.nextval,
+			'${parkName}',
+			'${cityCode}',
+			'${countyCode}',
+			'${area}',
+			'${address}',
+			'${traffic}',
+			'${infrastructure}',
+			'${advantage}',
+			'${contactName}',
+			'${contactPhone}',
+			'${createUserId}',
+			'${createTime}'
+		)
+  </insert>
+    	
+  <!-- 批量插入数据 -->
+    <insert id="saveBatch" parameterType="java.util.Map">
+    	insert into T_COMPANY_PARK_MANAGEMENT(
+	    	 ID, 
+	    	 PARK_NAME, 
+			 COUNTY_CODE, 
+			 AREA, 
+			 ADDRESS, 
+			 TRAFFIC, 
+			 INFRASTRUCTURE, 
+		     ADVANTAGE, 
+		     CONTACT_NAME, 
+		     CONTACT_PHONE, 
+		     CREATE_USER_ID, 
+		     CREATE_TIME
+    	)select ID.NEXTVAL,a.* from(
+    	<foreach collection ="list" item="item" separator ="union" close=")" open="(">
+        select
+				'${item.parkName}' t1,
+				'${item.countyCode}' t2,
+				'${item.area}' t3,
+				'${item.address}' t4,
+				'${item.traffic}' t5,
+				'${item.infrastructure}' t6,
+				'${item.advantage}' t7,
+				'${item.contactName}' t8,
+				'${item.contactPhone}' t9,
+				'${item.createUserId}' t10,
+				'${item.createTime}' t11
+    	from DUAL
+    	</foreach>
+    	) a
+    </insert>  	
+    	
+  <update id="updateParkManagementInfor" parameterType="com.gistone.cdsems.database.entity.CompanyParkManagement">
+  	  UPDATE T_COMPANY_PARK_MANAGEMENT SET 
+		     PARK_NAME='${parkName}', 
+		     AREA='${area}', 
+			 ADDRESS='${address}', 
+			 TRAFFIC='${traffic}', 
+			 INFRASTRUCTURE='${infrastructure}', 
+		     ADVANTAGE='${advantage}', 
+		     CONTACT_NAME='${contactName}',
+		      CONTACT_PHONE='${contactPhone}', 
+		     UPDATE_USER_ID='${updateUserId}', 
+		     UPDATE_TIME='${updateTime}'
+		     WHERE ID = '${id}'
+  </update>
+  
+  <sql id="Base_Column_List" >
+    ID, PARK_NAME, PROVINCE_CODE, CITY_CODE, COUNTY_CODE, AREA, ADDRESS, TRAFFIC, INFRASTRUCTURE, 
+    ADVANTAGE, CONTACT_NAME, CONTACT_PHONE, UPLOAD_TIME, CREATE_USER_ID, CREATE_TIME, 
+    UPDATE_USER_ID, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_COMPANY_PARK_MANAGEMENT
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_COMPANY_PARK_MANAGEMENT
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.CompanyParkManagement" >
+    insert into T_COMPANY_PARK_MANAGEMENT (ID, PARK_NAME, PROVINCE_CODE, 
+      CITY_CODE, COUNTY_CODE, AREA, 
+      ADDRESS, TRAFFIC, INFRASTRUCTURE, 
+      ADVANTAGE, CONTACT_NAME, CONTACT_PHONE, 
+      UPLOAD_TIME, CREATE_USER_ID, CREATE_TIME, 
+      UPDATE_USER_ID, UPDATE_TIME)
+    values (#{id,jdbcType=DECIMAL}, #{parkName,jdbcType=VARCHAR}, #{provinceCode,jdbcType=VARCHAR}, 
+      #{cityCode,jdbcType=VARCHAR}, #{countyCode,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{traffic,jdbcType=VARCHAR}, #{infrastructure,jdbcType=VARCHAR}, 
+      #{advantage,jdbcType=VARCHAR}, #{contactName,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
+      #{uploadTime,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{updateUserId,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.CompanyParkManagement" >
+    insert into T_COMPANY_PARK_MANAGEMENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="parkName != null" >
+        PARK_NAME,
+      </if>
+      <if test="provinceCode != null" >
+        PROVINCE_CODE,
+      </if>
+      <if test="cityCode != null" >
+        CITY_CODE,
+      </if>
+      <if test="countyCode != null" >
+        COUNTY_CODE,
+      </if>
+      <if test="area != null" >
+        AREA,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="traffic != null" >
+        TRAFFIC,
+      </if>
+      <if test="infrastructure != null" >
+        INFRASTRUCTURE,
+      </if>
+      <if test="advantage != null" >
+        ADVANTAGE,
+      </if>
+      <if test="contactName != null" >
+        CONTACT_NAME,
+      </if>
+      <if test="contactPhone != null" >
+        CONTACT_PHONE,
+      </if>
+      <if test="uploadTime != null" >
+        UPLOAD_TIME,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="parkName != null" >
+        #{parkName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null" >
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null" >
+        #{countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="traffic != null" >
+        #{traffic,jdbcType=VARCHAR},
+      </if>
+      <if test="infrastructure != null" >
+        #{infrastructure,jdbcType=VARCHAR},
+      </if>
+      <if test="advantage != null" >
+        #{advantage,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null" >
+        #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        #{uploadTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.CompanyParkManagement" >
+    update T_COMPANY_PARK_MANAGEMENT
+    <set >
+      <if test="parkName != null" >
+        PARK_NAME = #{parkName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null" >
+        PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null" >
+        COUNTY_CODE = #{countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="traffic != null" >
+        TRAFFIC = #{traffic,jdbcType=VARCHAR},
+      </if>
+      <if test="infrastructure != null" >
+        INFRASTRUCTURE = #{infrastructure,jdbcType=VARCHAR},
+      </if>
+      <if test="advantage != null" >
+        ADVANTAGE = #{advantage,jdbcType=VARCHAR},
+      </if>
+      <if test="contactName != null" >
+        CONTACT_NAME = #{contactName,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        UPLOAD_TIME = #{uploadTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.CompanyParkManagement" >
+    update T_COMPANY_PARK_MANAGEMENT
+    set PARK_NAME = #{parkName,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      COUNTY_CODE = #{countyCode,jdbcType=VARCHAR},
+      AREA = #{area,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      TRAFFIC = #{traffic,jdbcType=VARCHAR},
+      INFRASTRUCTURE = #{infrastructure,jdbcType=VARCHAR},
+      ADVANTAGE = #{advantage,jdbcType=VARCHAR},
+      CONTACT_NAME = #{contactName,jdbcType=VARCHAR},
+      CONTACT_PHONE = #{contactPhone,jdbcType=VARCHAR},
+      UPLOAD_TIME = #{uploadTime,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+   <!-- 查询县的详细数据 -->
+    <select id="selectByCounty" parameterType="java.util.Map" resultType="java.util.Map">
+    	select <include refid="Base_Column_List"></include> 
+    	from T_COMPANY_PARK_MANAGEMENT
+    	where 1=1 
+    	<if test="parkName!=null">
+				AND PARK_NAME LIKE '%${parkName}%'
+		</if>
+    	<if test="contactName!=null">
+				ANDCONTACT_NAME LIKE '%${contactName}%'
+		</if>
+		<if test="contactPhone!=null">
+				AND CONTACT_PHONE LIKE '%${contactPhone}%'
+		</if>
+    	<if test="countyCode!=null">
+				AND COUNTY_CODE = #{countyCode}
+		</if>
+    </select>
+    <!-- 查询各个县的计数数据 -->
+    <select id="selectByCity" parameterType="java.util.Map" resultType="java.util.Map">
+    	select * from (
+		    select
+		    count(*) count, COUNTY_CODE code
+		    from T_COMPANY_PARK_MANAGEMENT
+		    where 1=1
+		    <if test="parkName!=null">
+				AND PARK_NAME LIKE '%${parkName}%'
+			</if>
+	    	<if test="contactName!=null">
+					ANDCONTACT_NAME LIKE '%${contactName}%'
+			</if>
+			<if test="contactPhone!=null">
+					AND CONTACT_PHONE LIKE '%${contactPhone}%'
+			</if>
+		     	group by COUNTY_CODE)a left join  
+		     (select TC_LON LON,TC_LAT LAT,TC_NAME name,TC_CODE from  TB_CITY )b on a.code = b.TC_CODE
+    	
+    </select>
+    <!-- 查询全市数据  -->
+    <select id="selectAllCity" parameterType="java.util.Map" resultType="java.util.Map">
+    	select <include refid="Base_Column_List"></include> 
+    	from T_COMPANY_PARK_MANAGEMENT
+    	where 1=1 
+    	<if test="parkName!=null">
+				AND PARK_NAME LIKE '%${parkName}%'
+		</if>
+    	<if test="contactName!=null">
+				ANDCONTACT_NAME LIKE '%${contactName}%'
+		</if>
+		<if test="contactPhone!=null">
+				AND CONTACT_PHONE LIKE '%${contactPhone}%'
+		</if>
+    	<if test="cityCode!=null">
+				AND CITY_CODE = #{cityCode}
+		</if>
+    </select>
+</mapper>

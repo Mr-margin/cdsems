@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gistone.cdsems.database.mapper.TAGRICUTURALSOILMapper">
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.TAGRICUTURALSOIL">
+    <id column="AID" jdbcType="DECIMAL" property="aid" />
+    <result column="AGRICUTURAL_NAME" jdbcType="VARCHAR" property="agricuturalName" />
+    <result column="AGRICUTURAL_CODE" jdbcType="VARCHAR" property="agricuturalCode" />
+    <result column="AGRICUTURAL_TYPE" jdbcType="VARCHAR" property="agricuturalType" />
+    <result column="PROVINCE_CODE" jdbcType="VARCHAR" property="provinceCode" />
+    <result column="CITY_CODE" jdbcType="VARCHAR" property="cityCode" />
+    <result column="COUNTY_CODE" jdbcType="VARCHAR" property="countyCode" />
+    <result column="LONGITUDE" jdbcType="VARCHAR" property="longitude" />
+    <result column="LATITUDE" jdbcType="VARCHAR" property="latitude" />
+    <result column="ALTITUDE" jdbcType="VARCHAR" property="altitude" />
+    <result column="RESERVED_FIELD1" jdbcType="VARCHAR" property="reservedField1" />
+    <result column="RESERVED_FIELD2" jdbcType="VARCHAR" property="reservedField2" />
+    <result column="RESERVED_FIELD3" jdbcType="VARCHAR" property="reservedField3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    AID, AGRICUTURAL_NAME, AGRICUTURAL_CODE, AGRICUTURAL_TYPE, PROVINCE_CODE, CITY_CODE, 
+    COUNTY_CODE, LONGITUDE, LATITUDE, ALTITUDE, RESERVED_FIELD1, RESERVED_FIELD2, RESERVED_FIELD3
+  </sql>
+  <select id="selectByExample" parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOILExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_AGRICUTURAL_SOIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_AGRICUTURAL_SOIL
+    where AID = #{aid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from T_AGRICUTURAL_SOIL
+    where AID = #{aid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOILExample">
+    delete from T_AGRICUTURAL_SOIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOIL">
+    <selectKey keyProperty="aid" order="AFTER" resultType="java.lang.Long">
+      SELECT T_AGRICUTURAL_SOIL_SEQ.NEXTVAL as aid from DUAL
+    </selectKey>
+    insert into T_AGRICUTURAL_SOIL (AGRICUTURAL_NAME, AGRICUTURAL_CODE, 
+      AGRICUTURAL_TYPE, PROVINCE_CODE, CITY_CODE, 
+      COUNTY_CODE, LONGITUDE, LATITUDE, 
+      ALTITUDE, RESERVED_FIELD1, RESERVED_FIELD2, 
+      RESERVED_FIELD3)
+    values (#{agricuturalName,jdbcType=VARCHAR}, #{agricuturalCode,jdbcType=VARCHAR}, 
+      #{agricuturalType,jdbcType=VARCHAR}, #{provinceCode,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, 
+      #{countyCode,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
+      #{altitude,jdbcType=VARCHAR}, #{reservedField1,jdbcType=VARCHAR}, #{reservedField2,jdbcType=VARCHAR}, 
+      #{reservedField3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOIL">
+    <selectKey keyProperty="aid" order="AFTER" resultType="java.lang.Long">
+      Oracle
+    </selectKey>
+    insert into T_AGRICUTURAL_SOIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="agricuturalName != null">
+        AGRICUTURAL_NAME,
+      </if>
+      <if test="agricuturalCode != null">
+        AGRICUTURAL_CODE,
+      </if>
+      <if test="agricuturalType != null">
+        AGRICUTURAL_TYPE,
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE,
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE,
+      </if>
+      <if test="countyCode != null">
+        COUNTY_CODE,
+      </if>
+      <if test="longitude != null">
+        LONGITUDE,
+      </if>
+      <if test="latitude != null">
+        LATITUDE,
+      </if>
+      <if test="altitude != null">
+        ALTITUDE,
+      </if>
+      <if test="reservedField1 != null">
+        RESERVED_FIELD1,
+      </if>
+      <if test="reservedField2 != null">
+        RESERVED_FIELD2,
+      </if>
+      <if test="reservedField3 != null">
+        RESERVED_FIELD3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="agricuturalName != null">
+        #{agricuturalName,jdbcType=VARCHAR},
+      </if>
+      <if test="agricuturalCode != null">
+        #{agricuturalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="agricuturalType != null">
+        #{agricuturalType,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null">
+        #{countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="altitude != null">
+        #{altitude,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField1 != null">
+        #{reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField2 != null">
+        #{reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField3 != null">
+        #{reservedField3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOILExample" resultType="java.lang.Long">
+    select count(*) from T_AGRICUTURAL_SOIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_AGRICUTURAL_SOIL
+    <set>
+      <if test="record.aid != null">
+        AID = #{record.aid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.agricuturalName != null">
+        AGRICUTURAL_NAME = #{record.agricuturalName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agricuturalCode != null">
+        AGRICUTURAL_CODE = #{record.agricuturalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agricuturalType != null">
+        AGRICUTURAL_TYPE = #{record.agricuturalType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceCode != null">
+        PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null">
+        CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countyCode != null">
+        COUNTY_CODE = #{record.countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null">
+        LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null">
+        LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.altitude != null">
+        ALTITUDE = #{record.altitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField1 != null">
+        RESERVED_FIELD1 = #{record.reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField2 != null">
+        RESERVED_FIELD2 = #{record.reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField3 != null">
+        RESERVED_FIELD3 = #{record.reservedField3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_AGRICUTURAL_SOIL
+    set AID = #{record.aid,jdbcType=DECIMAL},
+      AGRICUTURAL_NAME = #{record.agricuturalName,jdbcType=VARCHAR},
+      AGRICUTURAL_CODE = #{record.agricuturalCode,jdbcType=VARCHAR},
+      AGRICUTURAL_TYPE = #{record.agricuturalType,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      COUNTY_CODE = #{record.countyCode,jdbcType=VARCHAR},
+      LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      ALTITUDE = #{record.altitude,jdbcType=VARCHAR},
+      RESERVED_FIELD1 = #{record.reservedField1,jdbcType=VARCHAR},
+      RESERVED_FIELD2 = #{record.reservedField2,jdbcType=VARCHAR},
+      RESERVED_FIELD3 = #{record.reservedField3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOIL">
+    update T_AGRICUTURAL_SOIL
+    <set>
+      <if test="agricuturalName != null">
+        AGRICUTURAL_NAME = #{agricuturalName,jdbcType=VARCHAR},
+      </if>
+      <if test="agricuturalCode != null">
+        AGRICUTURAL_CODE = #{agricuturalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="agricuturalType != null">
+        AGRICUTURAL_TYPE = #{agricuturalType,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null">
+        COUNTY_CODE = #{countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        LATITUDE = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="altitude != null">
+        ALTITUDE = #{altitude,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField1 != null">
+        RESERVED_FIELD1 = #{reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField2 != null">
+        RESERVED_FIELD2 = #{reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField3 != null">
+        RESERVED_FIELD3 = #{reservedField3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where AID = #{aid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOIL">
+    update T_AGRICUTURAL_SOIL
+    set AGRICUTURAL_NAME = #{agricuturalName,jdbcType=VARCHAR},
+      AGRICUTURAL_CODE = #{agricuturalCode,jdbcType=VARCHAR},
+      AGRICUTURAL_TYPE = #{agricuturalType,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      COUNTY_CODE = #{countyCode,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      LATITUDE = #{latitude,jdbcType=VARCHAR},
+      ALTITUDE = #{altitude,jdbcType=VARCHAR},
+      RESERVED_FIELD1 = #{reservedField1,jdbcType=VARCHAR},
+      RESERVED_FIELD2 = #{reservedField2,jdbcType=VARCHAR},
+      RESERVED_FIELD3 = #{reservedField3,jdbcType=VARCHAR}
+    where AID = #{aid,jdbcType=DECIMAL}
+  </update>
+
+  <select id="selectByEntityPage" resultMap="BaseResultMap"  parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOIL">
+    select * from (
+      select rownum rn,a.* from (
+    select
+    <include refid="Base_Column_List"/>
+    from T_AGRICUTURAL_SOIL
+    where 1=1
+    <if test="agricuturalName != null">
+      and AGRICUTURAL_NAME like '%${agricuturalName}%'
+    </if>
+    <if test="agricuturalType != null">
+      and AGRICUTURAL_TYPE like '%${agricuturalType}%'
+    </if>
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if> order by AID desc
+    )a )where  rn between #{pageNumber} and #{pageSize}
+
+  </select>
+  <select id="selectByCount" resultType="Integer" parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOIL">
+    select
+      count(*)
+    from T_AGRICUTURAL_SOIL
+    where 1=1
+    <if test="agricuturalName != null">
+      and AGRICUTURAL_NAME like '%${agricuturalName}%'
+    </if>
+    <if test="agricuturalType != null">
+      and AGRICUTURAL_TYPE like '%${agricuturalType}%'
+    </if>
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <!--批量导入-->
+  <insert id="insertBath" parameterType="java.util.Map">
+    insert into T_AGRICUTURAL_SOIL(
+    AGRICUTURAL_NAME,AGRICUTURAL_CODE,AGRICUTURAL_TYPE,COUNTY_CODE,LONGITUDE,
+    LATITUDE,ALTITUDE
+    ) select a.* from (
+    <foreach collection="list" item="cd" separator ="union" close=")" open="(">
+      select
+      #{cd.AGRICUTURAL_NAME,jdbcType=VARCHAR},
+      #{cd.AGRICUTURAL_CODE,jdbcType=VARCHAR},
+      #{cd.AGRICUTURAL_TYPE,jdbcType=VARCHAR},
+      #{cd.COUNTY_CODE,jdbcType=VARCHAR},
+      #{cd.LONGITUDE,jdbcType=VARCHAR},
+      #{cd.LATITUDE,jdbcType=VARCHAR},
+      #{cd.ALTITUDE,jdbcType=VARCHAR}
+      from DUAL
+    </foreach>
+    ) a
+  </insert>
+
+  <!--批量导出-->
+  <select id="selectListByAids" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOIL" >
+    SELECT
+    <include refid="Base_Column_List" />
+    from T_AGRICUTURAL_SOIL
+    where 1=1
+    <if test="agricuturalName != null">
+      and AGRICUTURAL_NAME like '%${agricuturalName}%'
+    </if>
+    <if test="agricuturalType != null">
+      and AGRICUTURAL_TYPE like '%${agricuturalType}%'
+    </if>
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <!--//查询所有农用地-->
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOIL" >
+    select AID , AGRICUTURAL_NAME from  T_AGRICUTURAL_SOIL
+    where 1 =1
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <!--根据县查询详细信息-->
+  <select id="selectByCounty" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOIL">
+    select
+    <include refid="Base_Column_List" />
+    from T_AGRICUTURAL_SOIL
+    where 1=1
+    <if test="agricuturalName != null">
+     and AGRICUTURAL_NAME = #{agricuturalName,jdbcType=VARCHAR}
+    </if>
+    <if test="agricuturalCode != null">
+      and AGRICUTURAL_CODE = #{agricuturalCode,jdbcType=VARCHAR}
+    </if>
+    <if test="agricuturalType != null">
+      and AGRICUTURAL_TYPE = #{agricuturalType,jdbcType=VARCHAR}
+    </if>
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <!--查询整个市的数据-->
+  <select id="selectAllCity" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TBASICSCONTAMINATED">
+    select
+    <include refid="Base_Column_List" />
+    from T_AGRICUTURAL_SOIL
+    where 1=1
+    <if test="agricuturalName != null">
+     and AGRICUTURAL_NAME = #{agricuturalName,jdbcType=VARCHAR}
+    </if>
+    <if test="agricuturalCode != null">
+      and AGRICUTURAL_CODE = #{agricuturalCode,jdbcType=VARCHAR}
+    </if>
+    <if test="agricuturalType != null">
+      and AGRICUTURAL_TYPE = #{agricuturalType,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <!--根据市统计各个县信息-->
+  <select id="selectByCity" parameterType="hashMap" resultType="hashMap">
+    select * from (
+    select
+    count(*) count, COUNTY_CODE code
+    from T_AGRICUTURAL_SOIL
+    where 1=1
+    <if test="agricuturalName != null">
+     and AGRICUTURAL_NAME = #{agricuturalName,jdbcType=VARCHAR}
+    </if>
+    <if test="agricuturalCode != null">
+      and AGRICUTURAL_CODE = #{agricuturalCode,jdbcType=VARCHAR}
+    </if>
+    <if test="agricuturalType != null">
+      and AGRICUTURAL_TYPE = #{agricuturalType,jdbcType=VARCHAR}
+    </if>
+     group by COUNTY_CODE)a left join  (select TC_LON LON,TC_LAT LAT,TC_NAME name,TC_CODE from  TB_CITY )b 
+     on a.code = b.TC_CODE ORDER BY COUNT
+  </select>
+  <!-- 已上图 -->
+  <select id="alreadyShown" parameterType="com.gistone.cdsems.database.entity.TBASICSCONTAMINATED" resultType="java.lang.Integer">
+    select
+    count(*) count
+    from T_AGRICUTURAL_SOIL
+    where 1=1
+    <if test="agricuturalName != null">
+     and AGRICUTURAL_NAME = #{agricuturalName,jdbcType=VARCHAR}
+    </if>
+    <if test="agricuturalCode != null">
+      and AGRICUTURAL_CODE = #{agricuturalCode,jdbcType=VARCHAR}
+    </if>
+    <if test="agricuturalType != null">
+      and AGRICUTURAL_TYPE = #{agricuturalType,jdbcType=VARCHAR}
+    </if>
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+    and LONGITUDE is not null and LATITUDE is not null
+  </select>
+</mapper>

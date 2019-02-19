@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.SysLogTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.SysLogType" >
+    <id column="SLT_ID" property="sltId" jdbcType="DECIMAL" />
+    <result column="SLT_NAME" property="sltName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SLT_ID, SLT_NAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_LOG_TYPE
+    where SLT_ID = #{sltId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_LOG_TYPE
+    where SLT_ID = #{sltId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.SysLogType" >
+    insert into SYS_LOG_TYPE (SLT_ID, SLT_NAME)
+    values (#{sltId,jdbcType=DECIMAL}, #{sltName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.SysLogType" >
+    insert into SYS_LOG_TYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sltId != null" >
+        SLT_ID,
+      </if>
+      <if test="sltName != null" >
+        SLT_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sltId != null" >
+        #{sltId,jdbcType=DECIMAL},
+      </if>
+      <if test="sltName != null" >
+        #{sltName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.SysLogType" >
+    update SYS_LOG_TYPE
+    <set >
+      <if test="sltName != null" >
+        SLT_NAME = #{sltName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SLT_ID = #{sltId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.SysLogType" >
+    update SYS_LOG_TYPE
+    set SLT_NAME = #{sltName,jdbcType=VARCHAR}
+    where SLT_ID = #{sltId,jdbcType=DECIMAL}
+  </update>
+</mapper>

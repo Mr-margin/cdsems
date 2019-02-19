@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.IndexMapper" >
+  
+  <select id="getIndexCount" resultType="java.util.Map"  parameterType="java.util.Map">
+  		<!-- 污染地块 -->
+		select count(1) count from T_BASICS_CONTAMINATED  where 1=1
+		<if test="suRegioncode != null" >
+        	and COUNTY_CODE = #{suRegioncode}
+      	</if>
+      	<if test="suCompanyname != null" >
+        	and ENTERPRISE_NAME = #{suCompanyname}
+      	</if>
+		
+		union all
+		<!-- 农用地 -->
+		select count(1) from T_AGRICUTURAL_SOIL where 1=1
+		<if test="suRegioncode != null" >
+        	and COUNTY_CODE = #{suRegioncode}
+      	</if>
+      	<if test="suCompanyname != null" >
+        	and 1!=1
+      	</if>
+		
+		union all
+		<!-- 重点行业企业 -->
+		select count(1) from T_COMPANY_INFO where 1=1
+		<if test="suRegioncode != null" >
+        	and COUNTY_CODE = #{suRegioncode}
+      	</if>
+      	<if test="suCompanyname != null" >
+        	and COMPANY_NAME = #{suCompanyname}
+      	</if>
+      	
+		union all
+		<!-- 修复治理 -->
+		select count(1) from T_SOIL_REMEDIATION  where 1=1
+		<if test="suRegioncode != null" >
+        	and COUNTY = #{suRegioncode}
+      	</if>
+      	<if test="suCompanyname != null" >
+        	and 1!=1
+      	</if>
+  </select>
+  
+</mapper>

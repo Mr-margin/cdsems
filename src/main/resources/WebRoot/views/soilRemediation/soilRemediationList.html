@@ -1,0 +1,100 @@
+<div class=" box-body">
+    <!-- 面包屑 -->
+    <div class="panel panel-default  crumbs_box">
+        <div class="panel-body  clearfix">
+            <p class="crumbs  pull-left"><i class="iconfont">&#xe690;</i><span>土壤治理与修复项目</span><span> > 基础信息管理列表</span></p>
+        	<div class="pull-right">
+        		<button type="button" id="soilRemediation_add" class="btn btn-origin mr10 eleNone"   onclick="add()"><i class="iconfont ml0 mr5">&#xe61e;</i>添加</button>
+        		<button type="button" id="soilRemediation_deleteBatch" class="btn btn-danger mr10 eleNone" onclick="delBatch();"><i class="iconfont ml0 mr5">&#xe60d;</i>批量删除</button>
+        		<button type="button" id="soilRemediation_import" class="btn btn-info mr10  btn-import eleNone" onclick="impExcel();"><i class="iconfont">&#xe6ae;</i>导入</button>
+        		<button type="button" id="soilRemediation_export" class="btn btn-primary mr10 btn-import eleNone" onclick="expExcel();"><i class="iconfont">&#xe6ad;</i>导出</button>
+        	</div>
+        </div>
+    </div>
+    <div class="panel panel-default  content">
+        <div class="panel-body">
+            <div class="clearfix">
+	            <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+	            	<!-- 查询条件 -->
+	            	<!-- 查询条件最多显示三个超出显示在折叠窗里 -->
+	            	<div class="col-lg-10 col-md-10 col-sm-10 no-padding">
+	            		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin">
+	            			<div class="col-lg-4 col-md-4 col-sm-4  col-xs-4 no-padding text-right">
+	            				<label >项目名称</label>
+	            			</div>
+	            			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pr0">
+	            				<input id="name" type="text" class="form-control " autocomplete="off" placeholder="模糊匹配项目名称">
+	            			</div>
+	            		</div>
+	            		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin pl0">
+	            			<div class="col-lg-4 col-md-4 col-sm-4  col-xs-4 no-padding text-right">
+	            				<label>实施单位名称</label>
+	            			</div>
+	            			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pr0">
+	            				<input id="implement" type="text" class="form-control " autocomplete="off" placeholder="模糊匹配实施单位名称">
+	            			</div>
+	            		</div>
+	            		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin">
+	            			<div class="col-lg-4 col-md-4 col-sm-4  col-xs-4 no-padding text-right">
+	            				<label>所在区县</label>
+	            			</div>
+	            			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pr0">
+	            				<select id="county" class="form-control" ></select>
+	            			</div>
+	            		</div>
+	            		
+	                 </div>
+	                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right pull-right">
+            			<button type="button"  class="btn btn-success  btn-search"  onclick="initTable()">查询<i class="iconfont  iconfont1">&#xea1b;</i></button>
+            		</div>
+	            </div>
+	    	</div>
+	    	<!-- 折叠窗 -->
+	    	<!-- <div class="clearfix"   id="collapse" >
+              <div class="col-lg-12 col-md-12 col-sm-12 no-padding  mt15"  >
+           		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin">
+           			<div class="col-lg-3 col-md-3 col-sm-3  col-xs-3 no-padding text-right">
+           				<label for="name">条件查询</label>
+           			</div>
+           			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr0">
+           				<input type="text" class="form-control" >
+           			</div>
+           		</div>
+           		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin">
+           			<div class="col-lg-3 col-md-3 col-sm-3  col-xs-3 no-padding text-right">
+           				<label for="name">条件查询</label>
+           			</div>
+           			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr0">
+           				<input type="text" class="form-control" >
+           			</div>
+           		</div>
+           		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin">
+           			<div class="col-lg-3 col-md-3 col-sm-3  col-xs-3 no-padding text-right">
+           				<label for="name">条件查询</label>
+           			</div>
+           			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr0">
+           				<input type="text" class="form-control" >
+           			</div>
+           		</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin">
+           			<div class="col-lg-3 col-md-3 col-sm-3  col-xs-3 no-padding text-right">
+           				<label for="name">条件查询</label>
+           			</div>
+           			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr0">
+           				<input type="text" class="form-control" >
+           			</div>
+           		</div>
+          	  </div>
+          	</div>
+		    <div class="collapseBtn">
+           		<a class="flip"><img class="xs1"  src="img/index/arrowTop.png"><img class="xs2" style="display:none;transform: rotate(180deg);" src="img/index/arrowTop.png"></a>
+            </div> -->
+            <div >
+            	<table class="table table-bordered  " id="dataTable"> </table>  
+            </div>
+           	
+            
+    		
+    	</div>
+	</div>
+</div>

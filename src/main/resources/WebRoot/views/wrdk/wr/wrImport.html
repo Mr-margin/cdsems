@@ -1,0 +1,35 @@
+<div class=" box-body">
+    <!-- 面包屑 -->
+    <div class="panel panel-default  crumbs_box">
+        <div class="panel-body  clearfix">
+            <p class="crumbs  pull-left">
+            	<i class="iconfont">&#xe690;</i>当前位置：
+            	<span>污染地块</span><span> > </span><span>基础信息</span><span> > </span><span>导入</span>
+            </p>
+        	<div class="pull-right">
+        		<button class="btn btn-info  p6-25" onclick="back()">返回</button>
+        	</div>
+        </div>
+    </div>
+    <div class="panel panel-default  content">
+        <div class="panel-body pt50">
+         	<form class="form-horizontal  col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-2 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2" enctype ="multipart/form-data"   role="form" id="importForm">
+         		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+         			<div class="form-group col-lg-10 col-md-10 col-sm-10 col-xs-10">
+						<label for="" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control-label">选择文件</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								<input id="file" type="file" class="form-control" name="file" accept="application/vnd.ms-excel" placeholder="">
+						</div>
+						<div class="col-lg-2  col-md-2 col-sm-2 col-xs-6">
+							<button type="button" class="btn btn-default p6-25" ><a href="../../mould/污染地块信息模板.xls">下载模板</a></button>
+						</div>
+         			</div>
+         		</div>
+         	</form>
+         	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center  mt50">
+         		<button class="btn btn-warning mr10 p6-25"  onclick="submit()">提交</button>
+            	<button class="btn btn-default p6-25"  onclick="back()">取消</button>
+			</div>
+    	</div>
+	</div>
+</div>

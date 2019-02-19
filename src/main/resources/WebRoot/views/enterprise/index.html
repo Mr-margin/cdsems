@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<head>
+    <title>成都市土壤环境综合管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="renderer" content="webkit"/>
+	<meta name="force-rendering" content="webkit"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+	<!-- Bootstrap core CSS -->
+    <link href="../../css/plugins/bootstrap-table/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap - table -->
+    <link rel="stylesheet" href="../../css/plugins/bootstrap-table/bootstrap-table.min.css">
+    
+    <link rel="stylesheet" href="../../css/bootstrap-datetimepicker.min.css">
+    <!-- swal -->
+    <link rel="stylesheet" href="../../js/plugins/swal/sweetalert2.css">
+    <!-- select -->
+    <link rel="stylesheet" href="../../js/plugins/bootstrap-select/bootstrap-select.min.css">
+    <!-- Bootstrap - checkbox -->
+    <link rel="stylesheet" href="../../css/awesome-bootstrap-checkbox.css">
+    <!-- font awesome -->
+    <link href="../../css/awesome/font-awesome.min.css" rel="stylesheet" />
+    <!-- alifonts -->
+    <link href="../../css/aliFont/iconfont.css" rel="stylesheet">
+    <!--ztree-->
+    <link rel="stylesheet" href="../../js/plugins/ztree/css/zTreeStyle/zTreeStyle.css">
+    <!-- 自定义 -->
+    <link href="../../css/public.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/system.css" rel="stylesheet">
+    <link href="../../css/measure.css" rel="stylesheet">
+    <style type="text/css">
+    	.table th,.table td{
+    		text-align: center;
+    	}
+    </style>
+</head>
+<body >
+	<div class="page-content-wrapper  clearfix">
+		<ul id="Menus" class="sysList">
+			<li  id="company_list"  style="display:none;" class="sysLi1"><a href="#companyList"><div></div><p>基础信息</p></a></li>
+    		<li  id="companyMigration_list"  style="display:none;" class="sysLi2" ><a href="#companyMigrationList"><div></div><p>迁移信息</p></a></li>
+    		<li  id="companyPolluter_list"  style="display:none;" class="sysLi3"><a href="#companyPolluterList"><div></div><p>污染源信息</p></a></li>
+    		<li  id="companyReceptor_list"  style="display:none;" class="sysLi4"><a href="#companyReceptorList"><div></div><p>敏感受体信息</p></a></li>
+    		<li  id="companyMonitor_list"  style="display:none;" class="sysLi5"><a href="#companyMonitorList"><div></div><p>自行监测</p></a></li>
+    		<li  id="companyPollutantMonitor_list"  style="display:none;" class="sysLi5"><a href="#companyPollutantMonitorList"><div></div><p>特征污染物监测</p></a></li>
+		</ul>
+		<div  id="ui-view" ></div>
+	</div>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/vipspa.js"></script>
+	
+	<script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/plugins/es6-promise.auto.js"></script>
+	<script src="../../js/plugins/swal/sweetalert2.min.js"></script>
+	<script src="../../js/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+	<script src="../../js/plugins/bootstrap-select/defaults-zh_CN.js"></script>
+	<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<!--ztree-->
+	<script src="../../js/plugins/ztree/jquery.ztree.all.min.js"></script>
+	
+	<script src="../../js/bootstrap-datetimepicker.js"></script>
+	<script src="../../js/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="../../js/plugins/validate/jquery.validate.min.js"></script>
+	<script src="../../js/plugins/validate/jquery.validate.min.js"></script>
+	<script src="../../js/plugins/validate/messages_zh.min.js"></script>
+	<script src="../../js/config.js"></script>
+	
+	<script src="../../js/app/enterprise/index.js"></script>
+	
+	<script type="text/javascript">
+	//初始化日历框
+	function init_date(){
+		//初始化日视图
+		$('.date_day').datetimepicker({ 
+			language:  'zh-CN',  //日期
+	        weekStart: 1,
+	        todayBtn:  1,
+	        autoclose: 1,
+	        todayHighlight: 1,
+	        startView: 2,
+	        minView: 2,
+	        forceParse: 0,
+			format:'yyyy-mm-dd'
+		});
+		//初始化月视图
+		$('.date_month').datetimepicker({ 
+			language:  'zh-CN',  //日期
+	        weekStart: 1,
+	        todayBtn:  1,
+	        autoclose: 1,
+	        todayHighlight: 1,
+	        startView: 2,
+	        minView: 2,
+	        forceParse: 0,
+			format:'yyyy-mm'
+
+		});
+			//初始化年视图
+		$('.date_year').datetimepicker({ 
+			language:  'zh-CN',  //日期
+	        weekStart: 1,
+	        todayBtn:  1,
+	        autoclose: 1,
+	        todayHighlight: 1,
+	        startView: 2,
+	        minView: 2,
+	        forceParse: 0,
+			format:'yyyy'
+		});
+	}
+	</script>
+</body>

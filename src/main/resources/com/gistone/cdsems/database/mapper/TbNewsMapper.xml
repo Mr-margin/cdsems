@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.TbNewsMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.TbNews" >
+    <id column="TN_ID" property="tnId" jdbcType="DECIMAL" />
+    <result column="TN_TITLE" property="tnTitle" jdbcType="VARCHAR" />
+    <result column="TN_TYPE" property="tnType" jdbcType="VARCHAR" />
+    <result column="TN_SOURCE" property="tnSource" jdbcType="VARCHAR" />
+    <result column="TN_AUTHOR" property="tnAuthor" jdbcType="VARCHAR" />
+    <result column="TN_CHECKPERSON" property="tnCheckperson" jdbcType="VARCHAR" />
+    <result column="TN_POSTTIME" property="tnPosttime" jdbcType="TIMESTAMP" />
+    <result column="TN_ISTOP" property="tnIstop" jdbcType="VARCHAR" />
+    <result column="ADD_SU_ID" property="addSuId" jdbcType="DECIMAL" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="UPD_SU_ID" property="updSuId" jdbcType="DECIMAL" />
+    <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
+    <result column="TN_CHECKSTATUE" property="tnCheckstatue" jdbcType="VARCHAR" />
+	<collection property="tnTbNewsFiles" ofType="com.gistone.cdsems.database.entity.TbNewsFile">
+        <result column="TNF_ID" property="tnfId" jdbcType="DECIMAL" />
+    	<result column="TNF_TN_ID" property="tnfTnId" jdbcType="DECIMAL" />
+    	<result column="TNF_URL" property="tnfUrl" jdbcType="VARCHAR" />
+    	<result column="TNF_OLDNAME" property="tnfOldname" jdbcType="VARCHAR" />
+	</collection>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.gistone.cdsems.database.entity.TbNews" extends="BaseResultMap" >
+    <result column="TN_CONTENT" property="tnContent" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TN_ID, TN_TITLE, TN_TYPE, TN_SOURCE, TN_AUTHOR, TN_CHECKPERSON, TN_POSTTIME, TN_ISTOP, 
+    ADD_SU_ID, ADD_TIME, UPD_SU_ID, UPD_TIME, TN_CHECKSTATUE
+  </sql>
+  <sql id="TbNewsFile_Column_List" >
+    TNF_ID, TNF_TN_ID, TNF_URL, TNF_OLDNAME
+  </sql>
+  <sql id="Blob_Column_List" >
+    TN_CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    ,
+    <include refid="TbNewsFile_Column_List" />
+    from TB_NEWS tb
+    left join TB_NEWS_FILE tbf on tb.TN_ID=tbf.TNF_TN_ID
+    where TN_ID = #{tnId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TB_NEWS
+    where TN_ID = #{tnId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.TbNews" >
+    insert into TB_NEWS (TN_ID, TN_TITLE, TN_TYPE, 
+      TN_SOURCE, TN_AUTHOR, TN_CHECKPERSON, 
+      TN_POSTTIME, TN_ISTOP, ADD_SU_ID, 
+      ADD_TIME, UPD_SU_ID, UPD_TIME, 
+      TN_CHECKSTATUE, TN_CONTENT)
+    values (#{tnId,jdbcType=DECIMAL}, #{tnTitle,jdbcType=VARCHAR}, #{tnType,jdbcType=VARCHAR}, 
+      #{tnSource,jdbcType=VARCHAR}, #{tnAuthor,jdbcType=VARCHAR}, #{tnCheckperson,jdbcType=VARCHAR}, 
+      #{tnPosttime,jdbcType=TIMESTAMP}, #{tnIstop,jdbcType=VARCHAR}, #{addSuId,jdbcType=DECIMAL}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updSuId,jdbcType=DECIMAL}, #{updTime,jdbcType=TIMESTAMP}, 
+      #{tnCheckstatue,jdbcType=VARCHAR}, #{tnContent,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" keyProperty="tnId" parameterType="com.gistone.cdsems.database.entity.TbNews" >
+  		<selectKey resultType="BigDecimal"   order="BEFORE" keyProperty="tnId">  
+            SELECT TB_NEWS_SEQ.NEXTVAL as tnId from DUAL
+    	</selectKey>
+  
+    insert into TB_NEWS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tnId != null" >
+        TN_ID,
+      </if>
+      <if test="tnTitle != null" >
+        TN_TITLE,
+      </if>
+      <if test="tnType != null" >
+        TN_TYPE,
+      </if>
+      <if test="tnSource != null" >
+        TN_SOURCE,
+      </if>
+      <if test="tnAuthor != null" >
+        TN_AUTHOR,
+      </if>
+      <if test="tnCheckperson != null" >
+        TN_CHECKPERSON,
+      </if>
+      <if test="tnPosttime != null" >
+        TN_POSTTIME,
+      </if>
+      <if test="tnIstop != null" >
+        TN_ISTOP,
+      </if>
+      <if test="addSuId != null" >
+        ADD_SU_ID,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="updSuId != null" >
+        UPD_SU_ID,
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME,
+      </if>
+      <if test="tnCheckstatue != null" >
+        TN_CHECKSTATUE,
+      </if>
+      <if test="tnContent != null" >
+        TN_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tnId != null" >
+        #{tnId,jdbcType=DECIMAL},
+      </if>
+      <if test="tnTitle != null" >
+        #{tnTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tnType != null" >
+        #{tnType,jdbcType=VARCHAR},
+      </if>
+      <if test="tnSource != null" >
+        #{tnSource,jdbcType=VARCHAR},
+      </if>
+      <if test="tnAuthor != null" >
+        #{tnAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="tnCheckperson != null" >
+        #{tnCheckperson,jdbcType=VARCHAR},
+      </if>
+      <if test="tnPosttime != null" >
+        #{tnPosttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tnIstop != null" >
+        #{tnIstop,jdbcType=VARCHAR},
+      </if>
+      <if test="addSuId != null" >
+        #{addSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updSuId != null" >
+        #{updSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tnCheckstatue != null" >
+        #{tnCheckstatue,jdbcType=VARCHAR},
+      </if>
+      <if test="tnContent != null" >
+        #{tnContent,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.TbNews" >
+    update TB_NEWS
+    <set >
+      <if test="tnTitle != null" >
+        TN_TITLE = #{tnTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tnType != null" >
+        TN_TYPE = #{tnType,jdbcType=VARCHAR},
+      </if>
+      <if test="tnSource != null" >
+        TN_SOURCE = #{tnSource,jdbcType=VARCHAR},
+      </if>
+      <if test="tnAuthor != null" >
+        TN_AUTHOR = #{tnAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="tnCheckperson != null" >
+        TN_CHECKPERSON = #{tnCheckperson,jdbcType=VARCHAR},
+      </if>
+      <if test="tnPosttime != null" >
+        TN_POSTTIME = #{tnPosttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tnIstop != null" >
+        TN_ISTOP = #{tnIstop,jdbcType=VARCHAR},
+      </if>
+      <if test="addSuId != null" >
+        ADD_SU_ID = #{addSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updSuId != null" >
+        UPD_SU_ID = #{updSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tnCheckstatue != null" >
+        TN_CHECKSTATUE = #{tnCheckstatue,jdbcType=VARCHAR},
+      </if>
+      <if test="tnContent != null" >
+        TN_CONTENT = #{tnContent,jdbcType=CLOB},
+      </if>
+    </set>
+    where TN_ID = #{tnId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gistone.cdsems.database.entity.TbNews" >
+    update TB_NEWS
+    set TN_TITLE = #{tnTitle,jdbcType=VARCHAR},
+      TN_TYPE = #{tnType,jdbcType=VARCHAR},
+      TN_SOURCE = #{tnSource,jdbcType=VARCHAR},
+      TN_AUTHOR = #{tnAuthor,jdbcType=VARCHAR},
+      TN_CHECKPERSON = #{tnCheckperson,jdbcType=VARCHAR},
+      TN_POSTTIME = #{tnPosttime,jdbcType=TIMESTAMP},
+      TN_ISTOP = #{tnIstop,jdbcType=VARCHAR},
+      ADD_SU_ID = #{addSuId,jdbcType=DECIMAL},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPD_SU_ID = #{updSuId,jdbcType=DECIMAL},
+      UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      TN_CHECKSTATUE = #{tnCheckstatue,jdbcType=VARCHAR},
+      TN_CONTENT = #{tnContent,jdbcType=CLOB}
+    where TN_ID = #{tnId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.TbNews" >
+    update TB_NEWS
+    set TN_TITLE = #{tnTitle,jdbcType=VARCHAR},
+      TN_TYPE = #{tnType,jdbcType=VARCHAR},
+      TN_SOURCE = #{tnSource,jdbcType=VARCHAR},
+      TN_AUTHOR = #{tnAuthor,jdbcType=VARCHAR},
+      TN_CHECKPERSON = #{tnCheckperson,jdbcType=VARCHAR},
+      TN_POSTTIME = #{tnPosttime,jdbcType=TIMESTAMP},
+      TN_ISTOP = #{tnIstop,jdbcType=VARCHAR},
+      ADD_SU_ID = #{addSuId,jdbcType=DECIMAL},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPD_SU_ID = #{updSuId,jdbcType=DECIMAL},
+      UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      TN_CHECKSTATUE = #{tnCheckstatue,jdbcType=VARCHAR}
+    where TN_ID = #{tnId,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 列表 -->
+  <select id="list" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TbNews" >
+  	select * from (select R.*,ROWNUM RN from (
+	select
+		<include refid="Base_Column_List" />
+	from
+		TB_NEWS 
+	where 1=1
+	<if test="tnTitle != null" >
+		and TN_TITLE like '%${tnTitle}%'
+	</if>
+	<if test="tnType != null" >
+		and TN_TYPE = #{tnType}
+	</if>
+	<if test="tnCheckstatue != null" >
+		and TN_CHECKSTATUE = #{tnCheckstatue}
+	</if>
+	<if test="tnIstop != null" >
+		and TN_ISTOP = #{tnIstop}
+	</if>
+	order by TN_POSTTIME  desc 
+	)R)
+	where RN &gt; #{pageNumber,jdbcType=INTEGER} and RN  &lt;=(#{pageSize,jdbcType=INTEGER}+#{pageNumber,jdbcType=INTEGER})
+	
+  </select>
+  
+  <!-- 列表总数 -->
+  <select id="total" resultType="int" parameterType="com.gistone.cdsems.database.entity.TbNews" >
+	select
+		count(1)
+	from
+		TB_NEWS
+	where 1=1
+	<if test="tnTitle != null" >
+		and TN_TITLE like '%${tnTitle}%'
+	</if>
+	<if test="tnType != null" >
+		and TN_TYPE = #{tnType}
+	</if>
+	<if test="tnCheckstatue != null" >
+		and TN_CHECKSTATUE = #{tnCheckstatue}
+	</if>
+	<if test="tnIstop != null" >
+		and TN_ISTOP = #{tnIstop}
+	</if>
+  </select>
+  
+   <!-- 根据标题查询标题列表 -->
+  <select id="findNewsByTnTitle" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TbNews">
+  		select 
+  		<include refid="Base_Column_List" />
+    	from TB_NEWS
+    	where  TN_TITLE = #{tnTitle}
+    	<if test="tnId != null" >
+        	and TN_ID != #{tnId}
+      	</if>
+  </select>
+  
+  <!-- 批量更新 -->
+  <update id="updateNewsWithoutTnContentByTnIds" parameterType="com.gistone.cdsems.database.entity.TbNews" >
+    update TB_NEWS
+    <set >
+      <if test="tnTitle != null" >
+        TN_TITLE = #{tnTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tnType != null" >
+        TN_TYPE = #{tnType,jdbcType=VARCHAR},
+      </if>
+      <if test="tnSource != null" >
+        TN_SOURCE = #{tnSource,jdbcType=VARCHAR},
+      </if>
+      <if test="tnAuthor != null" >
+        TN_AUTHOR = #{tnAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="tnCheckperson != null" >
+        TN_CHECKPERSON = #{tnCheckperson,jdbcType=VARCHAR},
+      </if>
+      <if test="tnPosttime != null" >
+        TN_POSTTIME = #{tnPosttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tnIstop != null" >
+        TN_ISTOP = #{tnIstop,jdbcType=VARCHAR},
+      </if>
+      <if test="addSuId != null" >
+        ADD_SU_ID = #{addSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updSuId != null" >
+        UPD_SU_ID = #{updSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tnCheckstatue != null" >
+        TN_CHECKSTATUE = #{tnCheckstatue,jdbcType=VARCHAR},
+      </if>
+      <if test="tnContent != null" >
+        TN_CONTENT = #{tnContent,jdbcType=CLOB},
+      </if>
+    </set>
+    where TN_ID in (${tnIds})
+  </update>
+  
+  
+  <select id="getNewsListByType" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TbNews" >
+  	select * from (select R.*,ROWNUM RN from (
+	select
+		<include refid="Base_Column_List" />
+	from
+		TB_NEWS 
+	where TN_CHECKSTATUE=2
+	<if test="tnType != null" >
+		and TN_TYPE = #{tnType}
+	</if>
+	order by TN_ISTOP desc, TN_POSTTIME desc 
+	)R)
+	where RN &gt; #{pageNumber,jdbcType=INTEGER} and RN  &lt;=(#{pageSize,jdbcType=INTEGER}+#{pageNumber,jdbcType=INTEGER})
+	
+  </select>
+  
+  <!-- 列表总数 -->
+  <select id="totalByType" resultType="int" parameterType="com.gistone.cdsems.database.entity.TbNews" >
+	select
+		count(1)
+	from
+		TB_NEWS 
+	where TN_CHECKSTATUE=2
+	<if test="tnType != null" >
+		and TN_TYPE = #{tnType}
+	</if>
+  </select>
+  
+</mapper>

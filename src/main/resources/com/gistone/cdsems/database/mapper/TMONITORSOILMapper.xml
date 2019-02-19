@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gistone.cdsems.database.mapper.TMONITORSOILMapper">
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.TMONITORSOIL">
+    <id column="MID" jdbcType="DECIMAL" property="mid" />
+    <result column="AID" jdbcType="DECIMAL" property="aid" />
+    <result column="SAMPLE_TYPE" jdbcType="VARCHAR" property="sampleType" />
+    <result column="SAMPLE_POINT_CODE" jdbcType="VARCHAR" property="samplePointCode" />
+    <result column="SAMPLE_CODE" jdbcType="VARCHAR" property="sampleCode" />
+    <result column="PH" jdbcType="VARCHAR" property="ph" />
+    <result column="CADMIUM" jdbcType="VARCHAR" property="cadmium" />
+    <result column="MERCURY" jdbcType="VARCHAR" property="mercury" />
+    <result column="LEAD" jdbcType="VARCHAR" property="lead" />
+    <result column="ARSENIC" jdbcType="VARCHAR" property="arsenic" />
+    <result column="CHROMIUM" jdbcType="VARCHAR" property="chromium" />
+    <result column="COPPER" jdbcType="VARCHAR" property="copper" />
+    <result column="ZINC" jdbcType="VARCHAR" property="zinc" />
+    <result column="NICKEL" jdbcType="VARCHAR" property="nickel" />
+    <result column="AROMATIC" jdbcType="VARCHAR" property="aromatic" />
+    <result column="RESERVED_FIELD1" jdbcType="VARCHAR" property="reservedField1" />
+    <result column="RESERVED_FIELD2" jdbcType="VARCHAR" property="reservedField2" />
+    <result column="RESERVED_FIELD3" jdbcType="VARCHAR" property="reservedField3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    MID, AID, SAMPLE_TYPE, SAMPLE_POINT_CODE, SAMPLE_CODE, PH, CADMIUM, MERCURY, LEAD, 
+    ARSENIC, CHROMIUM, COPPER, ZINC, NICKEL, AROMATIC, RESERVED_FIELD1, RESERVED_FIELD2, 
+    RESERVED_FIELD3
+  </sql>
+  <select id="selectByExample" parameterType="com.gistone.cdsems.database.entity.TMONITORSOILExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_MONITOR_SOIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_MONITOR_SOIL
+    where MID = #{mid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from T_MONITOR_SOIL
+    where AID = #{aid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByPrimaryKeys" parameterType="java.lang.Long">
+    delete from T_MONITOR_SOIL
+    where MID = #{mid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gistone.cdsems.database.entity.TMONITORSOILExample">
+    delete from T_MONITOR_SOIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.TMONITORSOIL">
+    <!--<selectKey keyProperty="mid" order="AFTER" resultType="java.lang.Long">-->
+      <!--Oracle-->
+    <!--</selectKey>-->
+    <selectKey resultType="java.lang.Long"   order="AFTER" keyProperty="mid">
+      SELECT T_MONITOR_SOIL_SEQ.NEXTVAL as mid from DUAL
+    </selectKey>
+    insert into T_MONITOR_SOIL (AID, SAMPLE_TYPE, SAMPLE_POINT_CODE, 
+      SAMPLE_CODE, PH, CADMIUM, 
+      MERCURY, LEAD, ARSENIC, 
+      CHROMIUM, COPPER, ZINC, 
+      NICKEL, AROMATIC, RESERVED_FIELD1, 
+      RESERVED_FIELD2, RESERVED_FIELD3)
+    values (#{aid,jdbcType=DECIMAL}, #{sampleType,jdbcType=VARCHAR}, #{samplePointCode,jdbcType=VARCHAR}, 
+      #{sampleCode,jdbcType=VARCHAR}, #{ph,jdbcType=VARCHAR}, #{cadmium,jdbcType=VARCHAR}, 
+      #{mercury,jdbcType=VARCHAR}, #{lead,jdbcType=VARCHAR}, #{arsenic,jdbcType=VARCHAR}, 
+      #{chromium,jdbcType=VARCHAR}, #{copper,jdbcType=VARCHAR}, #{zinc,jdbcType=VARCHAR}, 
+      #{nickel,jdbcType=VARCHAR}, #{aromatic,jdbcType=VARCHAR}, #{reservedField1,jdbcType=VARCHAR}, 
+      #{reservedField2,jdbcType=VARCHAR}, #{reservedField3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.TMONITORSOIL">
+    <selectKey keyProperty="mid" order="AFTER" resultType="java.lang.Long">
+      Oracle
+    </selectKey>
+    insert into T_MONITOR_SOIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        AID,
+      </if>
+      <if test="sampleType != null">
+        SAMPLE_TYPE,
+      </if>
+      <if test="samplePointCode != null">
+        SAMPLE_POINT_CODE,
+      </if>
+      <if test="sampleCode != null">
+        SAMPLE_CODE,
+      </if>
+      <if test="ph != null">
+        PH,
+      </if>
+      <if test="cadmium != null">
+        CADMIUM,
+      </if>
+      <if test="mercury != null">
+        MERCURY,
+      </if>
+      <if test="lead != null">
+        LEAD,
+      </if>
+      <if test="arsenic != null">
+        ARSENIC,
+      </if>
+      <if test="chromium != null">
+        CHROMIUM,
+      </if>
+      <if test="copper != null">
+        COPPER,
+      </if>
+      <if test="zinc != null">
+        ZINC,
+      </if>
+      <if test="nickel != null">
+        NICKEL,
+      </if>
+      <if test="aromatic != null">
+        AROMATIC,
+      </if>
+      <if test="reservedField1 != null">
+        RESERVED_FIELD1,
+      </if>
+      <if test="reservedField2 != null">
+        RESERVED_FIELD2,
+      </if>
+      <if test="reservedField3 != null">
+        RESERVED_FIELD3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        #{aid,jdbcType=DECIMAL},
+      </if>
+      <if test="sampleType != null">
+        #{sampleType,jdbcType=VARCHAR},
+      </if>
+      <if test="samplePointCode != null">
+        #{samplePointCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleCode != null">
+        #{sampleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ph != null">
+        #{ph,jdbcType=VARCHAR},
+      </if>
+      <if test="cadmium != null">
+        #{cadmium,jdbcType=VARCHAR},
+      </if>
+      <if test="mercury != null">
+        #{mercury,jdbcType=VARCHAR},
+      </if>
+      <if test="lead != null">
+        #{lead,jdbcType=VARCHAR},
+      </if>
+      <if test="arsenic != null">
+        #{arsenic,jdbcType=VARCHAR},
+      </if>
+      <if test="chromium != null">
+        #{chromium,jdbcType=VARCHAR},
+      </if>
+      <if test="copper != null">
+        #{copper,jdbcType=VARCHAR},
+      </if>
+      <if test="zinc != null">
+        #{zinc,jdbcType=VARCHAR},
+      </if>
+      <if test="nickel != null">
+        #{nickel,jdbcType=VARCHAR},
+      </if>
+      <if test="aromatic != null">
+        #{aromatic,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField1 != null">
+        #{reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField2 != null">
+        #{reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField3 != null">
+        #{reservedField3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gistone.cdsems.database.entity.TMONITORSOILExample" resultType="java.lang.Long">
+    select count(*) from T_MONITOR_SOIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_MONITOR_SOIL
+    <set>
+      <if test="record.mid != null">
+        MID = #{record.mid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.aid != null">
+        AID = #{record.aid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sampleType != null">
+        SAMPLE_TYPE = #{record.sampleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.samplePointCode != null">
+        SAMPLE_POINT_CODE = #{record.samplePointCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sampleCode != null">
+        SAMPLE_CODE = #{record.sampleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ph != null">
+        PH = #{record.ph,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cadmium != null">
+        CADMIUM = #{record.cadmium,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mercury != null">
+        MERCURY = #{record.mercury,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lead != null">
+        LEAD = #{record.lead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arsenic != null">
+        ARSENIC = #{record.arsenic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chromium != null">
+        CHROMIUM = #{record.chromium,jdbcType=VARCHAR},
+      </if>
+      <if test="record.copper != null">
+        COPPER = #{record.copper,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zinc != null">
+        ZINC = #{record.zinc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickel != null">
+        NICKEL = #{record.nickel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aromatic != null">
+        AROMATIC = #{record.aromatic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField1 != null">
+        RESERVED_FIELD1 = #{record.reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField2 != null">
+        RESERVED_FIELD2 = #{record.reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField3 != null">
+        RESERVED_FIELD3 = #{record.reservedField3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_MONITOR_SOIL
+    set MID = #{record.mid,jdbcType=DECIMAL},
+      AID = #{record.aid,jdbcType=DECIMAL},
+      SAMPLE_TYPE = #{record.sampleType,jdbcType=VARCHAR},
+      SAMPLE_POINT_CODE = #{record.samplePointCode,jdbcType=VARCHAR},
+      SAMPLE_CODE = #{record.sampleCode,jdbcType=VARCHAR},
+      PH = #{record.ph,jdbcType=VARCHAR},
+      CADMIUM = #{record.cadmium,jdbcType=VARCHAR},
+      MERCURY = #{record.mercury,jdbcType=VARCHAR},
+      LEAD = #{record.lead,jdbcType=VARCHAR},
+      ARSENIC = #{record.arsenic,jdbcType=VARCHAR},
+      CHROMIUM = #{record.chromium,jdbcType=VARCHAR},
+      COPPER = #{record.copper,jdbcType=VARCHAR},
+      ZINC = #{record.zinc,jdbcType=VARCHAR},
+      NICKEL = #{record.nickel,jdbcType=VARCHAR},
+      AROMATIC = #{record.aromatic,jdbcType=VARCHAR},
+      RESERVED_FIELD1 = #{record.reservedField1,jdbcType=VARCHAR},
+      RESERVED_FIELD2 = #{record.reservedField2,jdbcType=VARCHAR},
+      RESERVED_FIELD3 = #{record.reservedField3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.TMONITORSOIL">
+    update T_MONITOR_SOIL
+    <set>
+      <if test="aid != null">
+        AID = #{aid,jdbcType=DECIMAL},
+      </if>
+      <if test="sampleType != null">
+        SAMPLE_TYPE = #{sampleType,jdbcType=VARCHAR},
+      </if>
+      <if test="samplePointCode != null">
+        SAMPLE_POINT_CODE = #{samplePointCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleCode != null">
+        SAMPLE_CODE = #{sampleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ph != null">
+        PH = #{ph,jdbcType=VARCHAR},
+      </if>
+      <if test="cadmium != null">
+        CADMIUM = #{cadmium,jdbcType=VARCHAR},
+      </if>
+      <if test="mercury != null">
+        MERCURY = #{mercury,jdbcType=VARCHAR},
+      </if>
+      <if test="lead != null">
+        LEAD = #{lead,jdbcType=VARCHAR},
+      </if>
+      <if test="arsenic != null">
+        ARSENIC = #{arsenic,jdbcType=VARCHAR},
+      </if>
+      <if test="chromium != null">
+        CHROMIUM = #{chromium,jdbcType=VARCHAR},
+      </if>
+      <if test="copper != null">
+        COPPER = #{copper,jdbcType=VARCHAR},
+      </if>
+      <if test="zinc != null">
+        ZINC = #{zinc,jdbcType=VARCHAR},
+      </if>
+      <if test="nickel != null">
+        NICKEL = #{nickel,jdbcType=VARCHAR},
+      </if>
+      <if test="aromatic != null">
+        AROMATIC = #{aromatic,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField1 != null">
+        RESERVED_FIELD1 = #{reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField2 != null">
+        RESERVED_FIELD2 = #{reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField3 != null">
+        RESERVED_FIELD3 = #{reservedField3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MID = #{mid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.TMONITORSOIL">
+    update T_MONITOR_SOIL
+    set AID = #{aid,jdbcType=DECIMAL},
+      SAMPLE_TYPE = #{sampleType,jdbcType=VARCHAR},
+      SAMPLE_POINT_CODE = #{samplePointCode,jdbcType=VARCHAR},
+      SAMPLE_CODE = #{sampleCode,jdbcType=VARCHAR},
+      PH = #{ph,jdbcType=VARCHAR},
+      CADMIUM = #{cadmium,jdbcType=VARCHAR},
+      MERCURY = #{mercury,jdbcType=VARCHAR},
+      LEAD = #{lead,jdbcType=VARCHAR},
+      ARSENIC = #{arsenic,jdbcType=VARCHAR},
+      CHROMIUM = #{chromium,jdbcType=VARCHAR},
+      COPPER = #{copper,jdbcType=VARCHAR},
+      ZINC = #{zinc,jdbcType=VARCHAR},
+      NICKEL = #{nickel,jdbcType=VARCHAR},
+      AROMATIC = #{aromatic,jdbcType=VARCHAR},
+      RESERVED_FIELD1 = #{reservedField1,jdbcType=VARCHAR},
+      RESERVED_FIELD2 = #{reservedField2,jdbcType=VARCHAR},
+      RESERVED_FIELD3 = #{reservedField3,jdbcType=VARCHAR}
+    where MID = #{mid,jdbcType=DECIMAL}
+  </update>
+
+  <!--表格分页列表-->
+  <select id="selectByEntityPage" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOIL">
+    select * from (
+    select rownum rn,aa.* from (
+    select a.*,b.* from (
+    (select
+    <include refid="Base_Column_List"/>
+    from T_MONITOR_SOIL
+    where 1=1) a left join (select AGRICUTURAL_NAME agricuturalName,AGRICUTURAL_TYPE,COUNTY_CODE,AID AAID from T_AGRICUTURAL_SOIL )b
+    on a.AID=B.AAID
+    ) where 1=1
+    <if test="agricuturalName != null">
+      and agricuturalName like '%${agricuturalName}%'
+    </if>
+
+    <if test="agricuturalType != null">
+      and AGRICUTURAL_TYPE like '%${agricuturalType}%'
+    </if>
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+    order by MID desc
+    )aa) where  rn between #{pageNumber} and #{pageSize}
+
+  </select>
+  <!--表格总数-->
+  <select id="selectByCount" resultType="Integer" parameterType="com.gistone.cdsems.database.entity.TAGRICUTURALSOIL" >
+    select COUNT(*) from (
+    (select
+    <include refid="Base_Column_List"/>
+    from T_MONITOR_SOIL
+    where 1=1) a left join (select AGRICUTURAL_NAME agricuturalName,AGRICUTURAL_TYPE,COUNTY_CODE,AID AAID from T_AGRICUTURAL_SOIL )b
+    on a.AID=B.AAID
+    ) where 1=1
+    <if test="agricuturalName != null">
+      and agricuturalName like '%${agricuturalName}%'
+    </if>
+
+    <if test="agricuturalType != null">
+      and AGRICUTURAL_TYPE like '%${agricuturalType}%'
+    </if>
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

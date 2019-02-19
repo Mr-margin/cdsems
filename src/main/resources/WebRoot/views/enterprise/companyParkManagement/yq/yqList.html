@@ -1,0 +1,65 @@
+<div class=" box-body">
+    <!-- 面包屑 -->
+    <div class="panel panel-default  crumbs_box">
+        <div class="panel-body  clearfix">
+            <p class="crumbs  pull-left"><i class="iconfont">&#xe690;</i><span>工业园区</span></p>
+        	<div class="pull-right">
+        		<button type="button" id="yqaddid"  class="btn btn-origin mr10 eleNone"   onclick="addyq()"><i class="iconfont ml0 mr5">&#xe61e;</i>添加</button>
+        		<button type="button" id="yqdelallid" class="btn btn-danger mr10 eleNone"  onclick="deleteALL()"><i class="iconfont ml0 mr5">&#xe60d;</i>批量删除</button>
+        		<button type="button" id="yqsubmitid" class="btn btn-info mr10  btn-import eleNone" onclick="yqsubmit()"><i class="iconfont">&#xe6ae;</i>导入</button>
+        		<button type="button" id="yqexpid" class="btn btn-primary btn-import eleNone" onclick="yqexpExcel()"><i class="iconfont">&#xe6ad;</i>导出</button>
+        	</div>
+        </div>
+    </div>
+    <div class="panel panel-default  content">
+        <div class="panel-body">
+            <div class="clearfix">
+	            <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+	            	<!-- 查询条件 -->
+	            	<!-- 查询条件最多显示三个超出显示在折叠窗里 -->
+	            	<div class="col-lg-12 col-md-12 col-sm-12 no-padding  clearfix">
+	            		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin  ">
+	            			<div class="form-group col-lg-12 col-md-12 col-sm-12  no-padding">
+		                        <div class="col-lg-5 col-md-5 col-sm-5  col-xs-5 no-padding text-right " >
+		                            <label class="">工业园区名称</label>
+		                        </div>
+		                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 pr0">
+		                            <input  type="text" class="form-control "   id="parkName">
+		                        </div>
+		                    </div>
+	            		</div>
+	            		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin ">
+	            			<div class="form-group col-lg-12 col-md-12 col-sm-12 no-padding">
+		                        <div class="col-lg-5 col-md-5 col-sm-5  col-xs-5 no-padding text-right" >
+		                            <label class="">县区</label>
+		                        </div>
+		                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 pr0">
+		                            <select id="countyCode"  class="form-control"  >
+							    		<option value="">请选择</option>
+							    	</select>
+		                        </div>
+		                    </div>
+	            		</div>
+	                 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-right pull-right  no-padding">
+		           			<button type="button"  class="btn btn-success  btn-search"  onclick="search()">查询<i class="iconfont  iconfont1">&#xea1b;</i></button>
+		           		</div>
+	                 </div>
+	            </div>
+	    	</div>
+	    	<!-- 折叠窗 -->
+	    	<!--<div class="clearfix"   id="collapse" >
+              <div class="col-lg-12 col-md-12 col-sm-12 no-padding  clearfix"  >
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right pull-right">
+           			<button type="button"  class="btn btn-success  btn-search"  onclick="search()">查询<i class="iconfont  iconfont1">&#xea1b;</i></button>
+           		</div>
+          	  </div>
+          	</div>
+		    <div class="collapseBtn">
+           		<a class="flip"><img class="xs1"  src="../../../img/index/arrowTop.png"><img class="xs2" style="display:none;transform: rotate(180deg);" src="../../../img/index/arrowTop.png"></a>
+            </div>-->
+            <div >
+            	<table class="table table-bordered  " id="dataTable"> </table>  
+            </div>
+    	</div>
+	</div>
+</div>

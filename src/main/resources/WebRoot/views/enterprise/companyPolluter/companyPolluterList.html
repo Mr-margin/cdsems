@@ -1,0 +1,105 @@
+<div class=" box-body">
+    <!-- 面包屑 -->
+    <div class="panel panel-default  crumbs_box">
+        <div class="panel-body  clearfix">
+            <p class="crumbs  pull-left"><i class="iconfont">&#xe690;</i><span>重点行业企业</span><span> > 污染源信息</span></p>
+        	<div class="pull-right">
+        		<button type="button" id="companyPolluter_add" class="btn btn-origin mr10 eleNone"   onclick="add()"><i class="iconfont ml0 mr5">&#xe61e;</i>添加</button>
+        		<button type="button" id="companyPolluter_deleteBatch" class="btn btn-danger mr10 eleNone" onclick="delBatch();"><i class="iconfont ml0 mr5">&#xe60d;</i>批量删除</button>
+        		<button type="button" id="companyPolluter_import" class="btn btn-info mr10  btn-import eleNone" onclick="impExcel();"><i class="iconfont">&#xe6ae;</i>导入</button>
+        		<button type="button" id="companyPolluter_export" class="btn btn-primary mr10 btn-import eleNone" onclick="expExcel();"><i class="iconfont">&#xe6ad;</i>导出</button>
+        	</div>
+        </div>
+    </div>
+    <div class="panel panel-default  content">
+        <div class="panel-body">
+            <div class="clearfix">
+	            <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+	            	<!-- 查询条件 -->
+	            	<!-- 查询条件最多显示三个超出显示在折叠窗里 -->
+	            	<div class="col-lg-11 col-md-11 col-sm-11 no-padding">
+	            		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin no-padding">
+	            			<div class="col-lg-4 col-md-4 col-sm-4  col-xs-4 no-padding text-right">
+	            				<label >企业名称</label>
+	            			</div>
+	            			<div class="col-lg-7 col-md-7 col-sm-7  col-xs-7 pr0">
+	            				<input id="company_name" type="text" class="form-control " autocomplete="off" placeholder="模糊匹配企业名称">
+	            			</div>
+	            		</div>
+	            		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin no-padding">
+	            			<div class="col-lg-4 col-md-4 col-sm-4  col-xs-4 no-padding text-right">
+	            				<label>组织机构代码</label>
+	            			</div>
+	            			<div class="col-lg-7 col-md-7 col-sm-7  col-xs-7 pr0">
+	            				<input id="organizing_code" type="text" class="form-control " autocomplete="off" placeholder="模糊匹配组织机构代码">
+	            			</div>
+	            		</div>
+	            		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin no-padding">
+	            			<div class="col-lg-4 col-md-4 col-sm-4  col-xs-4 no-padding text-right">
+	            				<label>法定代表人</label>
+	            			</div>
+	            			<div class="col-lg-7 col-md-7 col-sm-7  col-xs-7 pr0">
+	            				<input id="legal_person" type="text" class="form-control " autocomplete="off" placeholder="模糊匹配法定代表人">
+	            			</div>
+	            		</div>
+	            		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin no-padding">
+	            			<div class="col-lg-4 col-md-4 col-sm-4  col-xs-4 no-padding text-right">
+	            				<label>企业地址</label>
+	            			</div>
+	            			<div class="col-lg-7 col-md-7 col-sm-7  col-xs-7 pr0">
+	            				<input id="address" type="text" class="form-control " autocomplete="off" placeholder="模糊匹配地址">
+	            			</div>
+	            		</div>
+	            		
+	                 </div>
+	                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-right pull-right">
+            			<button type="button"  class="btn btn-success  btn-search"  onclick="initTable()">查询<i class="iconfont  iconfont1">&#xea1b;</i></button>
+            		</div>
+	            </div>
+	    	</div>
+	    	<!-- 折叠窗 -->
+	    	<div class="clearfix"   id="collapse" >
+              <div class="col-lg-11 col-md-11 col-sm-11 no-padding  mt15"  >
+           		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin no-padding">
+           			<div class="col-lg-4 col-md-4 col-sm-4  col-xs-4 no-padding text-right">
+           				<label>污染区类型</label>
+           			</div>
+           			<div class="col-lg-7 col-md-7 col-sm-7  col-xs-7 pr0">
+           				<select	class="form-control" id="areaType" onchange="areaTypeChange();">
+           					<option value="">全部</option>
+           					<option value="POLLUTER_AREA">污染区域总面积</option>
+           					<option value="PRODUCTION_AREA">生产区面积</option>
+           					<option value="STORAGE_AREA">储存区面积</option>
+           					<option value="WATER_TREATMENT_AREA">废水治理区面积</option>
+           					<option value="SOLID_DISPOSAL_AREA">固体废物贮存或处置区面积</option>
+           				</select>
+           			</div>
+           		</div>
+           		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin no-padding" id="valType">
+           			<div class="col-lg-1 col-md-1 col-sm-1  col-xs-1 no-padding text-right">
+           				<label>≥</label>
+           			</div>
+           			<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 pr0">
+           				<input id="minVal" type="number" onblur="if($('#maxVal').val()!=''&&value!=''&&$('#maxVal').val()<value){value=''}" class="form-control" oninput="value=value.replace(/[^\d\.]/g,'')" maxlength="10" autocomplete="off" placeholder="">
+           			</div>
+           			<div class="col-lg-1 col-md-1 col-sm-1  col-xs-1 no-padding text-right">
+           				<label>≤</label>
+           			</div>
+           			<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 pr0">
+           				<input id="maxVal" type="number" onblur="if($('#minVal').val()!=''&&value!=''&&$('#minVal').val()>value){value=''}" class="form-control" oninput="value=value.replace(/[^\d\.]/g,'')"  autocomplete="off" placeholder="">
+           			</div>
+           		</div>
+          	  </div>
+          	</div>
+		    <div class="collapseBtn">
+           		<a class="flip"><img class="xs1"  src="../../img/index/arrowTop.png"><img class="xs2" style="display:none;transform: rotate(180deg);" src="../../img/index/arrowTop.png"></a>
+            </div>
+            <div >
+            	<table class="table table-bordered  " id="dataTable"> </table>  
+            </div>
+           	
+            
+    		
+    	</div>
+	</div>
+</div>

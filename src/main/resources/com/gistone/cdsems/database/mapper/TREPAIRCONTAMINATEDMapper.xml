@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gistone.cdsems.database.mapper.TREPAIRCONTAMINATEDMapper">
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.TREPAIRCONTAMINATED">
+    <id column="TID" jdbcType="DECIMAL" property="tid" />
+    <result column="CID" jdbcType="DECIMAL" property="cid" />
+    <result column="TREAMENT_REPAIR_TITLE" jdbcType="VARCHAR" property="treamentRepairTitle" />
+    <result column="TREAMENT_REPAIR_WEBSITE" jdbcType="VARCHAR" property="treamentRepairWebsite" />
+    <result column="TREAMENT_REPAIR_UNIT" jdbcType="VARCHAR" property="treamentRepairUnit" />
+    <result column="TREAMENT_REPAIR_TIME" jdbcType="DATE" property="treamentRepairTime" />
+    <result column="TREAMENT_REPAIR_PATH" jdbcType="VARCHAR" property="treamentRepairPath" />
+    <result column="FILL_STATE" jdbcType="VARCHAR" property="fillState" />
+    <result column="RESERVED_FIELD1" jdbcType="VARCHAR" property="reservedField1" />
+    <result column="RESERVED_FIELD2" jdbcType="VARCHAR" property="reservedField2" />
+    <result column="RESERVED_FIELD3" jdbcType="VARCHAR" property="reservedField3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TID, CID, TREAMENT_REPAIR_TITLE, TREAMENT_REPAIR_WEBSITE, TREAMENT_REPAIR_UNIT, TREAMENT_REPAIR_TIME, 
+    TREAMENT_REPAIR_PATH, FILL_STATE, RESERVED_FIELD1, RESERVED_FIELD2, RESERVED_FIELD3
+  </sql>
+  <select id="selectByExample" parameterType="com.gistone.cdsems.database.entity.TREPAIRCONTAMINATEDExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_REPAIR_CONTAMINATED
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_REPAIR_CONTAMINATED
+    where TID = #{tid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from T_REPAIR_CONTAMINATED
+    where CID = #{cid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByPrimaryKeys" parameterType="java.lang.Long">
+    delete from T_REPAIR_CONTAMINATED
+    where TID = #{tid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gistone.cdsems.database.entity.TREPAIRCONTAMINATEDExample">
+    delete from T_REPAIR_CONTAMINATED
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.TREPAIRCONTAMINATED">
+    <selectKey resultType="java.lang.Long"   order="AFTER" keyProperty="tid">
+      SELECT T_REPAIR_CONTAMINATED_SEQ.NEXTVAL as tid from DUAL
+    </selectKey>
+    insert into T_REPAIR_CONTAMINATED (TID, CID, TREAMENT_REPAIR_TITLE,
+      TREAMENT_REPAIR_WEBSITE, TREAMENT_REPAIR_UNIT, 
+      TREAMENT_REPAIR_TIME, TREAMENT_REPAIR_PATH, FILL_STATE, 
+      RESERVED_FIELD1, RESERVED_FIELD2, RESERVED_FIELD3
+      )
+    values (#{tid,jdbcType=DECIMAL}, #{cid,jdbcType=DECIMAL}, #{treamentRepairTitle,jdbcType=VARCHAR}, 
+      #{treamentRepairWebsite,jdbcType=VARCHAR}, #{treamentRepairUnit,jdbcType=VARCHAR}, 
+      #{treamentRepairTime,jdbcType=DATE}, #{treamentRepairPath,jdbcType=VARCHAR}, #{fillState,jdbcType=VARCHAR}, 
+      #{reservedField1,jdbcType=VARCHAR}, #{reservedField2,jdbcType=VARCHAR}, #{reservedField3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.TREPAIRCONTAMINATED">
+    insert into T_REPAIR_CONTAMINATED
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        TID,
+      </if>
+      <if test="cid != null">
+        CID,
+      </if>
+      <if test="treamentRepairTitle != null">
+        TREAMENT_REPAIR_TITLE,
+      </if>
+      <if test="treamentRepairWebsite != null">
+        TREAMENT_REPAIR_WEBSITE,
+      </if>
+      <if test="treamentRepairUnit != null">
+        TREAMENT_REPAIR_UNIT,
+      </if>
+      <if test="treamentRepairTime != null">
+        TREAMENT_REPAIR_TIME,
+      </if>
+      <if test="treamentRepairPath != null">
+        TREAMENT_REPAIR_PATH,
+      </if>
+      <if test="fillState != null">
+        FILL_STATE,
+      </if>
+      <if test="reservedField1 != null">
+        RESERVED_FIELD1,
+      </if>
+      <if test="reservedField2 != null">
+        RESERVED_FIELD2,
+      </if>
+      <if test="reservedField3 != null">
+        RESERVED_FIELD3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tid != null">
+        #{tid,jdbcType=DECIMAL},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=DECIMAL},
+      </if>
+      <if test="treamentRepairTitle != null">
+        #{treamentRepairTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="treamentRepairWebsite != null">
+        #{treamentRepairWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="treamentRepairUnit != null">
+        #{treamentRepairUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="treamentRepairTime != null">
+        #{treamentRepairTime,jdbcType=DATE},
+      </if>
+      <if test="treamentRepairPath != null">
+        #{treamentRepairPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fillState != null">
+        #{fillState,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField1 != null">
+        #{reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField2 != null">
+        #{reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField3 != null">
+        #{reservedField3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gistone.cdsems.database.entity.TREPAIRCONTAMINATEDExample" resultType="java.lang.Long">
+    select count(*) from T_REPAIR_CONTAMINATED
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_REPAIR_CONTAMINATED
+    <set>
+      <if test="record.tid != null">
+        TID = #{record.tid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cid != null">
+        CID = #{record.cid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.treamentRepairTitle != null">
+        TREAMENT_REPAIR_TITLE = #{record.treamentRepairTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treamentRepairWebsite != null">
+        TREAMENT_REPAIR_WEBSITE = #{record.treamentRepairWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treamentRepairUnit != null">
+        TREAMENT_REPAIR_UNIT = #{record.treamentRepairUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.treamentRepairTime != null">
+        TREAMENT_REPAIR_TIME = #{record.treamentRepairTime,jdbcType=DATE},
+      </if>
+      <if test="record.treamentRepairPath != null">
+        TREAMENT_REPAIR_PATH = #{record.treamentRepairPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fillState != null">
+        FILL_STATE = #{record.fillState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField1 != null">
+        RESERVED_FIELD1 = #{record.reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField2 != null">
+        RESERVED_FIELD2 = #{record.reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField3 != null">
+        RESERVED_FIELD3 = #{record.reservedField3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_REPAIR_CONTAMINATED
+    set TID = #{record.tid,jdbcType=DECIMAL},
+      CID = #{record.cid,jdbcType=DECIMAL},
+      TREAMENT_REPAIR_TITLE = #{record.treamentRepairTitle,jdbcType=VARCHAR},
+      TREAMENT_REPAIR_WEBSITE = #{record.treamentRepairWebsite,jdbcType=VARCHAR},
+      TREAMENT_REPAIR_UNIT = #{record.treamentRepairUnit,jdbcType=VARCHAR},
+      TREAMENT_REPAIR_TIME = #{record.treamentRepairTime,jdbcType=DATE},
+      TREAMENT_REPAIR_PATH = #{record.treamentRepairPath,jdbcType=VARCHAR},
+      FILL_STATE = #{record.fillState,jdbcType=VARCHAR},
+      RESERVED_FIELD1 = #{record.reservedField1,jdbcType=VARCHAR},
+      RESERVED_FIELD2 = #{record.reservedField2,jdbcType=VARCHAR},
+      RESERVED_FIELD3 = #{record.reservedField3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.TREPAIRCONTAMINATED">
+    update T_REPAIR_CONTAMINATED
+    <set>
+      <if test="cid != null">
+        CID = #{cid,jdbcType=DECIMAL},
+      </if>
+      <if test="treamentRepairTitle != null">
+        TREAMENT_REPAIR_TITLE = #{treamentRepairTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="treamentRepairWebsite != null">
+        TREAMENT_REPAIR_WEBSITE = #{treamentRepairWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="treamentRepairUnit != null">
+        TREAMENT_REPAIR_UNIT = #{treamentRepairUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="treamentRepairTime != null">
+        TREAMENT_REPAIR_TIME = #{treamentRepairTime,jdbcType=DATE},
+      </if>
+      <if test="treamentRepairPath != null">
+        TREAMENT_REPAIR_PATH = #{treamentRepairPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fillState != null">
+        FILL_STATE = #{fillState,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField1 != null">
+        RESERVED_FIELD1 = #{reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField2 != null">
+        RESERVED_FIELD2 = #{reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField3 != null">
+        RESERVED_FIELD3 = #{reservedField3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TID = #{tid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.TREPAIRCONTAMINATED">
+    update T_REPAIR_CONTAMINATED
+    set CID = #{cid,jdbcType=DECIMAL},
+      TREAMENT_REPAIR_TITLE = #{treamentRepairTitle,jdbcType=VARCHAR},
+      TREAMENT_REPAIR_WEBSITE = #{treamentRepairWebsite,jdbcType=VARCHAR},
+      TREAMENT_REPAIR_UNIT = #{treamentRepairUnit,jdbcType=VARCHAR},
+      TREAMENT_REPAIR_TIME = #{treamentRepairTime,jdbcType=DATE},
+      TREAMENT_REPAIR_PATH = #{treamentRepairPath,jdbcType=VARCHAR},
+      FILL_STATE = #{fillState,jdbcType=VARCHAR},
+      RESERVED_FIELD1 = #{reservedField1,jdbcType=VARCHAR},
+      RESERVED_FIELD2 = #{reservedField2,jdbcType=VARCHAR},
+      RESERVED_FIELD3 = #{reservedField3,jdbcType=VARCHAR}
+    where TID = #{tid,jdbcType=DECIMAL}
+  </update>
+  <!--治理修复列表-->
+  <select id="selectByEntityPage" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TBASICSCONTAMINATED">
+    select * from (
+    select  rownum rn,aa.* from (
+    select a.*,b.* from (
+    (select
+    <include refid="Base_Column_List" />
+    from T_REPAIR_CONTAMINATED
+    where 1=1) a left join (select MASSIF_NAME massifName,MASSIF_CODE,MASSIF_ADDRESS,CID CCID,MASSIF_COVERED,COUNTY_CODE from T_BASICS_CONTAMINATED)b
+    on  a.CID=b.CCID
+    )
+    where 1=1
+    <if test="massifName != null">
+      and massifName like '%${massifName}%'
+    </if>
+    <if test="massifAddress != null">
+      and MASSIF_ADDRESS like '%${massifAddress}%'
+    </if>
+    <if test="massifCovered != null">
+      and  TO_NUMBER(MASSIF_COVERED) &gt;#{massifCovered,jdbcType=VARCHAR}
+    </if>
+    <if test="reservedField1 != null">
+      and TO_NUMBER(MASSIF_COVERED) &lt; #{reservedField1,jdbcType=VARCHAR}
+    </if>
+
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+    order by TID desc
+    )aa)
+    where  rn between #{pageNumber} and #{pageSize}
+  </select>
+  <!--治理修复总数-->
+  <select id="selectByCount" resultType="Integer" parameterType="com.gistone.cdsems.database.entity.TBASICSCONTAMINATED" >
+    select count(*) from (
+    (select
+    <include refid="Base_Column_List" />
+    from T_REPAIR_CONTAMINATED
+    where 1=1) a left join (select MASSIF_NAME massifName,MASSIF_CODE,MASSIF_ADDRESS,CID CCID,MASSIF_COVERED,COUNTY_CODE from T_BASICS_CONTAMINATED)b
+    on  a.CID=b.CCID
+    )
+    where 1=1
+    <if test="massifName != null">
+      and massifName like '%${massifName}%'
+    </if>
+    <if test="massifAddress != null">
+      and MASSIF_ADDRESS like '%${massifAddress}%'
+    </if>
+    <if test="massifCovered != null">
+      and  TO_NUMBER(MASSIF_COVERED) &gt;#{massifCovered,jdbcType=VARCHAR}
+    </if>
+    <if test="reservedField1 != null">
+      and TO_NUMBER(MASSIF_COVERED) &lt; #{reservedField1,jdbcType=VARCHAR}
+    </if>
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

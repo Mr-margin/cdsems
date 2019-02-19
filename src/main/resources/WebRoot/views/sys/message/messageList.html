@@ -1,0 +1,57 @@
+<div class=" box-body col-md-12">
+    <!-- 面包屑 -->
+    <div class="panel panel-default crumbs_box">
+        <div class="panel-body clearfix">
+            <p class="pull-left crumbs">
+            	<i class="iconfont">&#xe690;</i>当前位置：
+                <span>系统管理</span><span> > </span><span>系统通知</span>
+            </p>
+            <div class="pull-right">
+            	<button id="sys_message_add" type="button"  class="btn btn-origin eleNone"   onclick="addMessage()"><i class="iconfont ml0 mr5">&#xe61e;</i>添加</button>
+            </div>
+        </div>
+    </div>
+    <!-- 表格 -->
+    <div class="panel panel-default content">
+        <div class="panel-body">
+            <div class="col-lg-12 col-md-12 col-sm-12 no-padding clearfix">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-lg-5 col-md-5 col-sm-5  col-xs-5 no-padding text-right" >
+                            <label class="">过期状态</label>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 pr0">
+                            <select name="tmIsdead" id="tmIsdead" class="form-control">
+								<option value="">全部</option>
+								<option value="0">未过期</option>
+								<option value="1">已过期</option>
+							</select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 no-padding">
+                        <div class="col-lg-2 col-md-2 col-sm-2  col-xs-2 no-padding text-right" >
+                            <label class="">过期时间</label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 pr0">
+                        	<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 no-padding"  style="width: 45%;">
+	                            <input type="text"  id="tmStartTime" class="form-control mydatetime"  placeholder="操作开始时间">
+	                        </div>
+	                        <div class="col-lg-2 no-padding  text-center"  style="width: 10%;line-height: 36px;">至</div>
+	                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 no-padding"  style="width: 45%;">
+	                            <input type="text"  id="tmEndTime" class="form-control mydatetime"  placeholder="操作开始时间">
+	                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right pull-right  no-padding">
+           			<button type="button"  class="btn btn-success  btn-search"  onclick="initMessageTable()">查询<i class="iconfont  iconfont1">&#xea1b;</i></button>
+           		</div>
+               
+            </div>
+             <table class="table text-center table-bordered " id="dataTable">  
+            </table>  
+        </div>
+    </div>
+</div>

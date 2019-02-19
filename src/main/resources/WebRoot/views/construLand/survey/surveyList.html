@@ -1,0 +1,72 @@
+<div class=" box-body  col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <!-- 面包屑 -->
+    <div class="panel panel-default  crumbs_box">
+        <div class="panel-body  clearfix">
+            <p class="crumbs  pull-left"><i class="iconfont">&#xe690;</i><span>建设用地准入</span><span> > </span><span>调查信息</span></p>
+        	<div class="pull-right">
+        		<button id="jsyddc_add" type="button"  class="btn btn-origin mr10 eleNone"   onclick="add()"><i class="iconfont ml0 mr5">&#xe61e;</i>添加</button>
+        		<button id="jsyddc_deteleBatch" type="button"  class="btn btn-danger eleNone"  onclick="Dele()"><i class="iconfont ml0 mr5">&#xe60d;</i>批量删除</button>
+        	</div>
+        </div>
+    </div>
+    <div class="panel panel-default  content">
+        <div class="panel-body">
+            <div class="clearfix">
+	            <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+	            	<!-- 查询条件 -->
+	            	<!-- 查询条件最多显示三个超出显示在折叠窗里 -->
+					<div class="col-lg-12 col-md-12 col-sm-12 no-padding clearfix">
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin w-20 no-padding">
+							<div class="form-group col-lg-12 col-md-12 col-sm-12  no-padding">
+								<div class="col-lg-4 col-md-4 col-sm-4  col-xs-4 no-padding text-right " >
+									<label class="">地块名称</label>
+								</div>
+								<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pr0">
+									<input  type="text" class="form-control "   id="massifName">
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin w-20 no-padding" >
+							<div class="form-group col-lg-12 col-md-12 col-sm-12 no-padding">
+								<div class="col-lg-4 col-md-4 col-sm-4  col-xs-4 no-padding text-right" >
+									<label class="">区县</label>
+								</div>
+								<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pr0">
+									<select id="countyCode"  class="form-control"  >
+										<option value="">请选择</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 form-group no-margin w-23 no-padding">
+							<div class="form-group col-lg-12 col-md-12 col-sm-12 no-padding">
+								<div class="col-lg-4 col-md-4 col-sm-4  col-xs-4 no-padding text-right" >
+									<label class="">污染地块地址</label>
+								</div>
+								<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pr0">
+									<input  type="text" class="form-control "   id="massifAddress">
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 w-20 no-padding">
+							<div class="form-group col-lg-12 col-md-12 col-sm-12 no-padding">
+								<div class="col-lg-5 col-md-5 col-sm-5  col-xs-5 no-padding text-right" >
+									<label class="">组织机构代码</label>
+								</div>
+								<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 pr0">
+									<div class="input-group">
+										<input type="text" class="form-control"   id="organizationCode" >
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-right pull-right  no-padding">
+							<button type="button"  class="btn btn-success  btn-search"  onclick="search()">查询<i class="iconfont  iconfont1">&#xea1b;</i></button>
+						</div>
+					</div>
+		            <table class="table table-bordered  " id="dataTable"> </table>  
+	            </div>
+	    	</div>
+    	</div>
+	</div>
+</div>

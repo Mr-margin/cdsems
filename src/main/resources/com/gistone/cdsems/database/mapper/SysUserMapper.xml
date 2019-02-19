@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.SysUser" >
+    <id column="SU_ID" property="suId" jdbcType="DECIMAL" />
+    <result column="SU_USERNAME" property="suUsername" jdbcType="VARCHAR" />
+    <result column="SU_PASSWORD" property="suPassword" jdbcType="VARCHAR" />
+    <result column="SU_REALNAME" property="suRealname" jdbcType="VARCHAR" />
+    <result column="SU_LEVEL" property="suLevel" jdbcType="VARCHAR" />
+    <result column="SU_REGIONCODE" property="suRegioncode" jdbcType="VARCHAR" />
+    <result column="SU_COMPANYNAME" property="suCompanyname" jdbcType="VARCHAR" />
+    <result column="SU_SEX" property="suSex" jdbcType="VARCHAR" />
+    <result column="SU_PHONE" property="suPhone" jdbcType="VARCHAR" />
+    <result column="SU_EMAIL" property="suEmail" jdbcType="VARCHAR" />
+    <result column="IS_DEL" property="isDel" jdbcType="VARCHAR" />
+    <result column="ADD_SU_ID" property="addSuId" jdbcType="DECIMAL" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="UPD_SU_ID" property="updSuId" jdbcType="DECIMAL" />
+    <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
+    <result column="SU_SR_ID" property="suSrId" jdbcType="DECIMAL" />
+    <!-- 角色 -->
+     <association property="suSysRole" javaType="com.gistone.cdsems.database.entity.SysRole">
+		<id column="SR_ID" property="srId" jdbcType="DECIMAL" />
+    	<result column="SR_NAME" property="srName" jdbcType="VARCHAR" />
+    	<result column="SR_DESC" property="srDesc" jdbcType="VARCHAR" />
+	</association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SU_ID, SU_USERNAME, SU_PASSWORD, SU_REALNAME, SU_LEVEL, SU_REGIONCODE, SU_COMPANYNAME, 
+    SU_SEX, SU_PHONE, SU_EMAIL, IS_DEL, ADD_SU_ID, ADD_TIME, UPD_SU_ID, UPD_TIME, SU_SR_ID
+  </sql>
+  <sql id="Base_Column_List_Role" >
+    SU_ID, SU_USERNAME, SU_PASSWORD, SU_REALNAME, SU_LEVEL, SU_REGIONCODE, SU_COMPANYNAME, 
+    SU_SEX, SU_PHONE, SU_EMAIL, IS_DEL, ADD_SU_ID, ADD_TIME, UPD_SU_ID, UPD_TIME, SU_SR_ID,
+    <!-- 角色 -->
+    SR_ID, SR_NAME, SR_DESC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER
+    where SU_ID = #{suId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_USER
+    where SU_ID = #{suId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.SysUser" >
+    insert into SYS_USER (SU_ID, SU_USERNAME, SU_PASSWORD, 
+      SU_REALNAME, SU_LEVEL, SU_REGIONCODE, 
+      SU_COMPANYNAME, SU_SEX, SU_PHONE, 
+      SU_EMAIL, IS_DEL, ADD_SU_ID, 
+      ADD_TIME, UPD_SU_ID, UPD_TIME, 
+      SU_SR_ID)
+    values (SYS_USER_SEQ.NEXTVAL, #{suUsername,jdbcType=VARCHAR}, #{suPassword,jdbcType=VARCHAR}, 
+      #{suRealname,jdbcType=VARCHAR}, #{suLevel,jdbcType=VARCHAR}, #{suRegioncode,jdbcType=VARCHAR}, 
+      #{suCompanyname,jdbcType=VARCHAR}, #{suSex,jdbcType=VARCHAR}, #{suPhone,jdbcType=VARCHAR}, 
+      #{suEmail,jdbcType=VARCHAR}, #{isDel,jdbcType=VARCHAR}, #{addSuId,jdbcType=DECIMAL}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updSuId,jdbcType=DECIMAL}, #{updTime,jdbcType=TIMESTAMP}, 
+      #{suSrId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective"  keyProperty="suId" parameterType="com.gistone.cdsems.database.entity.SysUser" >
+  
+  	<selectKey resultType="BigDecimal"   order="BEFORE" keyProperty="suId">  
+            SELECT SYS_USER_SEQ.NEXTVAL as suId from DUAL
+    </selectKey>
+    insert into SYS_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+       <if test="suId != null" >
+        SU_ID,
+      </if>
+      <if test="suUsername != null" >
+        SU_USERNAME,
+      </if>
+      <if test="suPassword != null" >
+        SU_PASSWORD,
+      </if>
+      <if test="suRealname != null" >
+        SU_REALNAME,
+      </if>
+      <if test="suLevel != null" >
+        SU_LEVEL,
+      </if>
+      <if test="suRegioncode != null" >
+        SU_REGIONCODE,
+      </if>
+      <if test="suCompanyname != null" >
+        SU_COMPANYNAME,
+      </if>
+      <if test="suSex != null" >
+        SU_SEX,
+      </if>
+      <if test="suPhone != null" >
+        SU_PHONE,
+      </if>
+      <if test="suEmail != null" >
+        SU_EMAIL,
+      </if>
+      <if test="isDel != null" >
+        IS_DEL,
+      </if>
+      <if test="addSuId != null" >
+        ADD_SU_ID,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="updSuId != null" >
+        UPD_SU_ID,
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME,
+      </if>
+      <if test="suSrId != null" >
+        SU_SR_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="suId != null" >
+        #{suId},
+      </if>
+      <if test="suUsername != null" >
+        #{suUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="suPassword != null" >
+        #{suPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="suRealname != null" >
+        #{suRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="suLevel != null" >
+        #{suLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="suRegioncode != null" >
+        #{suRegioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="suCompanyname != null" >
+        #{suCompanyname,jdbcType=VARCHAR},
+      </if>
+      <if test="suSex != null" >
+        #{suSex,jdbcType=VARCHAR},
+      </if>
+      <if test="suPhone != null" >
+        #{suPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="suEmail != null" >
+        #{suEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=VARCHAR},
+      </if>
+      <if test="addSuId != null" >
+        #{addSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updSuId != null" >
+        #{updSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="suSrId != null" >
+        #{suSrId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.SysUser" >
+    update SYS_USER
+    <set >
+      <if test="suUsername != null" >
+        SU_USERNAME = #{suUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="suPassword != null" >
+        SU_PASSWORD = #{suPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="suRealname != null" >
+        SU_REALNAME = #{suRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="suLevel != null" >
+        SU_LEVEL = #{suLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="suRegioncode != null" >
+        SU_REGIONCODE = #{suRegioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="suCompanyname != null" >
+        SU_COMPANYNAME = #{suCompanyname,jdbcType=VARCHAR},
+      </if>
+      <if test="suSex != null" >
+        SU_SEX = #{suSex,jdbcType=VARCHAR},
+      </if>
+      <if test="suPhone != null" >
+        SU_PHONE = #{suPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="suEmail != null" >
+        SU_EMAIL = #{suEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        IS_DEL = #{isDel,jdbcType=VARCHAR},
+      </if>
+      <if test="addSuId != null" >
+        ADD_SU_ID = #{addSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updSuId != null" >
+        UPD_SU_ID = #{updSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="suSrId != null" >
+        SU_SR_ID = #{suSrId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where SU_ID = #{suId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.SysUser" >
+    update SYS_USER
+    set SU_USERNAME = #{suUsername,jdbcType=VARCHAR},
+      SU_PASSWORD = #{suPassword,jdbcType=VARCHAR},
+      SU_REALNAME = #{suRealname,jdbcType=VARCHAR},
+      SU_LEVEL = #{suLevel,jdbcType=VARCHAR},
+      SU_REGIONCODE = #{suRegioncode,jdbcType=VARCHAR},
+      SU_COMPANYNAME = #{suCompanyname,jdbcType=VARCHAR},
+      SU_SEX = #{suSex,jdbcType=VARCHAR},
+      SU_PHONE = #{suPhone,jdbcType=VARCHAR},
+      SU_EMAIL = #{suEmail,jdbcType=VARCHAR},
+      IS_DEL = #{isDel,jdbcType=VARCHAR},
+      ADD_SU_ID = #{addSuId,jdbcType=DECIMAL},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPD_SU_ID = #{updSuId,jdbcType=DECIMAL},
+      UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      SU_SR_ID = #{suSrId,jdbcType=DECIMAL}
+    where SU_ID = #{suId,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 登录，用户名，密码查询 -->
+  <select id="logingUser"  parameterType="com.gistone.cdsems.database.entity.SysUser" resultMap="BaseResultMap">
+  		select 
+    	<include refid="Base_Column_List" />
+    	from SYS_USER
+    	where SU_USERNAME = #{suUsername,jdbcType=VARCHAR} 
+    		and SU_PASSWORD = #{suPassword,jdbcType=VARCHAR}
+    		and IS_DEL = 0
+  </select>
+  
+  <!-- 列表 -->
+  <select id="list" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.SysUser" >
+  	select * from (select R.*,ROWNUM RN from (
+	select
+		*
+	from
+		SYS_USER T1
+	left join SYS_ROLE T2 on T1.SU_SR_ID = T2.SR_ID
+	where T1.IS_DEL=0
+	<if test="suUsername != null" >
+		and T1.SU_USERNAME like '%${suUsername}%'
+	</if>
+	<if test="suPhone != null" >
+		and T1.SU_PHONE like '%${suPhone}%'
+	</if>
+	order by T1.ADD_TIME  desc 
+	)R)
+	where RN &gt; #{pageNumber,jdbcType=INTEGER} and RN  &lt;=(#{pageSize,jdbcType=INTEGER}+#{pageNumber,jdbcType=INTEGER})
+	
+  </select>
+  
+  <!-- 列表总数 -->
+  <select id="total" resultType="int" parameterType="com.gistone.cdsems.database.entity.SysUser" >
+	select
+		count(*)
+	from
+		SYS_USER T1
+	left join SYS_ROLE T2 on T1.SU_SR_ID = T2.SR_ID
+	where T1.IS_DEL=0
+	<if test="suUsername != null" >
+		and T1.SU_USERNAME like '%${suUsername}%'
+	</if>
+	<if test="suPhone != null" >
+		and T1.SU_PHONE like '%${suPhone}%'
+	</if>
+  </select>
+  
+  <!-- 根据用户名查询用户列表 -->
+  <select id="findUserByUserName" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.SysUser">
+  		select 
+  		<include refid="Base_Column_List" />
+    	from SYS_USER
+    	where  IS_DEL=0 and SU_USERNAME = #{suUsername}
+    	<if test="suId != null" >
+        	and SU_ID != #{suId}
+      	</if>
+  </select>
+  
+  <!-- 所有用户 -->
+  <select id="listAll" resultMap="BaseResultMap">
+  		select 
+  		 	SU_ID, SU_USERNAME
+	    from SYS_USER
+	    where IS_DEL=0
+  </select>
+</mapper>

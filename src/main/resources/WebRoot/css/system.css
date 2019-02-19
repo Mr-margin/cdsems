@@ -1,0 +1,255 @@
+@charset "utf-8";
+html,body,.page-content-wrapper{
+	height:100%
+}
+#ui-view{
+	width: calc(100% - 141px);
+    margin: 8px;
+    height: calc(100% - 16px);
+}
+.matter_box{
+	height: calc(100% - 98px);
+    overflow: auto;
+}
+/*
+系统管理
+*/
+/*系统管理----侧边栏*/
+.sysList  li.sysLi1 div{
+	background-image: url(../img/index/sprits.png);
+	background-position: 4px -54px;
+	background-repeat:  no-repeat;
+	background-size: auto;
+}
+.sysList li.sysLi2 div{
+	background-image: url(../img/index/sprits.png);
+	background-position: -177px -56px;
+	background-repeat:  no-repeat;
+	background-size: auto;
+}
+.sysList li.sysLi3 div{
+	background-image: url(../img/index/sprits.png);
+	background-position: -114px -57px;
+	background-repeat:  no-repeat;
+	background-size: auto;
+}
+.sysList  li.sysLi4 div{
+	background-image: url(../img/index/sprits.png);
+	background-position: -53px -54px;
+	background-repeat:  no-repeat;
+	background-size: auto;
+}
+.sysList  li.sysLi5 div{
+	background-image: url(../img/index/sprits.png);
+	background-position: -234px -54px;
+	background-repeat:  no-repeat;
+	background-size: auto;
+}
+#Menus li.active.sysLi1 div{
+	background-image: url(../img/index/sprits.png);
+	background-position: -284px -51px;
+	background-repeat:  no-repeat;
+	background-size: auto;
+}
+.sysList li.active.sysLi2 div{
+	background-image: url(../img/index/sprits.png);
+	background-position: -392px -56px;
+	background-repeat:  no-repeat;
+	background-size: auto;
+}
+.sysList li.active.sysLi3 div{
+	background-image: url(../img/index/sprits.png);
+	background-position: -454px -55px;
+	background-repeat:  no-repeat;
+	background-size: auto;
+}
+.sysList  li.active.sysLi4 div{
+	background-image: url(../img/index/sprits.png);
+	background-position: -512px -53px;
+	background-repeat:  no-repeat;
+	background-size: auto;
+}
+.sysList  li.active.sysLi5 div{
+	background-image: url(../img/index/sprits.png);
+	background-position: -336px -51px;
+	background-repeat:  no-repeat;
+	background-size: auto;
+}
+
+/*污染地块*/
+.sysList  li#wrdk_jcxx div{
+	background-image: url(../img/index/basic2.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList  li#wrdk_cbdc div{
+	background-image: url(../img/index/pre2.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList  li#wrdk_xxdc div{
+	background-image: url(../img/index/de2.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList li#wrdk_fxpg div{
+	background-image: url(../img/index/eva2.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList li#wrdk_fxgk div{
+	background-image: url(../img/index/risk2.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList  li#wrdk_zlxf div{
+	background-image: url(../img/index/repare2.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList  li#wrdk_xgpg div{
+	background-image: url(../img/index/effect2.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+
+
+#Menus li.active#wrdk_jcxx div{
+	background-image: url(../img/index/basic1.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList li.active#wrdk_cbdc div{
+	background-image: url(../img/index/pre1.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList li.active#wrdk_xxdc div{
+	background-image: url(../img/index/de1.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList  li.active#wrdk_fxpg div{
+	background-image: url(../img/index/eva1.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList  li.active#wrdk_fxgk div{
+	background-image: url(../img/index/risk1.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList  li.active#wrdk_zlxf div{
+	background-image: url(../img/index/repare1.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList  li.active#wrdk_xgpg div{
+	background-image: url(../img/index/effect1.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+/*农用地*/
+.sysList  li#nyd_jcxx div{
+	background-image: url(../img/index/basic2.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList  li#nyd_nydjc div{
+	background-image: url(../img/index/monitor2.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+
+#Menus li.active#nyd_jcxx div{
+	background-image: url(../img/index/basic1.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList li.active#nyd_nydjc div{
+	background-image: url(../img/index/monitor1.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+/*建设用地准入*/
+.sysList  li#jsyd_jc div{
+	background-image: url(../img/index/basic2.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList  li#jsyd_dc div{
+	background-image: url(../img/index/in2.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+
+#Menus li.active#jsyd_jc div{
+	background-image: url(../img/index/basic1.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList li.active#jsyd_dc div{
+	background-image: url(../img/index/in1.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+/*重点行业企业*/
+.sysList  li#company_list div{
+	background-image: url(../img/index/qy21.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList  li#companyMigration_list div{
+	background-image: url(../img/index/qy22.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList  li#companyPolluter_list div{
+	background-image: url(../img/index/qy23.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList li#companyReceptor_list div{
+	background-image: url(../img/index/qy24.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList li#companyMonitor_list div{
+	background-image: url(../img/index/qy25.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+.sysList  li#companyPollutantMonitor_list div{
+	background-image: url(../img/index/qy26.png);
+	background-position: 0 0;
+	background-repeat:  no-repeat;
+	background-size: contain;
+}
+

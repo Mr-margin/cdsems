@@ -1,0 +1,165 @@
+@charset "utf-8";
+/*
+查询表格
+*/
+.btn-search .iconfont{
+	font-size: 20px;
+    line-height: 14px;
+    display: inline-block;
+    margin-right: -6px;
+    margin-left: 2px;
+}
+.form-group  label{
+	line-height: 34px;
+	margin: 0;
+}
+#collapse{
+	display:none;
+}
+.collapseBtn{
+	width: 100%;
+    height: 30px;
+    background: url(../img/index/pull.png) center center no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+    margin-top:15px;
+}
+.collapseBtn a{
+	position: absolute;
+    width: 88px;
+    height: 37px;
+    left: 50%;
+    transform: translateX(-55%);
+    cursor: pointer;
+}
+.collapseBtn a>img{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -12px;
+    margin-left: -8px;
+}
+.content{
+	 border: none;
+    box-shadow: none;
+    height: 100%;
+    overflow: auto;
+    z-index: 0;
+}
+.content>.panel-body{
+	margin-bottom:50px;
+}
+.content .table-bordered>thead>tr>th {
+    border-bottom-width: 2px;
+    background: #116a51;
+    color: #fff;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.content .table>tbody>tr>td a .iconfont{
+	margin: 0;
+}
+.content .table>tbody>tr>td .btn-warning .iconfont{
+	margin: 1px;
+}
+.content .table>tbody>tr>td .btn-info .iconfont{
+	margin: 0;
+    font-size: 17px;
+    margin-left: 0px;
+    margin-top: 0px;
+    display: inline-block;
+}
+.content .table>tbody>tr>td .btn-origin .iconfont{
+	margin: 0;
+    display: inline-block;
+    font-size: 20px;
+    line-height: 28px;
+    margin-left: -2px;
+}
+.content .table>tbody>tr>td .btn-danger .iconfont{
+	margin: 0;
+    font-size: 20px;
+    margin-left: -3px;
+    margin-top: -3px;
+    display: inline-block;
+}
+.input-group .form-control{
+    /*border-top-right-radius: 0;*/
+    /*border-bottom-right-radius: 0;*/
+}
+.input-group .input-group-addon{
+	border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 6px;
+}
+    
+/*
+添加页面---表单-----start
+*/
+
+
+.addContent .formWrap .formTab{
+	overflow: hidden;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.addContent .formWrap .tabItem{
+	border-bottom: 1px dashed #e7e7e7;
+	margin-bottom: 20px;
+    padding-bottom: 28px;
+}
+.addContent .formWrap .formTab li{
+	float: left;
+    line-height: 28px;
+    padding: 0 25px;
+    background: #e4e5ea;
+    color: #797979;
+    border-radius: 15px;
+    font-size: 16px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+.addContent .formWrap .formTab li.liActive{
+	background: #116a51;
+    color: #fff;
+}
+.content .form-group{
+	line-height: 34px;
+}
+.content .formWrap label{
+	color: #757575;
+}
+
+.content .formWrap .formTip{
+	color:#aeaeae;
+}
+.content .formWrap .iconfont{
+	color: #969696;
+}
+@media (min-width: 768px){
+	.form-horizontal .control-label {
+	    padding-top:0;
+	}
+}
+/*
+添加页面---表单-----end
+*/
+
+
+.eleNone{
+	display:none;	
+}
+.form-group .form-control.error{
+	border: 1px solid #ff0000;
+}    
+.editable-empty, .editable-empty:hover, .editable-empty:focus {
+    opacity: 0;
+}
+.none{
+	display:none
+}
+.editable-container .form-group{
+	line-height:18px;
+}

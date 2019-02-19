@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.SysYztMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.SysYzt" >
+    <id column="SY_ID" property="syId" jdbcType="DECIMAL" />
+    <result column="SY_NAME" property="syName" jdbcType="VARCHAR" />
+    <result column="SY_PID" property="syPid" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SY_ID, SY_NAME, SY_PID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_YZT
+    where SY_ID = #{syId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_YZT
+    where SY_ID = #{syId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.SysYzt" >
+    insert into SYS_YZT (SY_ID, SY_NAME, SY_PID
+      )
+    values (#{syId,jdbcType=DECIMAL}, #{syName,jdbcType=VARCHAR}, #{syPid,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.SysYzt" >
+    insert into SYS_YZT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="syId != null" >
+        SY_ID,
+      </if>
+      <if test="syName != null" >
+        SY_NAME,
+      </if>
+      <if test="syPid != null" >
+        SY_PID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="syId != null" >
+        #{syId,jdbcType=DECIMAL},
+      </if>
+      <if test="syName != null" >
+        #{syName,jdbcType=VARCHAR},
+      </if>
+      <if test="syPid != null" >
+        #{syPid,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.SysYzt" >
+    update SYS_YZT
+    <set >
+      <if test="syName != null" >
+        SY_NAME = #{syName,jdbcType=VARCHAR},
+      </if>
+      <if test="syPid != null" >
+        SY_PID = #{syPid,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where SY_ID = #{syId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.SysYzt" >
+    update SYS_YZT
+    set SY_NAME = #{syName,jdbcType=VARCHAR},
+      SY_PID = #{syPid,jdbcType=DECIMAL}
+    where SY_ID = #{syId,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 所有模块 -->
+  <select id="listAll" resultMap="BaseResultMap">
+  		 select 
+	    <include refid="Base_Column_List" />
+	    from SYS_YZT
+	    order by SY_ID
+  </select>
+  
+  <!-- 根据权限获取一张图目录 -->
+  <select id="listByPermission" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.SysUser">
+  		 select 
+	    <include refid="Base_Column_List" />
+	    from SYS_YZT sy
+		join SYS_ROLE_YZT sry 
+		on SY.SY_ID=SRY.SRY_SY_ID and SRY.SRY_SR_ID=#{suSrId}
+		order by sy.SY_ID asc
+  </select>
+</mapper>

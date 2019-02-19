@@ -1,0 +1,98 @@
+<div class=" box-body col-md-12">
+    <!-- 面包屑 -->
+    <div class="panel panel-default crumbs_box">
+        <div class="panel-body clearfix">
+            <p class="pull-left crumbs">
+            	<i class="iconfont">&#xe690;</i>当前位置：
+                <span>系统管理</span><span> > </span><span>用户管理</span><span> > </span><span>添加</span>
+            </p>
+            <div class="pull-right"></div>
+        </div>
+    </div>
+    <!-- 添加表单 -->
+    <div class="panel panel-default content">
+		<div class="panel-body pt50">
+			<form class="form-horizontal" role="form" id="dataForm">
+				<div class="form-group">
+					<label for="" class="col-sm-3 control-label">用户名<span style="color: red;">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control left required suUsername" minlength="5" maxlength="16"  name="suUsername" id="suUsername"   placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-3 control-label">密码<span style="color: red;">*</span></label>
+					<div class="col-sm-8">
+						<input type="password" class="form-control left required suPassword" minlength="6" maxlength="16"  name="suPassword" id="suPassword"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-3 control-label">真实姓名</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control left" name="suRealname" id="suRealname" minlength="0" maxlength="10" placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-3 control-label">角色<span style="color: red;">*</span></label>
+					<div class="col-sm-8">
+					<select name="suSrId" id="suSrId" class="form-control">
+						
+					</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-3 control-label">用户级别<span style="color: red;">*</span></label>
+					<div class="col-sm-8">
+					<select name="suLevel" id="suLevel" class="form-control" onchange="handleCityCounty()">
+						<option value="2">市级用户</option>
+						<option value="3">县级用户</option>
+						<option value="4">企业用户</option>
+					</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-3 control-label" id="regionLabel">行政区划<span style="color: red;">*</span></label>
+					<div class="col-sm-8">
+						<select name="suCityRegion" id="suCityRegion" onchange="cityRegionChange()" class="form-control">
+							<option value='510100' >成都市</option>
+						</select>
+					</div>
+					<div class="col-sm-4" style="display:none;">
+						<select name="suCountyRegion" id="suCountyRegion" class="form-control">
+							
+						</select>
+					</div>
+					<div class="col-sm-8" style="display:none;">
+						<input type="text" class="form-control left required" minlength="0" maxlength="100"  name="suCompanyname" id="suCompanyname"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-3 control-label">性别</label>
+					<div class="col-sm-8">								
+						<select name="suSex" id="suSex" class="form-control">
+						<option value="1">男</option>
+						<option value="2">女</option>
+					</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-3 control-label">手机号码</label>
+					<div class="col-sm-8">
+						<input type="number" class="form-control left phone" name="suPhone" id="suPhone"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-3 control-label ">邮箱</label>
+					<div class="col-sm-8">
+						<input type="email" class="form-control left email" name="suEmail" id="suEmail"  placeholder="">
+					</div>
+				</div>
+				
+			</form>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center  mt50">
+         		<button class="btn btn-warning mr10 p6-25"  onclick="addUser()">提交</button>
+            	<button class="btn btn-default p6-25"  onclick="backUser()">取消</button>
+			</div>
+			
+		</div>
+	</div>
+</div>

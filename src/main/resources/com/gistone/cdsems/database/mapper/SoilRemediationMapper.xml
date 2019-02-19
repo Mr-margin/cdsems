@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.SoilRemediationMapper">
+
+	<sql id="Base_Column_List">
+        a.ID,a.NAME,a.TYPE,a.CONTENT,a.FUND,a.FUND_SOURCE,a.FUND_USE,TO_CHAR(a.START_DATE,'yyyy-MM-dd') START_DATE,TO_CHAR(a.END_DATE,'yyyy-MM-dd') END_DATE,
+        a.PROGRESS,a.IMPLEMENT,a.CONTACTS,a.PHONE,a.COUNTY,a.ADDRESS,a.TECHNOLOGY,
+        a.CREATE_USER_ID,a.CREATE_TIME,a.UPDATE_USER_ID,a.UPDATE_TIME
+    </sql>
+    
+    <!-- 插入一条数据 -->
+    <insert id="save" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="pd.id">
+	    <selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="pd.id">
+	      	SELECT  SYS_RESOURCE_ID_SEQ.NEXTVAL AS id FROM DUAL
+	   	</selectKey>
+    	insert into T_SOIL_REMEDIATION(
+	    	ID,NAME,TYPE,CONTENT,FUND,FUND_SOURCE,FUND_USE,START_DATE,END_DATE,
+        	PROGRESS,IMPLEMENT,CONTACTS,PHONE,COUNTY,ADDRESS,TECHNOLOGY,
+        	CREATE_USER_ID,CREATE_TIME
+    	)values(
+    		#{pd.id},
+    		#{pd.NAME,jdbcType=VARCHAR},
+    		#{pd.TYPE,jdbcType=VARCHAR},
+    		#{pd.CONTENT,jdbcType=VARCHAR},
+    		#{pd.FUND,jdbcType=VARCHAR},
+    		#{pd.FUND_SOURCE,jdbcType=VARCHAR},
+    		#{pd.FUND_USE,jdbcType=VARCHAR},
+	    	#{pd.START_DATE,jdbcType=DATE},
+	    	#{pd.END_DATE,jdbcType=DATE},
+	    	#{pd.PROGRESS,jdbcType=VARCHAR},
+	    	#{pd.IMPLEMENT,jdbcType=VARCHAR},
+	    	#{pd.CONTACTS,jdbcType=VARCHAR},
+	    	#{pd.PHONE,jdbcType=VARCHAR},
+	    	#{pd.COUNTY,jdbcType=VARCHAR},
+	    	#{pd.ADDRESS,jdbcType=VARCHAR},
+	    	#{pd.TECHNOLOGY,jdbcType=VARCHAR},
+	        #{pd.CREATE_USER_ID,jdbcType=NUMERIC},
+	        sysdate
+    	)
+    </insert>
+    
+    <!-- 批量插入数据 -->
+    <insert id="saveBatch" parameterType="java.util.Map">
+    	insert into T_SOIL_REMEDIATION(
+	    	ID,NAME,TYPE,CONTENT,FUND,FUND_SOURCE,FUND_USE,START_DATE,END_DATE,
+        	PROGRESS,IMPLEMENT,CONTACTS,PHONE,COUNTY,ADDRESS,TECHNOLOGY,
+        	CREATE_USER_ID,CREATE_TIME
+    	)select SYS_RESOURCE_ID_SEQ.NEXTVAL,a.* from(
+    	<foreach collection ="list" item="pd" separator ="union" close=")" open="(">
+        select
+    		#{pd.NAME,jdbcType=VARCHAR},
+    		#{pd.TYPE,jdbcType=VARCHAR},
+    		#{pd.CONTENT,jdbcType=VARCHAR},
+    		#{pd.FUND,jdbcType=VARCHAR},
+    		#{pd.FUND_SOURCE,jdbcType=VARCHAR},
+    		#{pd.FUND_USE,jdbcType=VARCHAR},
+	    	#{pd.START_DATE,jdbcType=DATE},
+	    	#{pd.END_DATE,jdbcType=DATE},
+	    	#{pd.PROGRESS,jdbcType=VARCHAR},
+	    	#{pd.IMPLEMENT,jdbcType=VARCHAR},
+	    	#{pd.CONTACTS,jdbcType=VARCHAR},
+	    	#{pd.PHONE,jdbcType=VARCHAR},
+	    	#{pd.COUNTY,jdbcType=VARCHAR},
+	    	#{pd.ADDRESS,jdbcType=VARCHAR},
+	    	#{pd.TECHNOLOGY,jdbcType=VARCHAR},
+	        #{pd.CREATE_USER_ID,jdbcType=NUMERIC},
+	        sysdate
+    	from DUAL
+    	</foreach>
+    	) a
+    </insert>
+    
+    <!-- 根据id修改数据 -->
+    <update id="update" parameterType="java.util.Map">
+    	update T_SOIL_REMEDIATION set
+    		NAME = #{pd.NAME,jdbcType=VARCHAR},
+    		TYPE = #{pd.TYPE,jdbcType=VARCHAR},
+    		CONTENT = #{pd.CONTENT,jdbcType=VARCHAR},
+    		FUND = #{pd.FUND,jdbcType=VARCHAR},
+    		FUND_SOURCE = #{pd.FUND_SOURCE,jdbcType=VARCHAR},
+    		FUND_USE = #{pd.FUND_USE,jdbcType=VARCHAR},
+	    	START_DATE = #{pd.START_DATE,jdbcType=DATE},
+	    	END_DATE = #{pd.END_DATE,jdbcType=DATE},
+	    	PROGRESS = #{pd.PROGRESS,jdbcType=VARCHAR},
+	    	IMPLEMENT = #{pd.IMPLEMENT,jdbcType=VARCHAR},
+	    	CONTACTS = #{pd.CONTACTS,jdbcType=VARCHAR},
+	    	PHONE = #{pd.PHONE,jdbcType=VARCHAR},
+	    	COUNTY = #{pd.COUNTY,jdbcType=VARCHAR},
+	    	ADDRESS = #{pd.ADDRESS,jdbcType=VARCHAR},
+	    	TECHNOLOGY = #{pd.TECHNOLOGY,jdbcType=VARCHAR},
+	        UPDATE_USER_ID = #{pd.UPDATE_USER_ID,jdbcType=NUMERIC},
+	        UPDATE_TIME = sysdate
+	    where ID=#{pd.ID}
+    </update>
+    
+    <!-- 根据id删除数据 -->
+    <delete id="delete" parameterType="java.lang.Long">
+    	delete from T_SOIL_REMEDIATION 
+    	where ID=#{id}
+    </delete>
+    
+    <!-- 批量删除数据 -->
+    <delete id="deleteBatch" parameterType="java.lang.String">
+    	delete from T_SOIL_REMEDIATION where ID in
+    	<foreach collection="ids" item="id" index="index" separator="," open="(" close=")">
+    		#{id}
+    	</foreach>
+    </delete>
+    
+    <!-- 查询分页数据 -->
+    <select id="listPage" parameterType="java.util.Map" resultType="java.util.Map">
+    	select * from 
+	    	(select <include refid="Base_Column_List"></include>,ROWNUM RN,b.TC_NAME 
+	    	from T_SOIL_REMEDIATION a
+	    	left join TB_CITY b on a.COUNTY = b.TC_CODE
+	    	where 1=1 
+	    	<if test='pd.name!=null and pd.name!=""'>
+	    		and a.NAME like '%${pd.name}%'
+	    	</if>
+	    	<if test='pd.implement!=null and pd.implement!=""'>
+	    		and a.IMPLEMENT like '%${pd.implement}%'
+	    	</if>
+	    	<if test='pd.county!=null and pd.county!=""'>
+	    		and a.COUNTY = #{pd.county}
+	    	</if>
+	    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==3 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+	    		and a.COUNTY = #{pd.suRegioncode}
+	    	</if>
+	    	and ROWNUM &lt;= #{pd.endrow} 
+    		order by ID)
+    	WHERE RN &gt; #{pd.startrow}  
+    </select>
+    
+    <!-- 查询分页数据总条数 -->
+    <select id="listPageTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+    	select count(ID) 
+    	from T_SOIL_REMEDIATION
+    	where 1=1 
+    	<if test='pd.name!=null and pd.name!=""'>
+    		and NAME like '%${pd.name}%'
+    	</if>
+    	<if test='pd.implement!=null and pd.implement!=""'>
+    		and IMPLEMENT like '%${pd.implement}%'
+    	</if>
+    	<if test='pd.county!=null and pd.county!=""'>
+    		and COUNTY = #{pd.county}
+    	</if>
+    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==3 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+    		and COUNTY = #{pd.suRegioncode}
+    	</if>
+    </select>
+    
+    <!-- 查询全部信息 -->
+    <select id="listAll" parameterType="java.util.Map" resultType="java.util.Map">
+    	select <include refid="Base_Column_List"></include>,b.TC_NAME 
+    	from T_SOIL_REMEDIATION a
+    	left join TB_CITY b on a.COUNTY = b.TC_CODE
+    	where 1=1
+    	<if test='pd.name!=null and pd.name!=""'>
+    		and a.NAME like '%${pd.name}%'
+    	</if>
+    	<if test='pd.implement!=null and pd.implement!=""'>
+    		and a.IMPLEMENT like '%${pd.implement}%'
+    	</if>
+    	<if test='pd.county!=null and pd.county!=""'>
+    		and a.COUNTY = #{pd.county}
+    	</if>
+    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==3 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+    		and a.COUNTY = #{pd.suRegioncode}
+    	</if>
+    	order by a.ID
+    </select>
+</mapper>

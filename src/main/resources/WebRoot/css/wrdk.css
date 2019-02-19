@@ -1,0 +1,10 @@
+@charset "utf-8";
+html,body,.page-content-wrapper{
+	height:100%
+}
+/*
+污染地块
+*/
+.crumbs_box>.panel-body {
+    padding: 8px 15px;
+}

@@ -1,0 +1,346 @@
+@charset "utf-8";
+html,body,.page-content-wrapper{
+	height:100%
+}
+#ui-view{
+	overflow-y: auto;
+}
+/*
+首页
+*/
+.index .headline{
+    background: #f1f0f0;
+    height: 38px;
+    line-height: 38px;
+    border-bottom: 2px solid #116a51;
+    margin: 0 0 8px;
+    padding-right: 12px;
+    position: relative;
+}
+.index .headline p{
+    position: absolute;
+}
+.index .headline1 p,
+.index .headline3 p{
+    width: 222px;
+    height: 38px;
+}
+.index .headline2 p,
+.index .headline4 p{
+    width: 165px;
+    height: 38px;
+}	
+
+.index .headline5 p{
+	 width: 220px;
+     height: 38px;
+}
+.index .headline a{
+	float: right;
+    font-size: 14px;
+    color: #116a51;
+}
+.index .headline1 p{	
+	background:url(../img/index/sprits.png) 0px -126px no-repeat;
+    background-size: auto;
+}
+.index .headline2 p{	
+	background:url(../img/index/sprits.png) -684px -126px no-repeat;
+    background-size: auto;
+}
+.index .headline3 p{	
+	background:url(../img/index/sprits.png) -431px -124px no-repeat;
+    background-size: auto;
+}
+.index .headline4 p{	
+	background:url(../img/index/sprits.png) -232px -126px no-repeat;
+    background-size: auto;
+}
+.index .headline5 p{	
+	background:url(../img/index/news.png) 0 0 no-repeat;
+    background-size: auto;
+}
+.index .boxing{
+	filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#f2f2f3,endColorStr=#ffffff); /*IE 6 7 8*/ 
+	background: -ms-linear-gradient(top, #f2f2f3,  #ffffff);        /* IE 10 */
+	background:-moz-linear-gradient(top,#f2f2f3,#ffffff);/*火狐*/ 
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#f2f2f3), to(#ffffff));/*谷歌*/ 
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f2f2f3), to(#ffffff));      /* Safari 4-5, Chrome 1-9*/
+	background: -webkit-linear-gradient(top, #f2f2f3, #ffffff);   /*Safari5.1 Chrome 10+*/
+	background: -o-linear-gradient(top, #f2f2f3, #ffffff);  /*Opera 11.10+*/
+}
+.index .msgList li{
+	border-bottom: 1px solid #d2d2d2;
+    line-height: 45px;  
+    padding: 0;
+    margin-right: 3%;
+    width: 48.5%;
+}
+.news .index .msgList li{
+	color:#b3b2b3;
+	border-bottom: 1px dashed #d2d2d2;
+    line-height: 50px;  
+    padding: 0;
+    margin-right: 0;
+    width: 100%;  
+}
+.index .msgList li:nth-child(2n){
+	margin-right:0
+}
+.index .msgList li a{
+	display:block;
+	width:100%;
+	height:100%;
+	overflow: hidden;
+}
+
+.index .msgList li p{
+	color: #737373;
+    float: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 68%;
+}
+.index .msgList li img{
+	margin: 12px 0 0 10px;
+}
+.news .index .msgList li img {
+    margin: 18px 0 0 10px;
+}
+.index .msgList li span{
+	 float: right;
+    color: #262626;
+}
+.index .msgList li:hover p,
+.index .msgList li:hover span,
+.index .msgList2 li:hover p,
+.index .msgList2 li:hover span{
+	color:#1c7058 ;
+}
+.carousel,.carousel-inner,.carousel-inner>.item{
+	height:200px;
+}
+.carousel-inner>.item img{
+	height:100%;
+}
+.carousel-indicators li{
+	border: 1px solid #116a51;
+}
+.carousel-indicators .active{
+	background-color: #116a51;
+}
+.carousel-caption{
+	bottom: 0 !important;
+    padding: 2px 10px !important;
+    background: rgba(0,0,0,.4);
+    width: 100%;
+    left: 0 !important;
+    right: 0 !important;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+.index .imgBox-mid{
+	overflow: hidden;
+	line-height: 48px;
+}
+.index .imgBox-mid p{
+	color: #262626;
+    float: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    width: 70%;
+}
+.index .imgBox-mid span{
+	float: right;
+    color: #262626;
+}
+.index .imgBox-bot a{
+	display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.index .imgBox-bot p{
+	color: #666666;
+    float: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    width: 80%;
+}
+.index .imgBox-bot span{
+	float: right;
+    color: #cf6f6f;
+}
+.index .msgList2{
+	padding-bottom: 12px;
+}
+.index  .msgList2 li{
+	line-height: 32px;
+    border-bottom: 1px dashed #666666;
+}
+.index  .msgList2 li a{
+	overflow: hidden;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.index  .msgList2 li a p{
+	color: #8a8a8a;
+    float: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    width: 75%;
+}
+.index  .msgList2 li a span{
+	float: right;
+    color: #262626;
+}
+.index .Gk{
+	position: relative;
+	padding: 0;
+}
+.index .Gk>.row{
+	width: calc(100% - 30px);
+	position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 15px;
+}
+.index .Gk>.row>div,
+.index .Gk>.row>div>div{
+	width:100%;
+}
+.index .gk4,
+.index .gk3,
+.index .gk2,
+.index .gk1{
+	background: #116a51;
+    width: 49%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    height: 126px;
+    padding: 0 5px;
+    color:#fff
+}
+.index .gk4>div,
+.index .gk3>div,
+.index .gk2>div,
+.index .gk1>div{
+    overflow:hidden;
+   margin-top: 10px;
+}
+.index .gk4>div img,
+.index .gk3>div img{
+	width:100%;
+}
+.index .gk1>div img{
+	width:100%;
+}
+.index .gk2>div img
+{
+    width:80%;
+}  
+
+.index .gk4 p,
+.index .gk3 p,
+.index .gk2 p,
+.index .gk1 p{
+	text-align: center;
+    font-size: 35px;
+    padding-top:12px;
+}
+.index .gk4 p i,
+.index .gk3 p i,
+.index .gk2 p i,
+.index .gk1 p i{
+	font-style:normal;
+	font-family: "黑体";
+}
+.news .crumbs_box>.panel-body{
+	padding: 4px 15px;
+}
+.news .crumbs_box>.panel-body	.pull-right{
+	line-height: 34px;
+}
+.news .crumbs_box>.panel-body	.pull-right a{
+	color: #353535;
+    overflow: hidden;
+    display: block;
+}
+.news .crumbs_box>.panel-body	.pull-right a img{
+	float: left;
+    margin-right: 4px;
+    margin-top: 6px;
+}    
+.news .crumbs_box>.panel-body	.pull-right a span{
+	float: left;
+}    
+.news .index{
+	border:none;
+	box-shadow: none;
+}
+.news .index .boxings{
+	padding: 10px 15px 0;
+}
+
+/*.pagination*/
+
+.news .pagination>li>a:focus,.news .pagination>li>a:hover,.news .pagination>li>span:focus,
+.news	.pagination>li>span:hover {
+	color: #1c7058;
+}
+
+.news .pagination>.active>a,.news .pagination>.active>a:focus,.news .pagination>.active>a:hover,
+.news	.pagination>.active>span,.news .pagination>.active>span:focus,.news .pagination>.active>span:hover
+	{
+	color:#fff;
+	background-color: #1c7058;
+	border-color: #1c7058
+}
+.newsInfo  .tip{
+	color: #aaaaaa;
+    margin-top: 24px;
+}
+.newsInfo  .tip span{
+	margin-right:30px;
+}
+.newsInfo  .tip .tip1:before{
+	content:"发布时间："
+}
+.newsInfo  .tip .tip2:before{
+	content:"来源："
+}
+.newsInfo  .tip .tip3:before{
+	content:"编辑："
+}
+.newsInfo .line{
+	border-color: #ddd;
+}
+.newsInfo .title{
+	overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.newsInfo .article{
+	overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
+	font-size: 18px;
+    color: #616161;
+    padding-bottom: 50px;
+}
+@media ( max-width :1366px) {
+	.index .msgList li {
+	    margin-right: 4%;
+	    width: 48%;
+	}
+}

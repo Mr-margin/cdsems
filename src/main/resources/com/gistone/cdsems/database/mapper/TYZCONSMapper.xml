@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gistone.cdsems.database.mapper.TYZCONSMapper">
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.TYZCONS">
+    <id column="CONSTRUCTIONID" jdbcType="VARCHAR" property="constructionId" />
+    <result column="PROJECTNAME" jdbcType="VARCHAR" property="projectName" />
+    <result column="ACCEPTANCEDATE" jdbcType="VARCHAR" property="acceptanceDate" />
+    <result column="NATIONALECONOMYCODE" jdbcType="VARCHAR" property="nationalEconomyCode" />
+    <result column="EIAMANAGETYPE" jdbcType="VARCHAR" property="eiaManageType" />
+    <result column="PROJECTADDRESS" jdbcType="VARCHAR" property="projectAddress" />
+    <result column="PROJECTINVEST" jdbcType="VARCHAR" property="projectInvest" />
+    <result column="ENVIRONINVEST" jdbcType="VARCHAR" property="environInvest" />
+    <result column="PROVINCENAME" jdbcType="VARCHAR" property="provinceName" />
+    <result column="DELMARK" jdbcType="VARCHAR" property="delMark" />
+    <result column="LONGITUDE" jdbcType="VARCHAR" property="longitude" />
+    <result column="LATITUDE" jdbcType="VARCHAR" property="latitude" />
+    <result column="NATIONALECONOMYNAME" jdbcType="VARCHAR" property="nationalEconomyName" />
+    <result column="EIAMANAGENAME" jdbcType="VARCHAR" property="eiaManageName" />
+    <result column="STORAGETIME" jdbcType="VARCHAR" property="storageTime" />
+    <result column="INSERTTIME" jdbcType="TIMESTAMP" property="insertTime" />
+    <result column="ISDOWNLOADED" jdbcType="DOUBLE" property="isDownLoaded" />
+    <result column="LON" jdbcType="DOUBLE" property="lon" />
+    <result column="LAT" jdbcType="DOUBLE" property="lat" />
+    <result column="LON2" jdbcType="DOUBLE" property="lon2" />
+    <result column="LAT2" jdbcType="DOUBLE" property="lat2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql> 
+  <sql id="Base_Column_List">
+    CONSTRUCTIONID,PROJECTNAME,ACCEPTANCEDATE,NATIONALECONOMYCODE,EIAMANAGETYPE,PROJECTADDRESS,PROJECTINVEST
+    PROVINCENAME,DELMARK,NATIONALECONOMYNAME,EIAMANAGENAME,STORAGETIME,INSERTTIME,ISDOWNLOADED,LON2,LAT2
+  </sql>
+   <select id="getJchpfx" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_YZ_CONS
+    where 
+    NATIONALECONOMYCODE in ('B','B9','B91','B911','B912','B913','B914','B915','B916','B919','B92','B921','B922','B32','B321','B321','B3212','B3213','B3214','B3215','B3216','B3217','B3219','B322','B3221','B3222','B323',
+                    'B3231','B3232','B7','B71','B711','B712','C','C25','C251','C2511','C2512','C252','C2520','C26','C261','C2611','C2612','C2613','C2614','C2619','C263','C2631','C263','C264','C2641','C2642',
+                    'C2643','C2644','C2645','C265','C2651','C2652','C266','C2661','C2662','C2664','C2669','C267','C2671','C2672','C27','C271','C2710','C28','C281','C2811','C2812','C282','C2822','C2823','C2826','C2829',
+                    'C33','C336','C3360','C19','C191','C1910','C193','C1931')
+     <if test='pd.eiaManageName != null and pd.eiaManageName != ""'>
+      and EIAMANAGENAME = #{pd.eiaManageName,jdbcType=VARCHAR}
+    </if>
+     <if test='pd.xmin != null and pd.xmin != ""'>
+      and LON2 >= #{pd.xmin,jdbcType=DOUBLE}
+    </if>  
+    <if test='pd.xmax != null and pd.xmax != ""'>
+      and LON2 &lt;= #{pd.xmax,jdbcType=DOUBLE}
+    </if>  
+    <if test='pd.ymin != null and pd.ymin != ""'>
+      and LAT2 >= #{pd.ymin,jdbcType=DOUBLE}
+    </if>
+    <if test='pd.ymax != null and pd.ymax != ""'>
+      and LAT2 &lt;= #{pd.ymax,jdbcType=DOUBLE}
+    </if>               
+  </select>
+  <!-- 通过建设id查询数据 -->
+   <select id="getJchpfxMessage" parameterType="com.gistone.cdsems.database.entity.TYZCONS" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_YZ_CONS
+    where 1=1 
+    <if test="constructionId != null">
+      and  CONSTRUCTIONID = #{constructionId,jdbcType=VARCHAR}
+     </if>
+  </select>
+</mapper>

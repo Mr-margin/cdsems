@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.CompanyParkPollutantsMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.CompanyParkPollutants" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <id column="PARK_ID" property="parkId" jdbcType="DECIMAL" />
+    <result column="HEXAVALENTCHROMIUM" property="hexavalentchromium" jdbcType="VARCHAR" />
+    <result column="THE_TOTAL_CHROMIUM" property="theTotalChromium" jdbcType="VARCHAR" />
+    <result column="CADMIUM" property="cadmium" jdbcType="VARCHAR" />
+    <result column="MERCURY" property="mercury" jdbcType="VARCHAR" />
+    <result column="ARSENIC" property="arsenic" jdbcType="VARCHAR" />
+    <result column="LEAD" property="lead" jdbcType="VARCHAR" />
+    <result column="NICKEL" property="nickel" jdbcType="VARCHAR" />
+    <result column="COPPER" property="copper" jdbcType="VARCHAR" />
+    <result column="BENZOPYRENE" property="benzopyrene" jdbcType="VARCHAR" />
+    <result column="OILTYPE" property="oiltype" jdbcType="VARCHAR" />
+    <result column="OTHERPOLLUTANTS" property="otherpollutants" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <delete id="delParkPollutantsInfor" parameterType="java.lang.String">
+  	DELETE T_COMPANY_PARK_POLLUTANTS WHERE PARK_ID in (${id})
+  </delete>
+  <delete id="delAllParkPollutantsInfor" parameterType="java.lang.String">
+  	DELETE T_COMPANY_PARK_POLLUTANTS WHERE ID in (${id})
+  </delete>
+  <insert id="insertParkPollutantsInforsss" parameterType="hashMap">
+  	INSERT INTO T_COMPANY_PARK_POLLUTANTS
+		(	ID, 
+			PARK_ID, 
+			HEXAVALENTCHROMIUM, 
+			THE_TOTAL_CHROMIUM, 
+			CADMIUM, 
+			MERCURY, 
+			ARSENIC, 
+			LEAD, 
+		    NICKEL, 
+		    COPPER, 
+		    BENZOPYRENE, 
+		    OILTYPE, 
+		    OTHERPOLLUTANTS, 
+		    CREATE_USER_ID, 
+		    CREATE_TIME,
+		    UPLOAD_TIME 
+		    ) 
+		VALUES 
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			PARK_ID.NEXTVAL,
+			${item.PARK_ID},
+			'${item.HEXAVALENTCHROMIUM}',
+			'${item.THE_TOTAL_CHROMIUM}',
+			'${item.CADMIUM}',
+			'${item.MERCURY}',
+			'${item.ARSENIC}',
+			'${item.LEAD}',
+			'${item.NICKEL}',
+			'${item.COPPER}',
+			'${item.BENZOPYRENE}',
+			'${item.OILTYPE}',
+			'${item.OTHERPOLLUTANTS}',
+			'${item.CREATE_USER_ID}',
+			'${item.CREATE_TIME}',
+			'${item.UPLOAD_TIME}'
+			)
+		</foreach> 
+  </insert>
+  
+   <!-- 批量插入数据 -->
+    <insert id="insertParkPollutantsInfor" parameterType="java.util.Map">
+    	insert into T_COMPANY_PARK_POLLUTANTS(
+    	    ID, 
+			PARK_ID, 
+			HEXAVALENTCHROMIUM, 
+			THE_TOTAL_CHROMIUM, 
+			CADMIUM, 
+			MERCURY, 
+			ARSENIC, 
+			LEAD, 
+		    NICKEL, 
+		    COPPER, 
+		    BENZOPYRENE, 
+		    OILTYPE, 
+		    OTHERPOLLUTANTS, 
+		    CREATE_USER_ID, 
+		    CREATE_TIME,
+		    UPLOAD_TIME, 
+		    GROWTH
+    	)select PARK_ID.NEXTVAL,a.* from(
+    	<foreach collection ="list" item="item" separator ="union" close=")" open="(">
+        select
+				${item.PARK_ID} as a1,
+				'${item.HEXAVALENTCHROMIUM}' as a2,
+				'${item.THE_TOTAL_CHROMIUM}' as a3,
+				'${item.CADMIUM}' as a4,
+				'${item.MERCURY}' as a5,
+				'${item.ARSENIC}' as a6,
+				'${item.LEAD}' as a7,
+				'${item.NICKEL}' as a8,
+				'${item.COPPER}' as a9,
+				'${item.BENZOPYRENE}' as a10,
+				'${item.OILTYPE}' as a11,
+				'${item.OTHERPOLLUTANTS}' as a12,
+				'${item.CREATE_USER_ID}' as a13,
+				'${item.CREATE_TIME}' as a14,
+				'${item.UPLOAD_TIME}' as a15,
+				'${item.GROWTH}' as a16
+    	from DUAL
+    	</foreach>
+    	) a
+    </insert>
+  
+  
+  <update id="updateParkPollutantsfor" parameterType="hashMap">
+  	UPDATE T_COMPANY_PARK_POLLUTANTS SET 
+			HEXAVALENTCHROMIUM=#{hexavalentchromium}, 
+			THE_TOTAL_CHROMIUM=#{theTotalChromium}, 
+			CADMIUM=#{cadmium}, 
+			MERCURY=#{mercury}, 
+			ARSENIC=#{arsenic}, 
+			LEAD=#{lead}, 
+		    NICKEL=#{nickel}, 
+		    COPPER=#{copper}, 
+		    BENZOPYRENE=#{benzopyrene}, 
+		    OILTYPE=#{oiltype}, 
+		    OTHERPOLLUTANTS=#{otherpollutants}, 
+		    UPDATE_USER_ID=#{updateUserId}, 
+		    UPDATE_TIME=#{updateTime}
+		    WHERE ID = #{id} 
+  </update>
+  <sql id="Column_List" >
+    ID, PARK_ID, HEXAVALENTCHROMIUM, THE_TOTAL_CHROMIUM, CADMIUM, MERCURY, ARSENIC, LEAD, 
+    NICKEL, COPPER, BENZOPYRENE, OILTYPE, OTHERPOLLUTANTS, CREATE_USER_ID, CREATE_TIME, 
+    UPDATE_USER_ID, UPDATE_TIME
+  </sql>																									  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.CompanyParkPollutantskey" >
+    select 
+    <include refid="Column_List" />
+    from T_COMPANY_PARK_POLLUTANTS
+    where ID = #{id,jdbcType=DECIMAL}
+      and PARK_ID = #{parkId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.CompanyParkPollutantskey" >
+    delete from T_COMPANY_PARK_POLLUTANTS
+    where ID = #{id,jdbcType=DECIMAL}
+      and PARK_ID = #{parkId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.CompanyParkPollutants" >
+    insert into T_COMPANY_PARK_POLLUTANTS (ID, PARK_ID, HEXAVALENTCHROMIUM, 
+      THE_TOTAL_CHROMIUM, CADMIUM, MERCURY, 
+      ARSENIC, LEAD, NICKEL, 
+      COPPER, BENZOPYRENE, OILTYPE, 
+      OTHERPOLLUTANTS, CREATE_USER_ID, CREATE_TIME, 
+      UPDATE_USER_ID, UPDATE_TIME)
+    values (#{id,jdbcType=DECIMAL}, #{parkId,jdbcType=DECIMAL}, #{hexavalentchromium,jdbcType=VARCHAR}, 
+      #{theTotalChromium,jdbcType=VARCHAR}, #{cadmium,jdbcType=VARCHAR}, #{mercury,jdbcType=VARCHAR}, 
+      #{arsenic,jdbcType=VARCHAR}, #{lead,jdbcType=VARCHAR}, #{nickel,jdbcType=VARCHAR}, 
+      #{copper,jdbcType=VARCHAR}, #{benzopyrene,jdbcType=VARCHAR}, #{oiltype,jdbcType=VARCHAR}, 
+      #{otherpollutants,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{updateUserId,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.CompanyParkPollutantskey" >
+    insert into T_COMPANY_PARK_POLLUTANTS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="parkId != null" >
+        PARK_ID,
+      </if>
+      <if test="hexavalentchromium != null" >
+        HEXAVALENTCHROMIUM,
+      </if>
+      <if test="theTotalChromium != null" >
+        THE_TOTAL_CHROMIUM,
+      </if>
+      <if test="cadmium != null" >
+        CADMIUM,
+      </if>
+      <if test="mercury != null" >
+        MERCURY,
+      </if>
+      <if test="arsenic != null" >
+        ARSENIC,
+      </if>
+      <if test="lead != null" >
+        LEAD,
+      </if>
+      <if test="nickel != null" >
+        NICKEL,
+      </if>
+      <if test="copper != null" >
+        COPPER,
+      </if>
+      <if test="benzopyrene != null" >
+        BENZOPYRENE,
+      </if>
+      <if test="oiltype != null" >
+        OILTYPE,
+      </if>
+      <if test="otherpollutants != null" >
+        OTHERPOLLUTANTS,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="parkId != null" >
+        #{parkId,jdbcType=DECIMAL},
+      </if>
+      <if test="hexavalentchromium != null" >
+        #{hexavalentchromium,jdbcType=VARCHAR},
+      </if>
+      <if test="theTotalChromium != null" >
+        #{theTotalChromium,jdbcType=VARCHAR},
+      </if>
+      <if test="cadmium != null" >
+        #{cadmium,jdbcType=VARCHAR},
+      </if>
+      <if test="mercury != null" >
+        #{mercury,jdbcType=VARCHAR},
+      </if>
+      <if test="arsenic != null" >
+        #{arsenic,jdbcType=VARCHAR},
+      </if>
+      <if test="lead != null" >
+        #{lead,jdbcType=VARCHAR},
+      </if>
+      <if test="nickel != null" >
+        #{nickel,jdbcType=VARCHAR},
+      </if>
+      <if test="copper != null" >
+        #{copper,jdbcType=VARCHAR},
+      </if>
+      <if test="benzopyrene != null" >
+        #{benzopyrene,jdbcType=VARCHAR},
+      </if>
+      <if test="oiltype != null" >
+        #{oiltype,jdbcType=VARCHAR},
+      </if>
+      <if test="otherpollutants != null" >
+        #{otherpollutants,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.CompanyParkPollutantskey" >
+    update T_COMPANY_PARK_POLLUTANTS
+    <set >
+      <if test="hexavalentchromium != null" >
+        HEXAVALENTCHROMIUM = #{hexavalentchromium,jdbcType=VARCHAR},
+      </if>
+      <if test="theTotalChromium != null" >
+        THE_TOTAL_CHROMIUM = #{theTotalChromium,jdbcType=VARCHAR},
+      </if>
+      <if test="cadmium != null" >
+        CADMIUM = #{cadmium,jdbcType=VARCHAR},
+      </if>
+      <if test="mercury != null" >
+        MERCURY = #{mercury,jdbcType=VARCHAR},
+      </if>
+      <if test="arsenic != null" >
+        ARSENIC = #{arsenic,jdbcType=VARCHAR},
+      </if>
+      <if test="lead != null" >
+        LEAD = #{lead,jdbcType=VARCHAR},
+      </if>
+      <if test="nickel != null" >
+        NICKEL = #{nickel,jdbcType=VARCHAR},
+      </if>
+      <if test="copper != null" >
+        COPPER = #{copper,jdbcType=VARCHAR},
+      </if>
+      <if test="benzopyrene != null" >
+        BENZOPYRENE = #{benzopyrene,jdbcType=VARCHAR},
+      </if>
+      <if test="oiltype != null" >
+        OILTYPE = #{oiltype,jdbcType=VARCHAR},
+      </if>
+      <if test="otherpollutants != null" >
+        OTHERPOLLUTANTS = #{otherpollutants,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+      and PARK_ID = #{parkId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.CompanyParkPollutantskey" >
+    update T_COMPANY_PARK_POLLUTANTS
+    set HEXAVALENTCHROMIUM = #{hexavalentchromium,jdbcType=VARCHAR},
+      THE_TOTAL_CHROMIUM = #{theTotalChromium,jdbcType=VARCHAR},
+      CADMIUM = #{cadmium,jdbcType=VARCHAR},
+      MERCURY = #{mercury,jdbcType=VARCHAR},
+      ARSENIC = #{arsenic,jdbcType=VARCHAR},
+      LEAD = #{lead,jdbcType=VARCHAR},
+      NICKEL = #{nickel,jdbcType=VARCHAR},
+      COPPER = #{copper,jdbcType=VARCHAR},
+      BENZOPYRENE = #{benzopyrene,jdbcType=VARCHAR},
+      OILTYPE = #{oiltype,jdbcType=VARCHAR},
+      OTHERPOLLUTANTS = #{otherpollutants,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+      and PARK_ID = #{parkId,jdbcType=DECIMAL}
+  </update>
+</mapper>

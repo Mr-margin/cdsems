@@ -1,0 +1,141 @@
+<div class=" box-body">
+    <!-- 面包屑 -->
+    <div class="panel panel-default  crumbs_box">
+        <div class="panel-body  clearfix">
+            <p class="crumbs  pull-left">
+            	<i class="iconfont">&#xe690;</i>当前位置：
+            	<span>重点行业企业</span><span> > </span><span>基础信息</span><span> > </span><span>修改</span>
+            </p>
+        	<div class="pull-right"></div>
+        </div>
+    </div>
+    <div class="panel panel-default  content">
+        <div class="panel-body pt50">
+         	<form class="form-horizontal  col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" role="form" id="dataForm">
+         		<input type="hidden" name="ID" id="ID" value="">
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">企业名称<span style="color: red;">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left required" maxlength="50" name="COMPANY_NAME" id="COMPANY_NAME" readonly="readonly" autocomplete="off" autocomplete="off"  placeholder="">
+					</div>
+					<label for="" class="col-sm-2 control-label">法定代表人<span style="color: red;">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left required" maxlength="20"  name="LEGAL_PERSON" id="LEGAL_PERSON"  autocomplete="off"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">组织机构代码<span style="color: red;">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left required" maxlength="20" name="ORGANIZING_CODE" id="ORGANIZING_CODE"  autocomplete="off"  placeholder="">
+					</div>
+					<label for="" class="col-sm-2 control-label">营业期限<span style="color: red;">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left required" maxlength="20"  name="BUSNISS_TERM" id="BUSNISS_TERM"  autocomplete="off"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">行政区划</label>
+					<div class="col-sm-4">
+					  <!-- <div class="col-lg-4" style="padding: 0;">
+						<select class="form-control" name="PROVINCE_CODE" id="PROVINCE_CODE" title="选择省"></select>
+					  </div> -->
+					  <div class="col-lg-6" style="padding: 0 5px 0 0;">
+						<select class="form-control" name="CITY_CODE" id="CITY_CODE" title="选择市"></select>
+					  </div>
+					  <div class="col-lg-6" style="padding: 0 0 0 5px;">
+						<select class="form-control" name="COUNTY_CODE" id="COUNTY_CODE" title="选择县"></select>
+					  </div>
+					</div>
+					<label for="" class="col-sm-2 control-label">地址<span style="color: red;">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left required" maxlength="100" name="ADDRESS" id="ADDRESS"  autocomplete="off"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">中心经纬度</label>
+					<div class="col-sm-4">
+					  <div class="col-lg-6" style="padding: 0 5px 0 0;">
+						<input type="number" class="form-control" maxlength="12" min="0" max="180" name="LONGITUDE" id="LONGITUDE" oninput="value=value.replace(/[^\d\.]/g,'')" autocomplete="off"  placeholder="请输入经度">
+					  </div>
+					  <div class="col-lg-6" style="padding: 0 0 0 5px;">
+						<input type="number" class="form-control" maxlength="12" min="0" max="90" name="LATITUDE" id="LATITUDE" oninput="value=value.replace(/[^\d\.]/g,'')" autocomplete="off"  placeholder="请输入纬度">
+					  </div>
+					</div>
+					<label for="" class="col-sm-2 control-label">企业规模</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left " maxlength="100"  name="SCALE" id="SCALE"  autocomplete="off"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group" style="position: relative;">
+					<label for="" class="col-sm-2 control-label" id="hylabel">所属行业</label>
+					<div class="col-sm-4">
+						<input type="hidden" name="INDUSTRY_CODE" id="INDUSTRY_CODE" value="">
+						<input type="text" class="form-control" name="INDUSTRY_TYPE" id="INDUSTRY_TYPE" readonly="readonly">
+						<!-- <select class="form-control selectpicker" data-live-search="true" name="INDUSTRY_CODE" id="INDUSTRY_CODE"></select> -->
+					</div>
+					<div class="treeDiv" id="treeDiv"  style="display:none;position: absolute;z-index: 100;overflow-y: scroll;overflow-x: auto;border: 1px solid #ccc;min-width: 300px;background: #fff;max-height: 240px;left: 18%;top: 230px;">
+		                <ul class="ztree" id="hyTree" >
+		                </ul>
+		            </div>
+					<label for="" class="col-sm-2 control-label">所属化工园区</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left " maxlength="50"  name="INDUSTRY_ZONE" id="INDUSTRY_ZONE"  autocomplete="off"  placeholder="">
+						<!-- <select class="form-control" name="INDUSTRY_ZONE" id="INDUSTRY_ZONE"></select> -->
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">地块面积(㎡)</label>
+					<div class="col-sm-4">
+						<input type="number" class="form-control left " maxlength="12" name="AREA" id="AREA" oninput="value=value.replace(/[^\d\.]/g,'')" autocomplete="off"  placeholder="">
+					</div>
+					<label for="" class="col-sm-2 control-label">现使用权属</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left " maxlength="10"  name="OWNERSHIP" id="OWNERSHIP"  autocomplete="off"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">地块利用历史</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left " maxlength="50" name="USING_HISTORY" id="USING_HISTORY"  autocomplete="off"  placeholder="">
+					</div>
+					<label for="" class="col-sm-2 control-label">地块规划用途</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left " maxlength="10"  name="LAND_USAGE" id="LAND_USAGE"  autocomplete="off"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">企业状态</label>
+					<div class="col-sm-4">
+						<select class="form-control" name="STATUS" id="STATUS">
+							<option value="在产">在产</option>
+							<option value="关闭">关闭</option>
+							<option value="搬迁">搬迁</option>
+						</select>
+					</div>
+					<label for="" class="col-sm-2 control-label">所属级别</label>
+					<div class="col-sm-4">
+						<select class="form-control" name="RANK" id="RANK">
+							<option value="国控">国控</option>
+							<option value="省控">省控</option>
+							<option value="市控">市控</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">污染地块风险等级</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left " maxlength="50" name="RISK_GRADE" id="RISK_GRADE"  autocomplete="off"  placeholder="">
+					</div>
+					<label for="" class="col-sm-2 control-label">数据来源</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left " maxlength="50" name="DATA_SOURCES" id="DATA_SOURCES"  autocomplete="off"  placeholder="">
+					</div>
+				</div>
+         	</form>
+         	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center  mt50">
+         		<button class="btn btn-warning mr10 p6-25"  onclick="update()">提交</button>
+            	<button class="btn btn-default p6-25"  onclick="back()">取消</button>
+			</div>
+    	</div>
+	</div>
+</div>

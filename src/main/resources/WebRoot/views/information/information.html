@@ -1,0 +1,398 @@
+<div class=" box-body  information  clearfix">
+    <div class="info-left  pull-left">
+    	<ul class="left-nav">
+    		<li class="info-li-active">图层目录<span></span></li>
+    		<li>图层控制<span></span></li>
+    		<li>图例<span></span></li>
+    	</ul>
+    	<div class="left-menu">
+    		<!-- 分布图/专题图切换 -->
+   			<div class="menuType info_menuList typeShow">
+   				<div>
+   					<label class="menuType-active">
+			            <input type="radio" name="menuType"  data="专题图"   value="专题图" checked/>
+			            <span>专题图</span>
+		            </label>
+   				</div>
+				<div>
+				
+					<label>
+			            <input type="radio" name="menuType"  data="分布图"  value="分布图"/>
+			            <span>分布图</span>
+		            </label>
+				</div>
+	    	</div>
+    	    <!-- 图层目录 -->
+    		<div class="menu-list  menu1">
+    			<div  class="listWrap list1">
+    				<ul class="menuList" id = "leftMenu"></ul>
+    			</div>
+		    </div>
+    		<!-- 图层控制 -->
+    		<div class="menu-list  menu2 info_menuList" style="overflow-y: auto !important;">
+	    		<div class="tool_hover sortable-list connectList agile-list">
+	                <!-- <div class="warning-element clearfix"  data="layer0" style="display:none;">
+	                	<i class="fa fa-eye fa-lg eye pull-left" checked="true" data="layer0"></i>
+	                	<div class="row pull-left">
+	                		<div class="col-sm-12">
+		                        <span style="cursor: move;">谷歌影像</span>
+		                    </div>
+		                    <div class="col-sm-12">
+		                        <div class="layer0" style="width:100%;height: 2px;margin-right: 20px;"></div>
+		                    </div>
+	                	</div>
+	                </div>
+	                <div class="warning-element clearfix" data="annoLayerImg" style="display:none;">
+	                	<i  class="fa fa-eye fa-lg eye pull-left" checked="true" data="annoLayerImg"></i>
+	                	<div class="row pull-left">
+	                		<div class="col-sm-12">
+		                        <span style="cursor: move;">中文注记</span>
+		                    </div>
+		                    <div class="col-sm-12">
+		                        <div class="annoLayerImg" style="width:100%;height: 2px;margin-right: 20px;"></div>
+		                    </div>
+	                	</div>
+	                </div>
+	                <div class="warning-element clearfix"  data="baseLayer" style="display:none;">
+	                	<i class="fa fa-eye fa-lg eye pull-left" checked="true" data="baseLayer"></i>
+	                	<div class="row pull-left">
+	                		<div class="col-sm-12">
+		                        <span style="cursor: move;">影像</span>
+		                    </div>
+		                    <div class="col-sm-12">
+		                        <div class="baseLayer" style="width:100%;height: 2px;margin-right: 20px;"></div>
+		                    </div>
+	                	</div>
+	                </div>
+	                <div class="warning-element clearfix"  data="vectorNoteLayer">
+	                	<i class="fa fa-eye fa-lg eye pull-left" checked="true" data="vectorNoteLayer"></i>
+	                	<div class="row pull-left">
+	                		<div class="col-sm-12">
+		                        <span style="cursor: move;">中文注记</span>
+		                    </div>
+		                    <div class="col-sm-12">
+		                        <div class="vectorNoteLayer" style="width:100%;height: 2px;margin-right: 20px;"></div>
+		                    </div>
+	                	</div>
+	                </div>
+	                <div class="warning-element clearfix"  data="vectorLayer">
+	                	<i class="fa fa-eye fa-lg eye pull-left" checked="true" data="vectorLayer"></i>
+	                	<div class="row pull-left">
+	                		<div class="col-sm-12">
+		                        <span style="cursor: move;">矢量图</span>
+		                    </div>
+		                    <div class="col-sm-12">
+		                        <div class="vectorLayer" style="width:100%;height: 2px;margin-right: 20px;"></div>
+		                    </div>
+	                	</div>
+	                </div> -->
+	            </div>
+    		
+    		
+    		
+    		
+    		</div>
+    		<!-- 图例 -->
+    		<div class="menu-list  menu3 tuli info_menuList" id = "yzt_tuli" style="overflow: auto !important;display: block;"></div>
+    	</div>
+    </div>
+    <div  id="toggle-sidebar"  title="收起菜单"   onclick="toggleBar()"  ><img src="../../img/information/toggle2.png"   /></div>
+    <div class="info-right pull-right infor-maps">
+	    <div class="infor-map ">
+	        <!-- 地图-start -->
+	        <div id="map" style="height: 100%;"></div>
+	    	<!-- 影像切换 -->
+	    	<div class="yx-box">
+				<ul class="cards">
+					<li class="card card-1 type1"></li>
+				  	<li class="card card-2 type2"></li>
+				  	<li class="card card-3 type3 yx_active"></li>
+				  	<span></span>
+				</ul>
+			</div>
+	    	<!-- 工具栏 -->
+	    	<ul class="map_representation  tool-box">
+				<li title="全图" class=""><i class="tool1 tool-qt"></i></li>
+	       		<li title="量距" class=""><i class="tool2 tool-jl"></i></li>
+	       		<li title="量面" class=""><i class="tool3 tool-mj"></i></li>
+	       		<li title="清空" class=""><i class="tool4 tool-qc"></i></li>
+	       		<li title="表格"><i class="tool5 tool-bg"></i></li>
+	       		<li title="属性查询"><i class="tool6 tool-idQuery"></i></li>	
+			</ul>
+			<div class="map_blc">
+	            <div id="scalebar"></div>
+	            <span>当前经纬度：<strong class="jwd">109.803818,36.940145</strong></span>
+	        </div>
+	        <!-- 工具条中图表 -->
+	        <div id="tongjituDiv" class="mobile_table" style="display: none">
+	            <div class="table-title" id="main_tabletitle">
+	                <div class="clearfix" style="width: 98%;margin: 0 1%;border-bottom: 1px solid #DEDFE1;">
+	                    <div><span id="title">数据</span></div>
+	                    <p>
+	                        <i data="1" class="large" ></i><a class="switch" href="javascript:void(0);"></a>
+	                    </p>
+	                </div>
+	            </div>
+	            <div class="table-body clearfix">
+	                <table id="tongjibiao" class="table table-striped" style="height:initial">
+	                    <thead>
+	                    </thead>
+	                    <tbody>
+	                    </tbody>
+	                </table>
+	            </div>
+	        </div>
+	        <!-- 环评项目建设分析表格 -->
+	        <div id="tongjituDiv_2" class="mobile_table" style="display:none;right:0px;left:400px; z-index: 1300;">
+	            <div class="table-title" id="main_tabletitle2">
+	                <div class="clearfix" style="width: 98%;margin: 0 1%;border-bottom: 1px solid #DEDFE1;">
+	                    <div><span id="title1">数据</span></div>
+	                    <p>
+	                        <i data="1" class="large" style="background:none;"></i><a class="switch" href="javascript:void(0);"></a>
+	                    </p>
+	                </div>
+	            </div>
+	            <div class="table-body clearfix">
+	
+	            </div>
+	
+	        </div>
+	        <!-- 污染地块敏感点分析表格 -->
+	        <div id="info_table1" class="mobile_table" style="display:none;">
+	            <div class="table-title" >
+	                <div class="clearfix" style="width: 98%;margin: 0 1%;border-bottom: 1px solid #DEDFE1;">
+	                    <div><span id="title">数据1</span></div>
+	                    <p>
+	                       <i data="1" class="large" style="background:none;"></i><a class="switch" href="javascript:void(0);"></a>
+	                    </p>
+	                </div>
+	            </div>
+	            <div class="table-body clearfix">
+	
+	            </div>
+	        </div>
+	        <!--返回市窗 --> 
+			<div class="menuTip modal-header"  style="display:none;">
+	            <div>
+	                <i class="iconfont icon-return"></i><a href="javascript:void(0);" onclick="fanhuiShi()" id="fanhuiShi" value="" >成都市</a>
+	            </div>
+			</div>
+			<div class="info_modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none">
+	            <div class="modal-dialog">
+	                <div class="modal-content">
+	                    <div class="modal-header">
+	                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="background:none !important;">&times;</button>
+	                        <h4 class="modal-title" id="myModalLabel">污染地块条件查询</h4>
+	                    </div>
+	                    <div class="modal-body">
+	                        <form class="form-horizontal" role="form">
+	                        	<div class="clearfix info_wrdk" style="display:none">
+	                        		
+	                        	</div>
+	                            <div class="form-group mb8">
+	                                <label for="city" class="col-sm-4 control-label">市：</label>
+	                                <div class="col-sm-8">
+	                                   <select class="form-control" id="city" >
+	                                        <option value="510100" >成都市</option>
+	                                    </select>
+	                                </div>
+	                            </div>
+	                            <div class="form-group mb8">
+	                                <label for="county" class="col-sm-4 control-label">县：</label>
+	                                <div class="col-sm-8">
+	                                    <select class="form-control" id="county" onchange="setCountyCode();">
+	                                    </select>
+	                                </div>
+	                            </div>
+	                            <div class="form-group scjd info_wrdks mb8">
+	                                <label for="pos" class="col-sm-4 control-label">所处阶段：</label>
+	                                <div class="col-sm-8">
+	                                    <select class="form-control" id="scjd">
+	                                        <option value="">请选择地块所属阶段</option>
+	                                        <option value="疑似地块">疑似地块</option>
+	                                        <option value="初步调查">初步调查</option>
+	                                        <option value="详细调查">详细调查</option>
+	                                        <option value="风险评估">风险评估</option>
+	                                        <option value="风险管控">风险管控</option>
+	                                        <option value="土壤修复与治理">土壤修复与治理</option>
+	                                        <option value="土壤修复与治理评估">土壤修复与治理评估</option>
+	                                    </select>
+	                                </div>
+	                            </div>
+	                            <div class="form-group scjd info_wrdks mb8">
+	                                <label for="pos" class="col-sm-4 control-label">风险级别：</label>
+	                                <div class="col-sm-8">
+	                                    <input type="text" id="fxjb" class="form-control">
+	                                </div>
+	                            </div>
+	                            <div class="form-group dkbm info_wrdks mb8" >
+	                                <label for="code" class="col-sm-4 control-label">地块编码：</label>
+	                                <div class="col-sm-8">
+	                                    <input type="text" id="dkbm" class="form-control">
+	                                </div>
+	
+	                            </div>
+	                            <div class="form-group dkbm info_wrdks mb8" >
+	                                <label for="code" class="col-sm-4 control-label">污染地块名称：</label>
+	                                <div class="col-sm-8">
+	                                    <input type="text" id="dkmc" class="form-control">
+	                                </div>
+	                            </div>
+	                            
+	                            <!-- 重点行业监管企业 -->
+	                            <div class="zhongdianyangye" style="display:none;">
+	                                <div class="form-group mb8" >
+	                                    <label for="code" class="col-sm-4 control-label">企业名称：</label>
+	                                    <div class="col-sm-8">
+	                                        <input type="text" id="enterpriseName" class="form-control">
+	                                    </div>
+	                                </div>
+	                                <div class="form-group mb8">
+	                                    <label for="pos" class="col-sm-4 control-label">行业：</label>
+	                                    <div class="col-sm-8">
+	                                        <select class="form-control" id="industry">
+	                                            <option value="">全部</option>
+	                                        </select>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            
+	                             <!-- 工业园区 -->
+	                            <!-- <div class="gongyeyuanqu" style="display:none;">
+	                                <div class="form-group" >
+	                                    <label for="code" class="col-sm-4 control-label">工业园区名称：</label>
+	                                    <div class="col-sm-8">
+	                                        <input type="text" id="parkName" class="form-control">
+	                                    </div>
+	                                </div>
+	                                <div class="form-group">
+	                                     <label for="code" class="col-sm-4 control-label">联系人：</label>
+	                                     <div class="col-sm-8">
+	                                        <input type="text" id="park_contactName" class="form-control">
+	                                     </div>
+	                                </div>
+	                                <div class="form-group">
+	                                     <label for="code" class="col-sm-4 control-label">联系电话：</label>
+	                                     <div class="col-sm-8">
+	                                        <input type="text" id="park_contactPhone" class="form-control">
+	                                     </div>
+	                                </div>
+	                            </div> -->
+	                            
+	                            
+	                             <!-- 农用地 -->
+	                            <div class="nongyongdi " style="display:none;">
+	                                <div class="form-group mb8" >
+	                                    <label for="code" class="col-sm-4 control-label">农用地名称：</label>
+	                                    <div class="col-sm-8">
+	                                        <input type="text" id="agricuturalName" class="form-control">
+	                                    </div>
+	                                </div>
+	                                <div class="form-group mb8">
+	                                     <label for="code" class="col-sm-4 control-label">农用地编码：</label>
+	                                     <div class="col-sm-8">
+	                                        <input type="text" id="agricuturalCode" class="form-control">
+	                                     </div>
+	                                </div>
+	                                <div class="form-group mb8">
+	                                     <label for="code" class="col-sm-4 control-label">土地利用类型：</label>
+	                                     <div class="col-sm-8">
+	                                        <input type="text" id="agricuturalType" class="form-control">
+	                                     </div>
+	                                </div>
+	                            </div>
+	                            <!-- 建设用地准入 -->
+                                <div class="form-group scjd info_jsyd mb8">
+	                                <label for="pos" class="col-sm-4 control-label">风险级别：</label>
+	                                <div class="col-sm-8">
+	                                    <input type="text" id="jsyd_fxjb" class="form-control">
+	                                </div>
+	                            </div>
+	                            <div class="form-group dkbm info_jsyd mb8" >
+	                                <label for="code" class="col-sm-4 control-label">地块编码：</label>
+	                                <div class="col-sm-8">
+	                                    <input type="text" id="jsyd_dkbm" class="form-control">
+	                                </div>
+	
+	                            </div>
+	                            <div class="form-group dkbm info_jsyd mb8" >
+	                                <label for="code" class="col-sm-4 control-label">污染地块名称：</label>
+	                                <div class="col-sm-8">
+	                                    <input type="text" id="jsyd_dkmc" class="form-control">
+	                                </div>
+	                            </div>
+	                        </form>
+	                    </div>
+	                    <div class="modal-footer">
+	                        <button type="button" class="btn btn-primary conditionQuery" >查询</button>
+	                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	                    </div>
+	                </div><!-- /.modal-content -->
+	            </div>
+	        </div>
+		</div>
+		<!-- 可显示隐藏详细信息div -->
+	   	<div id="toggle-sidebar2" title="收起菜单" onclick="toggleBar2()"  hidden><img src="../../img/information/toggle2.png" /></div>  
+		<!-- 可显示隐藏详细信息div -->
+		<div  class="toggleInfo"  hidden>
+	   		<div class="toggleInfo-box">
+	  				<div  class="box1">
+	  					<div   id = "wrdk_detail" ></div>
+	  				</div>
+	  				<!-- <div  class="box2"  >
+	  						<div  id = "wrdk_pie"  style="height: 250px; width:100%" ></div>
+	  						
+	  				</div> -->
+	  				<hr  style="margin-left: 15px;margin-right: 15px;border-top: 1px solid #a8a8a8;margin-top: 5px;margin-bottom: 10px;" />
+	  				<div  class="box3" >
+	   						<div  class="wrdk_barTip"></div>
+	   						<div  id ="wrdk_bar"   style=" width:300px; height:700px" ></div>
+	   						<div id="countryDetail" class="table" >
+						        <div class="" >
+						            <table id="countryDetailTable">
+						                <thead>
+						                </thead>
+						                <tbody style = "cursor:pointer;">
+						                </tbody>
+						            </table>
+						        </div>
+					    	</div>
+	   				</div>
+	   		</div>	
+	 
+	 
+	 	
+	 
+	 </div>
+	
+		<div class="modal fade" id="pwModal" tabindex="-1" role="dialog" aria-labelledby="pwModal" aria-hidden="true">
+            <div class="modal-dialog"  style="height:95%;width:80%;">
+                <div class="modal-content">
+                	<div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="background:none !important;">&times;</button>
+		                <h4 class="modal-title" id="myModalLabel1">模态框（Modal）标题</h4>
+		            </div>
+                    <div class="modal-body">
+                        <div id="detailsDiv">
+				        	<div class="detailsDivBocy" >
+				        		<!-- <iframe id="detailsIframe" src="views/details/enterpriseDetails.html" style="width: 100%;height: 600px;" class="pwModal"></iframe> -->
+				        		<iframe id="detailsIframe" src="" style="width: 100%;border:none" class="pwModal"  ></iframe>
+				        	</div>
+				        </div>
+                    </div>
+                   
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+	
+	</div>
+</div>
+
+<script type="text/javascript">
+		$(function(){
+			var allHeight=document.documentElement.clientHeight;
+			var iframeHeight=allHeight-150
+			$("#detailsIframe").height(iframeHeight)
+		})
+</script>
+

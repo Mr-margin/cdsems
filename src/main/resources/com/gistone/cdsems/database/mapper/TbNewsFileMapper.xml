@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.TbNewsFileMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.TbNewsFile" >
+    <id column="TNF_ID" property="tnfId" jdbcType="DECIMAL" />
+    <result column="TNF_TN_ID" property="tnfTnId" jdbcType="DECIMAL" />
+    <result column="TNF_URL" property="tnfUrl" jdbcType="VARCHAR" />
+    <result column="TNF_OLDNAME" property="tnfOldname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TNF_ID, TNF_TN_ID, TNF_URL, TNF_OLDNAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from TB_NEWS_FILE
+    where TNF_ID = #{tnfId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TB_NEWS_FILE
+    where TNF_ID = #{tnfId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.TbNewsFile" >
+    insert into TB_NEWS_FILE (TNF_ID, TNF_TN_ID, TNF_URL, 
+      TNF_OLDNAME)
+    values (#{tnfId,jdbcType=DECIMAL}, #{tnfTnId,jdbcType=DECIMAL}, #{tnfUrl,jdbcType=VARCHAR}, 
+      #{tnfOldname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.TbNewsFile" >
+    insert into TB_NEWS_FILE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        TNF_ID,
+      <if test="tnfTnId != null" >
+        TNF_TN_ID,
+      </if>
+      <if test="tnfUrl != null" >
+        TNF_URL,
+      </if>
+      <if test="tnfOldname != null" >
+        TNF_OLDNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+         TB_NEWS_FILE_SEQ.NEXTVAL,
+      <if test="tnfTnId != null" >
+        #{tnfTnId,jdbcType=DECIMAL},
+      </if>
+      <if test="tnfUrl != null" >
+        #{tnfUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="tnfOldname != null" >
+        #{tnfOldname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.TbNewsFile" >
+    update TB_NEWS_FILE
+    <set >
+      <if test="tnfTnId != null" >
+        TNF_TN_ID = #{tnfTnId,jdbcType=DECIMAL},
+      </if>
+      <if test="tnfUrl != null" >
+        TNF_URL = #{tnfUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="tnfOldname != null" >
+        TNF_OLDNAME = #{tnfOldname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TNF_ID = #{tnfId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.TbNewsFile" >
+    update TB_NEWS_FILE
+    set TNF_TN_ID = #{tnfTnId,jdbcType=DECIMAL},
+      TNF_URL = #{tnfUrl,jdbcType=VARCHAR},
+      TNF_OLDNAME = #{tnfOldname,jdbcType=VARCHAR}
+    where TNF_ID = #{tnfId,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 根据角色ID查询 -->
+  <select id="selectByTnfTnId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+     select 
+    <include refid="Base_Column_List" />
+    from TB_NEWS_FILE
+    where TNF_TN_ID = #{tnfTnId,jdbcType=DECIMAL}
+  </select>
+  
+  <!-- 根据角色ID删除 -->
+  <delete id="deleteByTnfTnId" parameterType="java.math.BigDecimal" >
+    delete from TB_NEWS_FILE
+    where TNF_TN_ID = #{tnfTnId,jdbcType=INTEGER}
+  </delete>
+</mapper>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.SysLogMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.SysLog" >
+    <id column="SL_ID" property="slId" jdbcType="DECIMAL" />
+    <result column="SL_CONTENT" property="slContent" jdbcType="VARCHAR" />
+    <result column="SL_SLT_ID" property="slSltId" jdbcType="DECIMAL" />
+    <result column="SL_SU_ID" property="slSuId" jdbcType="DECIMAL" />
+    <result column="SL_IP" property="slIp" jdbcType="VARCHAR" />
+    <result column="SL_TIME" property="slTime" jdbcType="TIMESTAMP" />
+    <!-- 操作用户 -->
+    <association property="slSysUser" javaType="com.gistone.cdsems.database.entity.SysUser">
+		<id column="SU_ID" property="suId" jdbcType="DECIMAL" />
+	    <result column="SU_USERNAME" property="suUsername" jdbcType="VARCHAR" />
+	</association>
+	<!-- 日志类型 -->
+	<association property="slSysLogType" javaType="com.gistone.cdsems.database.entity.SysLogType">
+		<id column="SLT_ID" property="sltId" jdbcType="DECIMAL" />
+    	<result column="SLT_NAME" property="sltName" jdbcType="VARCHAR" />
+	</association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SL_ID, SL_CONTENT, SL_SLT_ID, SL_SU_ID, SL_IP, SL_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_LOG
+    where SL_ID = #{slId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_LOG
+    where SL_ID = #{slId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.SysLog" >
+    insert into SYS_LOG (SL_ID, SL_CONTENT, SL_SLT_ID, 
+      SL_SU_ID, SL_IP, SL_TIME
+      )
+    values (SYS_LOG_SEQ.nextval, #{slContent,jdbcType=VARCHAR}, #{slSltId,jdbcType=DECIMAL}, 
+      #{slSuId,jdbcType=DECIMAL}, #{slIp,jdbcType=VARCHAR}, #{slTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.SysLog" >
+    insert into SYS_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      
+        SL_ID,
+      
+      <if test="slContent != null" >
+        SL_CONTENT,
+      </if>
+      <if test="slSltId != null" >
+        SL_SLT_ID,
+      </if>
+      <if test="slSuId != null" >
+        SL_SU_ID,
+      </if>
+      <if test="slIp != null" >
+        SL_IP,
+      </if>
+      <if test="slTime != null" >
+        SL_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      
+        SYS_LOG_SEQ.nextval,
+      
+      <if test="slContent != null" >
+        #{slContent,jdbcType=VARCHAR},
+      </if>
+      <if test="slSltId != null" >
+        #{slSltId,jdbcType=DECIMAL},
+      </if>
+      <if test="slSuId != null" >
+        #{slSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="slIp != null" >
+        #{slIp,jdbcType=VARCHAR},
+      </if>
+      <if test="slTime != null" >
+        #{slTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.SysLog" >
+    update SYS_LOG
+    <set >
+      <if test="slContent != null" >
+        SL_CONTENT = #{slContent,jdbcType=VARCHAR},
+      </if>
+      <if test="slSltId != null" >
+        SL_SLT_ID = #{slSltId,jdbcType=DECIMAL},
+      </if>
+      <if test="slSuId != null" >
+        SL_SU_ID = #{slSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="slIp != null" >
+        SL_IP = #{slIp,jdbcType=VARCHAR},
+      </if>
+      <if test="slTime != null" >
+        SL_TIME = #{slTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SL_ID = #{slId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.SysLog" >
+    update SYS_LOG
+    set SL_CONTENT = #{slContent,jdbcType=VARCHAR},
+      SL_SLT_ID = #{slSltId,jdbcType=DECIMAL},
+      SL_SU_ID = #{slSuId,jdbcType=DECIMAL},
+      SL_IP = #{slIp,jdbcType=VARCHAR},
+      SL_TIME = #{slTime,jdbcType=TIMESTAMP}
+    where SL_ID = #{slId,jdbcType=DECIMAL}
+  </update>
+  
+  
+  <!-- 查询日志列表分页数据，查询条件用户名、开始时间、结束时间，判断null -->
+  <select id="list" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.SysLog" >
+  	select * from (select R.*,ROWNUM RN from (
+	select
+		*
+	from
+		SYS_LOG T3
+	left join SYS_USER T1 on T3.SL_SU_ID = T1.SU_ID
+	left join SYS_LOG_TYPE T2 on T3.SL_SLT_ID = T2.SLT_ID
+	where 1=1
+	<if test="slSysUser != null &amp;&amp; slSysUser.suUsername != null" >
+		and T1.SU_USERNAME like '%${slSysUser.suUsername}%'
+	</if>
+	<if test="slSltId != null " >
+		and T3.SL_SLT_ID = #{slSltId}
+	</if>
+	<if test="slStartTime != null" >
+		and T3.SL_TIME &gt;= #{slStartTime}
+	</if>
+	<if test="slEndTime != null" >
+		and T3.SL_TIME &lt;= #{slEndTime}
+	</if>
+	order by SL_TIME desc
+	)R)
+	where RN &gt; #{pageNumber,jdbcType=INTEGER} and RN  &lt;=(#{pageSize,jdbcType=INTEGER}+#{pageNumber,jdbcType=INTEGER})
+	
+  </select>
+  
+  <!-- 查询日志列表分页总条数， 查询条件用户名、开始时间、结束时间，判断null -->
+  <select id="total" resultType="int" parameterType="com.gistone.cdsems.database.entity.SysLog" >
+	select
+		count(1)
+	from
+		SYS_LOG T3
+	left join SYS_USER T1 on T3.SL_SU_ID = T1.SU_ID
+	left join SYS_LOG_TYPE T2 on T3.SL_SLT_ID = T2.SLT_ID
+	where 1=1
+	<if test="slSysUser != null &amp;&amp; slSysUser.suUsername != null" >
+		and T1.SU_USERNAME like '%${slSysUser.suUsername}%'
+	</if>
+	<if test="slSltId != null " >
+		and T3.SL_SLT_ID = #{slSltId}
+	</if>
+	<if test="slStartTime != null" >
+		and T3.SL_TIME &gt;= #{slStartTime}
+	</if>
+	<if test="slEndTime != null" >
+		and T3.SL_TIME &lt;= #{slEndTime}
+	</if>
+	order by SL_TIME desc
+  </select>
+</mapper>

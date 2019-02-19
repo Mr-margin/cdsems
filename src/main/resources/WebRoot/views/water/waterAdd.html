@@ -1,0 +1,89 @@
+<div class=" box-body">
+    <!-- 面包屑 -->
+    <div class="panel panel-default  crumbs_box">
+        <div class="panel-body  clearfix">
+            <p class="crumbs  pull-left"><i class="iconfont">&#xe690;</i><span>饮用水源地</span><b>></b><span>添加</span></p>
+        	<div class="pull-right"></div>
+        </div>
+    </div>
+    <div class="panel panel-default  content">
+        <div class="panel-body">
+            <div class="row">
+            	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            		<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10  col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+            			<div class="addContent">
+            				<div class="no-padding">
+            					<!-- 添加内容 -->
+            					<div class="formWrap mt50">
+            						<form id="dataForm"  onsubmit="return false">
+            							
+            							<div class="tabItem" id="waterTabelId">
+            								<div class="clearfix">
+            									<div class="form-group  col-lg-9 col-md-9 col-sm-9 col-xs-9">
+	            									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+		            								<label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding text-right">
+		            								<span style="color:#dd4b39" class="text-red">*</span>县区：</label>
+		            								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		            									 <select id="countyCode"  class="form-control"  >
+												    		<option value="">请选择</option>
+												    	</select>
+		            								</div>
+		            							</div>
+	            								<div class="form-group  col-lg-9 col-md-9 col-sm-9 col-xs-9">
+	            									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+		            								<label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding text-right">
+		            								<span style="color:#dd4b39" class="text-red">*</span>水源地名称：</label>
+		            								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		            									<input type="text" class="form-control" id="WATER_SOURCE_NAME">
+		            									<small class="WATER_SOURCE_NAME" style="color:red"></small>
+		            								</div>
+		            							</div>
+	            								<div class="form-group  col-lg-9 col-md-9 col-sm-9 col-xs-9">
+	            									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+		            								<label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding text-right">
+		            								水源地编码：</label>
+		            								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		            									<input type="text" class="form-control" id="WATER_SOURCE_CODE">
+		            								</div>
+		            							</div>
+	            								<div class="form-group  col-lg-9 col-md-9 col-sm-9 col-xs-9">
+	            									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+		            								<label class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding text-right">
+		            								<span style="color:#dd4b39" class="text-red">*</span>水源地类型：</label>
+		            								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		            									<select class="form-control" name="PERMEABILITY" id="WATER_SOURCE_TYPE">
+								           					<option value="">请选择</option>
+								           					<option value="0">河流型</option>
+								           					<option value="1">湖库型</option>
+								           					<option value="2">地下水型</option>
+								           				</select>
+								           				<small class="WATER_SOURCE_TYPE" style="color:red"></small>
+		            								</div>
+		            							</div>
+		            						</div>
+            							</div>
+            							
+            							<div class="tabItem"  style="border:none">
+	            							<div>
+								            	<table class="table table-bordered  " id="dataTablessOfwater"> </table>  
+								            </div>
+            								<div id="toolbar">
+										        <button id="button" class="btn btn-default">新增监测信息</button>
+<!-- 										        <button id="getTableData" class="btn btn-default">getTableData</button>
+ -->										    </div>
+            							</div>
+            							
+            							<div class="text-center">
+            								<button class="btn btn-warning mr10 p6-25" onclick="addyq()">添加</button>
+            								<button class="btn btn-default p6-25"  onclick="back()">取消</button>
+            							</div>
+            						</form>
+            					</div>
+            				</div>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+    	</div>
+	</div>
+</div>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.TbMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.TbMessage" >
+    <id column="TM_ID" property="tmId" jdbcType="DECIMAL" />
+    <result column="TM_CONTENT" property="tmContent" jdbcType="VARCHAR" />
+    <result column="TM_DEADTIME" property="tmDeadtime" jdbcType="TIMESTAMP" />
+    <result column="TM_ISDEAD" property="tmIsdead" jdbcType="VARCHAR" />
+    <result column="TM_SU_IDS" property="tmSuIds" jdbcType="VARCHAR" />
+    <result column="IS_DEL" property="isDel" jdbcType="VARCHAR" />
+    <result column="ADD_SU_ID" property="addSuId" jdbcType="DECIMAL" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="UPD_SU_ID" property="updSuId" jdbcType="DECIMAL" />
+    <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
+    <result column="TM_TITLE" property="tmTitle" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TM_ID, TM_CONTENT, TM_DEADTIME, TM_ISDEAD, TM_SU_IDS, IS_DEL, ADD_SU_ID, ADD_TIME, 
+    UPD_SU_ID, UPD_TIME, TM_TITLE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from TB_MESSAGE
+    where TM_ID = #{tmId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TB_MESSAGE
+    where TM_ID = #{tmId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.TbMessage" >
+    insert into TB_MESSAGE (TM_ID, TM_CONTENT, TM_DEADTIME, 
+      TM_ISDEAD, TM_SU_IDS, IS_DEL, 
+      ADD_SU_ID, ADD_TIME, UPD_SU_ID, 
+      UPD_TIME, TM_TITLE)
+    values (#{tmId,jdbcType=DECIMAL}, #{tmContent,jdbcType=VARCHAR}, #{tmDeadtime,jdbcType=TIMESTAMP}, 
+      #{tmIsdead,jdbcType=VARCHAR}, #{tmSuIds,jdbcType=VARCHAR}, #{isDel,jdbcType=VARCHAR}, 
+      #{addSuId,jdbcType=DECIMAL}, #{addTime,jdbcType=TIMESTAMP}, #{updSuId,jdbcType=DECIMAL}, 
+      #{updTime,jdbcType=TIMESTAMP}, #{tmTitle,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective"   keyProperty="tmId" parameterType="com.gistone.cdsems.database.entity.TbMessage" >
+    <selectKey resultType="BigDecimal"   order="BEFORE" keyProperty="tmId">  
+            SELECT TB_MESSAGE_SEQ.NEXTVAL as tmId from DUAL
+    </selectKey>
+    
+    insert into TB_MESSAGE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tmId != null" >
+        TM_ID,
+      </if>
+      <if test="tmContent != null" >
+        TM_CONTENT,
+      </if>
+      <if test="tmDeadtime != null" >
+        TM_DEADTIME,
+      </if>
+      <if test="tmIsdead != null" >
+        TM_ISDEAD,
+      </if>
+      <if test="tmSuIds != null" >
+        TM_SU_IDS,
+      </if>
+      <if test="isDel != null" >
+        IS_DEL,
+      </if>
+      <if test="addSuId != null" >
+        ADD_SU_ID,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="updSuId != null" >
+        UPD_SU_ID,
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME,
+      </if>
+      <if test="tmTitle != null" >
+        TM_TITLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tmId != null" >
+        #{tmId,jdbcType=DECIMAL},
+      </if>
+      <if test="tmContent != null" >
+        #{tmContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tmDeadtime != null" >
+        #{tmDeadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tmIsdead != null" >
+        #{tmIsdead,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSuIds != null" >
+        #{tmSuIds,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=VARCHAR},
+      </if>
+      <if test="addSuId != null" >
+        #{addSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updSuId != null" >
+        #{updSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tmTitle != null" >
+        #{tmTitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.TbMessage" >
+    update TB_MESSAGE
+    <set >
+      <if test="tmContent != null" >
+        TM_CONTENT = #{tmContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tmDeadtime != null" >
+        TM_DEADTIME = #{tmDeadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tmIsdead != null" >
+        TM_ISDEAD = #{tmIsdead,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSuIds != null" >
+        TM_SU_IDS = #{tmSuIds,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        IS_DEL = #{isDel,jdbcType=VARCHAR},
+      </if>
+      <if test="addSuId != null" >
+        ADD_SU_ID = #{addSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updSuId != null" >
+        UPD_SU_ID = #{updSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tmTitle != null" >
+        TM_TITLE = #{tmTitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TM_ID = #{tmId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.TbMessage" >
+    update TB_MESSAGE
+    set TM_CONTENT = #{tmContent,jdbcType=VARCHAR},
+      TM_DEADTIME = #{tmDeadtime,jdbcType=TIMESTAMP},
+      TM_ISDEAD = #{tmIsdead,jdbcType=VARCHAR},
+      TM_SU_IDS = #{tmSuIds,jdbcType=VARCHAR},
+      IS_DEL = #{isDel,jdbcType=VARCHAR},
+      ADD_SU_ID = #{addSuId,jdbcType=DECIMAL},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPD_SU_ID = #{updSuId,jdbcType=DECIMAL},
+      UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      TM_TITLE = #{tmTitle,jdbcType=VARCHAR}
+    where TM_ID = #{tmId,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 列表 -->
+  <select id="list" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TbMessage" >
+  	select * from (select R.*,ROWNUM RN from (
+	select
+		*
+	from
+		TB_MESSAGE
+	where IS_DEL=0
+	<if test="tmIsdead != null" >
+		and TM_ISDEAD = #{tmIsdead}
+	</if>
+	<if test="tmStartTime != null" >
+		and TM_DEADTIME &gt;= #{tmStartTime}
+	</if>
+	<if test="tmEndTime != null" >
+		and TM_DEADTIME &lt;= #{tmEndTime}
+	</if>
+	order by ADD_TIME  desc 
+	)R)
+	where RN &gt; #{pageNumber,jdbcType=INTEGER} and RN  &lt;=(#{pageSize,jdbcType=INTEGER}+#{pageNumber,jdbcType=INTEGER})
+	
+  </select>
+  
+  <!-- 列表总数 -->
+  <select id="total" resultType="int" parameterType="com.gistone.cdsems.database.entity.TbMessage" >
+	select
+		count(1)
+	from
+		TB_MESSAGE
+	where IS_DEL=0
+	<if test="tmIsdead != null" >
+		and TM_ISDEAD = #{tmIsdead}
+	</if>
+	<if test="tmStartTime != null" >
+		and TM_DEADTIME &gt;= #{tmStartTime}
+	</if>
+	<if test="tmEndTime != null" >
+		and TM_DEADTIME &lt;= #{tmEndTime}
+	</if>
+  </select>
+  
+  <!-- 列表 -->
+  <select id="getMessageListByUserId" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TbMessage" >
+  	select * from (select R.*,ROWNUM RN from (
+	select
+		*
+	from
+		TB_MESSAGE
+	where IS_DEL=0 and TM_ISDEAD=0 and to_char(SYSDATE,'yyyy-mm-dd') &lt;= to_char(TM_DEADTIME,'yyyy-mm-dd')
+	<if test="tmSuIds != null" >
+		and (TM_SU_IDS = #{tmSuIds} or TM_SU_IDS like '${tmSuIds},%' or TM_SU_IDS like '%,${tmSuIds},%' or TM_SU_IDS like '%,${tmSuIds}' or TM_SU_IDS='-1')
+	</if>
+	order by ADD_TIME  desc 
+	)R)
+	where RN &gt; #{pageNumber,jdbcType=INTEGER} and RN  &lt;=(#{pageSize,jdbcType=INTEGER}+#{pageNumber,jdbcType=INTEGER})
+	
+  </select>
+  
+  <!-- 列表总数 -->
+  <select id="totalByUserId" resultType="int" parameterType="com.gistone.cdsems.database.entity.TbMessage" >
+	select
+		count(1)
+	from
+		TB_MESSAGE
+	where IS_DEL=0 and TM_ISDEAD=0 and to_char(SYSDATE,'yyyy-mm-dd') &lt;= to_char(TM_DEADTIME,'yyyy-mm-dd')
+	<if test="tmSuIds != null" >
+		and (TM_SU_IDS = #{tmSuIds} or TM_SU_IDS like '${tmSuIds},%' or TM_SU_IDS like '%,${tmSuIds},%' or TM_SU_IDS like '%,${tmSuIds}'  or TM_SU_IDS='-1' )
+	</if>
+  </select>
+</mapper>

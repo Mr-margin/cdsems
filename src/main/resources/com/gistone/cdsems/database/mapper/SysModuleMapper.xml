@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.SysModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.SysModule" >
+    <id column="SM_ID" property="smId" jdbcType="DECIMAL" />
+    <result column="SM_NAME" property="smName" jdbcType="VARCHAR" />
+    <result column="SM_DESC" property="smDesc" jdbcType="VARCHAR" />
+    <result column="SM_ELE" property="smEle" jdbcType="VARCHAR" />
+    <result column="SM_PID" property="smPid" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SM_ID, SM_NAME, SM_DESC, SM_ELE, SM_PID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_MODULE
+    where SM_ID = #{smId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_MODULE
+    where SM_ID = #{smId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.SysModule" >
+    insert into SYS_MODULE (SM_ID, SM_NAME, SM_DESC, 
+      SM_ELE, SM_PID)
+    values (#{smId,jdbcType=DECIMAL}, #{smName,jdbcType=VARCHAR}, #{smDesc,jdbcType=VARCHAR}, 
+      #{smEle,jdbcType=VARCHAR}, #{smPid,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.SysModule" >
+    insert into SYS_MODULE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="smId != null" >
+        SM_ID,
+      </if>
+      <if test="smName != null" >
+        SM_NAME,
+      </if>
+      <if test="smDesc != null" >
+        SM_DESC,
+      </if>
+      <if test="smEle != null" >
+        SM_ELE,
+      </if>
+      <if test="smPid != null" >
+        SM_PID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="smId != null" >
+        #{smId,jdbcType=DECIMAL},
+      </if>
+      <if test="smName != null" >
+        #{smName,jdbcType=VARCHAR},
+      </if>
+      <if test="smDesc != null" >
+        #{smDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="smEle != null" >
+        #{smEle,jdbcType=VARCHAR},
+      </if>
+      <if test="smPid != null" >
+        #{smPid,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.SysModule" >
+    update SYS_MODULE
+    <set >
+      <if test="smName != null" >
+        SM_NAME = #{smName,jdbcType=VARCHAR},
+      </if>
+      <if test="smDesc != null" >
+        SM_DESC = #{smDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="smEle != null" >
+        SM_ELE = #{smEle,jdbcType=VARCHAR},
+      </if>
+      <if test="smPid != null" >
+        SM_PID = #{smPid,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where SM_ID = #{smId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.SysModule" >
+    update SYS_MODULE
+    set SM_NAME = #{smName,jdbcType=VARCHAR},
+      SM_DESC = #{smDesc,jdbcType=VARCHAR},
+      SM_ELE = #{smEle,jdbcType=VARCHAR},
+      SM_PID = #{smPid,jdbcType=DECIMAL}
+    where SM_ID = #{smId,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 所有模块 -->
+  <select id="listAll" resultMap="BaseResultMap">
+  		 select 
+	    <include refid="Base_Column_List" />
+	    from SYS_MODULE
+  </select>
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.SysRoleYztMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.SysRoleYzt" >
+    <id column="SRY_ID" property="sryId" jdbcType="DECIMAL" />
+    <result column="SRY_SR_ID" property="srySrId" jdbcType="DECIMAL" />
+    <result column="SRY_SY_ID" property="srySyId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SRY_ID, SRY_SR_ID, SRY_SY_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ROLE_YZT
+    where SRY_ID = #{sryId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_ROLE_YZT
+    where SRY_ID = #{sryId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.SysRoleYzt" >
+    insert into SYS_ROLE_YZT (SRY_ID, SRY_SR_ID, SRY_SY_ID
+      )
+    values (#{sryId,jdbcType=DECIMAL}, #{srySrId,jdbcType=DECIMAL}, #{srySyId,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.SysRoleYzt" >
+    insert into SYS_ROLE_YZT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        SRY_ID,
+      <if test="srySrId != null" >
+        SRY_SR_ID,
+      </if>
+      <if test="srySyId != null" >
+        SRY_SY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        SYS_ROLE_YZT_SEQ.nextval,
+      <if test="srySrId != null" >
+        #{srySrId,jdbcType=DECIMAL},
+      </if>
+      <if test="srySyId != null" >
+        #{srySyId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.SysRoleYzt" >
+    update SYS_ROLE_YZT
+    <set >
+      <if test="srySrId != null" >
+        SRY_SR_ID = #{srySrId,jdbcType=DECIMAL},
+      </if>
+      <if test="srySyId != null" >
+        SRY_SY_ID = #{srySyId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where SRY_ID = #{sryId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.SysRoleYzt" >
+    update SYS_ROLE_YZT
+    set SRY_SR_ID = #{srySrId,jdbcType=DECIMAL},
+      SRY_SY_ID = #{srySyId,jdbcType=DECIMAL}
+    where SRY_ID = #{sryId,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 根据角色ID删除 -->
+  <delete id="deleteBySrySrId" parameterType="java.math.BigDecimal" >
+    delete from SYS_ROLE_YZT
+    where SRY_SR_ID = #{srySrId,jdbcType=INTEGER}
+  </delete>
+  
+  <!-- 根据角色id，获取角色一张图中间表 -->
+  <select id="selectByrySrId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ROLE_YZT
+    where SRY_SR_ID = #{srySrId,jdbcType=DECIMAL}
+  </select>
+</mapper>

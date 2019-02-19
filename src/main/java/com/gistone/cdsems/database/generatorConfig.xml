@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<context id="water_context">
+		<!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制 -->
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<!-- 注释控制完毕 -->
+		<!-- oracle -->
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@192.168.1.202:1521:orcl" userId="cdsems"
+			password="cdsems" />
+		<javaModelGenerator targetPackage="com.gistone.database.model"
+			targetProject="edat">
+			<property name="trimStrings" value="true" />  <!-- 是否对数据库查询结果进行trim操作 -->
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.gistone.database.inter"
+			targetProject="edat" />
+
+		<javaClientGenerator targetPackage="com.gistone.database.inter"
+			targetProject="edat" type="XMLMAPPER" />
+		<table tableName="t_gauss_aermod" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		<table tableName="t_mesoscale_wrf" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		<table tableName="t_spread_hysplit" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		<table tableName="t_simulation_region" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	</context>
+</generatorConfiguration> 

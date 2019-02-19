@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.SysRoleModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.SysRoleModule" >
+    <id column="SRM_ID" property="srmId" jdbcType="DECIMAL" />
+    <result column="SRM_SR_ID" property="srmSrId" jdbcType="DECIMAL" />
+    <result column="SRM_SM_ID" property="srmSmId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SRM_ID, SRM_SR_ID, SRM_SM_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_ROLE_MODULE
+    where SRM_ID = #{srmId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_ROLE_MODULE
+    where SRM_ID = #{srmId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.SysRoleModule" >
+    insert into SYS_ROLE_MODULE (SRM_ID, SRM_SR_ID, SRM_SM_ID
+      )
+    values (SYS_ROLE_MODULE_SEQ.nextval, #{srmSrId,jdbcType=DECIMAL}, #{srmSmId,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective"  parameterType="com.gistone.cdsems.database.entity.SysRoleModule" >
+    insert into SYS_ROLE_MODULE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        SRM_ID,
+      <if test="srmSrId != null" >
+        SRM_SR_ID,
+      </if>
+      <if test="srmSmId != null" >
+        SRM_SM_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        SYS_ROLE_MODULE_SEQ.nextval,
+      <if test="srmSrId != null" >
+        #{srmSrId,jdbcType=DECIMAL},
+      </if>
+      <if test="srmSmId != null" >
+        #{srmSmId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.SysRoleModule" >
+    update SYS_ROLE_MODULE
+    <set >
+      <if test="srmSrId != null" >
+        SRM_SR_ID = #{srmSrId,jdbcType=DECIMAL},
+      </if>
+      <if test="srmSmId != null" >
+        SRM_SM_ID = #{srmSmId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where SRM_ID = #{srmId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.SysRoleModule" >
+    update SYS_ROLE_MODULE
+    set SRM_SR_ID = #{srmSrId,jdbcType=DECIMAL},
+      SRM_SM_ID = #{srmSmId,jdbcType=DECIMAL}
+    where SRM_ID = #{srmId,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 根据角色ID删除 -->
+  <delete id="deleteBySrmSrId" parameterType="java.math.BigDecimal" >
+    delete from SYS_ROLE_MODULE
+    where SRM_SR_ID = #{srmSrId,jdbcType=INTEGER}
+  </delete>
+</mapper>

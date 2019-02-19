@@ -1,0 +1,323 @@
+@charset "utf-8";
+html,body{
+	min-width:1366px;
+	overflow:auto;
+}
+ul,li{
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+p{
+	margin:0;
+}
+a:focus,a:hover {
+	text-decoration: none;
+}
+.page-wrapper{
+	height: 100%;
+    overflow: hidden;
+}
+/**
+pagerHeader
+**/
+.page-header{
+	margin: 0;
+    padding: 0;
+    border: none;
+}
+.page-header .top{
+	width: 100%;
+    height: 110px;
+    background: url(../img/index/topBg.png) 0 0 no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+}
+.page-header .top>p{
+	margin: 0;
+    width: 425px;
+    height: 50px;
+    background: url(../img/index/logo.png) 0 0 no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 70px;
+}
+.page-header .bottom{
+	width: 100%;
+    height: 50px;
+    background: url(../img/index/navBg.png) 0 0 no-repeat;
+    background-size: 100% 100%;
+    margin:0;
+}
+.page-header .bottom ul,
+.page-header .bottom li{
+	height:100%;
+	list-style:none;
+}
+.page-header .bottom ul{
+	padding-left:60px;
+}
+
+.page-header .bottom li a{
+	display: inline-block;
+	width: 55px;
+	height: 28px;
+}
+.page-header .bottom li>div{
+    height: auto;
+    margin-top: 8px;
+    padding: 0 8px;
+}
+.page-header .bottom li.active>div{
+	background: #093f2e;
+    border-radius: 15px;
+}
+.page-header .bottom .li1 a{
+    background: url(../img/index/top1.png) center  6px no-repeat;
+    background-size: contain;
+}
+.page-header .bottom .li2 a{
+    background: url(../img/index/top2.png) center  6px no-repeat;
+    background-size: contain;
+    width: 73px;
+}
+.page-header .bottom .li3 a{
+    background: url(../img/index/top3.png) center  6px no-repeat;
+    background-size: contain;
+    width: 86px;
+}
+.page-header .bottom .li4 a{
+    background: url(../img/index/top4.png) center  6px no-repeat;
+    background-size: contain;
+    width: 120px;
+}
+.page-header .bottom .li5 a{
+    background: url(../img/index/top5.png) -5px 1px no-repeat;
+    background-size: 106%;
+    width: 160px;
+}
+.page-header .bottom .li11 a{
+    background: url(../img/index/top11.png) -5px 0px no-repeat;
+    background-size: 115%;
+    width: 76px;
+}
+.page-header .bottom .li6 a{
+    background: url(../img/index/top6.png) center  6px no-repeat;
+    background-size: contain;
+    width: 84px;
+}
+.page-header .bottom .li7 a{
+    background: url(../img/index/top7.png) center  6px no-repeat;
+    background-size: contain;
+    width: 103px;
+}
+.page-header .bottom .li8 a{
+    background: url(../img/index/top8.png) center  6px no-repeat;
+    background-size: contain;
+    width: 155px;
+}
+.page-header .bottom .li9 a{
+    background: url(../img/index/top9.png) center  7px no-repeat;
+    background-size: contain;
+    width: 88px;
+}
+.page-header .bottom .li10 a{
+    background: url(../img/index/top10.png) center  7px no-repeat;
+    background-size: contain;
+    width: 84px;
+}
+.page-header  .logout{
+	background: url(../img/index/logout.png) center  6px no-repeat;
+    background-size: contain;
+    width: 323px;
+    height:41px;
+   position: absolute;
+    right: 15px;
+    top: -8px;
+    
+}
+.page-header  .logout p{
+	color: #fff;
+    float: left;
+    margin-top: 14px;
+    padding-left: 24px;
+    width: 155px;
+    margin-right: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.page-header  .logout a{
+	color: #fff;
+    float: left;
+    margin-top: 14px;
+    margin-right: 8px;
+	}
+.page-header  .logout a i{
+	margin-right:5px
+}
+@media screen and (max-width: 1366px) { 
+	.page-header .bottom ul{
+			padding-left:15px ;
+		}
+	
+}  
+@media screen and (min-width: 1367px) { 
+	.page-header .bottom li>div {
+	    padding: 0 15px;
+	}
+	
+} 
+
+
+/**
+page-container
+**/
+.iconfont{
+	vertical-align: middle;
+	margin-right: 5px;
+}
+.iconfont{
+	margin-right: 0;
+	margin-left:5px;
+}
+.crumbs_box{
+	margin: 0;
+	border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+.crumbs_box>.panel-body{
+	padding: 0 15px 8px;
+}
+.crumbs{
+	 margin: 0;
+	 line-height:34px;
+}
+.crumbs  .iconfont{
+	font-size: 22px;
+    margin: 0 8px 0 0;
+}
+.crumbs>b{
+	font-weight:normal;
+	margin:0 6px;
+}
+.btn-import .iconfont{
+	font-size: 14px;
+    display: inline-block;
+    margin:-3px 5px 0 0;
+}
+#ui-view{
+	float: left;
+	overflow: hidden;
+	height:100%;
+	width: 100%;
+}
+#view{
+	height: 100%;
+    overflow: hidden;
+}
+.box-body{
+	height: 100%;
+}
+/**
+page-footer
+**/
+.page-footer{
+	z-index: 10;
+	position: fixed;
+    width: 100%;
+    bottom: 0;
+	text-align: center;
+    line-height: 42px;
+    background: #787878;
+    color: #fff;
+}
+.page-footer p{
+	margin:0;
+}
+
+/*.pagination*/
+.pagination>li>a, .pagination>li>span {
+	color: #666666;
+}
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus,
+	.pagination>li>span:hover {
+	color: #10c55b;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover,
+	.pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover
+	{
+	background-color: #10c55b;
+	border-color: #10c55b
+}
+/*侧边导航*/
+#Menus{
+	float: left;
+	width: 125px;
+    height: 100%;
+    overflow: auto;
+    padding:15px 0;
+    background:#5a5a5a;
+}
+#Menus a{
+	display:block;
+	width:100%;
+	height:100%;
+}
+#Menus li{	
+	text-align: center;
+    padding-top: 15px;
+    background: #5a5a5a;
+    cursor: pointer;
+    display:none
+}
+#Menus li:first-child{
+	padding-top:0;
+}
+#Menus li p{
+	line-height:25px;
+	color:#fff;
+	font-size:14px;
+}
+#Menus li div{
+	width: 45px;
+    height: 45px;
+    margin: auto;
+}
+
+#Menus li.active{
+	background: #efefef;
+}
+#Menus li.active p{
+	color:#116a51;
+}
+/*超出滚动条样式--只支持谷歌*/
+::-webkit-scrollbar {  
+  width: 14px;  
+  height: 14px;  
+}  
+  
+::-webkit-scrollbar-track,  
+::-webkit-scrollbar-thumb {  
+  border-radius: 999px;  
+  border: 5px solid transparent;  
+}  
+  
+::-webkit-scrollbar-track {  
+  box-shadow: 1px 1px 5px rgba(0,0,0,.2) inset;  
+}  
+  
+::-webkit-scrollbar-thumb {  
+  min-height: 20px;  
+  background-clip: content-box;  
+  box-shadow: 0 0 0 5px rgba(0,0,0,.2) inset;  
+}  
+  
+::-webkit-scrollbar-corner {  
+  background: transparent;  
+}  

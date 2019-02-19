@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gistone.cdsems.database.mapper.TBULIDINGLANDMapper">
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.TBULIDINGLAND">
+    <id column="LID" jdbcType="DECIMAL" property="lid" />
+    <result column="MASSIF_NAME" jdbcType="VARCHAR" property="massifName" />
+    <result column="MASSIF_CODE" jdbcType="VARCHAR" property="massifCode" />
+    <result column="MASSIF_ADDRESS" jdbcType="VARCHAR" property="massifAddress" />
+    <result column="MASSIF_COVERED" jdbcType="VARCHAR" property="massifCovered" />
+    <result column="PROVINCE_CODE" jdbcType="VARCHAR" property="provinceCode" />
+    <result column="CITY_CODE" jdbcType="VARCHAR" property="cityCode" />
+    <result column="COUNTY_CODE" jdbcType="VARCHAR" property="countyCode" />
+    <result column="MASSIF_POLLUTE" jdbcType="VARCHAR" property="massifPollute" />
+    <result column="MASSIF_STAGE" jdbcType="VARCHAR" property="massifStage" />
+    <result column="RISK_LEVEL" jdbcType="VARCHAR" property="riskLevel" />
+    <result column="ENTERPRISE_NAME" jdbcType="VARCHAR" property="enterpriseName" />
+    <result column="LEGAL_REPRESENTATIVE" jdbcType="VARCHAR" property="legalRepresentative" />
+    <result column="BUSINESS_LICENSE" jdbcType="VARCHAR" property="businessLicense" />
+    <result column="POSTAL_CODE" jdbcType="VARCHAR" property="postalCode" />
+    <result column="MASSIF_AROUND_AREA" jdbcType="VARCHAR" property="massifAroundArea" />
+    <result column="MASSIF_LONGITUDE" jdbcType="VARCHAR" property="massifLongitude" />
+    <result column="MASSIF_LATITUDE" jdbcType="VARCHAR" property="massifLatitude" />
+    <result column="COORDINATE_DESCRIPTION" jdbcType="VARCHAR" property="coordinateDescription" />
+    <result column="ACCESS_UNIT_CONTACTS" jdbcType="VARCHAR" property="accessUnitContacts" />
+    <result column="ACCESS_UNIT_PHONE" jdbcType="VARCHAR" property="accessUnitPhone" />
+    <result column="CONTACT_FACSIMILE" jdbcType="VARCHAR" property="contactFacsimile" />
+    <result column="MAILBOX" jdbcType="VARCHAR" property="mailbox" />
+    <result column="FAX" jdbcType="VARCHAR" property="fax" />
+    <result column="CONSTRUCTION_UNIT" jdbcType="VARCHAR" property="constructionUnit" />
+    <result column="CONSTRUCTION_PEOPLE" jdbcType="VARCHAR" property="constructionPeople" />
+    <result column="CONSTRUCTION_PHONE" jdbcType="VARCHAR" property="constructionPhone" />
+    <result column="ORGANIZATION_CODE" jdbcType="VARCHAR" property="organizationCode" />
+    <result column="LAND_USE" jdbcType="VARCHAR" property="landUse" />
+    <result column="ADD_PEOPLE" jdbcType="VARCHAR" property="addPeople" />
+    <result column="ADD_TIME" jdbcType="DATE" property="addTime" />
+    <result column="UPDATE_TIME" jdbcType="DATE" property="updateTime" />
+    <result column="RESERVED_FIELD1" jdbcType="VARCHAR" property="reservedField1" />
+    <result column="RESERVED_FIELD2" jdbcType="VARCHAR" property="reservedField2" />
+    <result column="RESERVED_FIELD3" jdbcType="VARCHAR" property="reservedField3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    LID, MASSIF_NAME, MASSIF_CODE, MASSIF_ADDRESS, MASSIF_COVERED, PROVINCE_CODE, CITY_CODE, 
+    COUNTY_CODE, MASSIF_POLLUTE, MASSIF_STAGE, RISK_LEVEL, ENTERPRISE_NAME, LEGAL_REPRESENTATIVE, 
+    BUSINESS_LICENSE, POSTAL_CODE, MASSIF_AROUND_AREA, MASSIF_LONGITUDE, MASSIF_LATITUDE, 
+    COORDINATE_DESCRIPTION, ACCESS_UNIT_CONTACTS, ACCESS_UNIT_PHONE, CONTACT_FACSIMILE, 
+    MAILBOX, FAX, CONSTRUCTION_UNIT, CONSTRUCTION_PEOPLE, CONSTRUCTION_PHONE, ORGANIZATION_CODE, 
+    LAND_USE, ADD_PEOPLE, ADD_TIME, UPDATE_TIME, RESERVED_FIELD1, RESERVED_FIELD2, RESERVED_FIELD3
+  </sql>
+  <select id="selectByExample" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLANDExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_BULIDING_LAND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_BULIDING_LAND
+    where LID = #{lid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from T_BULIDING_LAND
+    where LID = #{lid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLANDExample">
+    delete from T_BULIDING_LAND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLAND">
+    <selectKey keyProperty="lid" order="AFTER" resultType="java.lang.Long">
+      SELECT T_BULIDING_LAND_SEQ.NEXTVAL as lid from DUAL
+    </selectKey>
+
+    insert into T_BULIDING_LAND (LID, MASSIF_NAME, MASSIF_CODE, 
+      MASSIF_ADDRESS, MASSIF_COVERED, PROVINCE_CODE, 
+      CITY_CODE, COUNTY_CODE, MASSIF_POLLUTE, 
+      MASSIF_STAGE, RISK_LEVEL, ENTERPRISE_NAME, 
+      LEGAL_REPRESENTATIVE, BUSINESS_LICENSE, POSTAL_CODE, 
+      MASSIF_AROUND_AREA, MASSIF_LONGITUDE, MASSIF_LATITUDE, 
+      COORDINATE_DESCRIPTION, ACCESS_UNIT_CONTACTS, 
+      ACCESS_UNIT_PHONE, CONTACT_FACSIMILE, MAILBOX, 
+      FAX, CONSTRUCTION_UNIT, CONSTRUCTION_PEOPLE, 
+      CONSTRUCTION_PHONE, ORGANIZATION_CODE, LAND_USE, 
+      ADD_PEOPLE, ADD_TIME, UPDATE_TIME, 
+      RESERVED_FIELD1, RESERVED_FIELD2, RESERVED_FIELD3
+      )
+    values (#{lid,jdbcType=DECIMAL}, #{massifName,jdbcType=VARCHAR}, #{massifCode,jdbcType=VARCHAR}, 
+      #{massifAddress,jdbcType=VARCHAR}, #{massifCovered,jdbcType=VARCHAR}, #{provinceCode,jdbcType=VARCHAR}, 
+      #{cityCode,jdbcType=VARCHAR}, #{countyCode,jdbcType=VARCHAR}, #{massifPollute,jdbcType=VARCHAR}, 
+      #{massifStage,jdbcType=VARCHAR}, #{riskLevel,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR}, 
+      #{legalRepresentative,jdbcType=VARCHAR}, #{businessLicense,jdbcType=VARCHAR}, #{postalCode,jdbcType=VARCHAR}, 
+      #{massifAroundArea,jdbcType=VARCHAR}, #{massifLongitude,jdbcType=VARCHAR}, #{massifLatitude,jdbcType=VARCHAR}, 
+      #{coordinateDescription,jdbcType=VARCHAR}, #{accessUnitContacts,jdbcType=VARCHAR}, 
+      #{accessUnitPhone,jdbcType=VARCHAR}, #{contactFacsimile,jdbcType=VARCHAR}, #{mailbox,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{constructionUnit,jdbcType=VARCHAR}, #{constructionPeople,jdbcType=VARCHAR}, 
+      #{constructionPhone,jdbcType=VARCHAR}, #{organizationCode,jdbcType=VARCHAR}, #{landUse,jdbcType=VARCHAR}, 
+      #{addPeople,jdbcType=VARCHAR}, #{addTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}, 
+      #{reservedField1,jdbcType=VARCHAR}, #{reservedField2,jdbcType=VARCHAR}, #{reservedField3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLAND">
+    insert into T_BULIDING_LAND
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lid != null">
+        LID,
+      </if>
+      <if test="massifName != null">
+        MASSIF_NAME,
+      </if>
+      <if test="massifCode != null">
+        MASSIF_CODE,
+      </if>
+      <if test="massifAddress != null">
+        MASSIF_ADDRESS,
+      </if>
+      <if test="massifCovered != null">
+        MASSIF_COVERED,
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE,
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE,
+      </if>
+      <if test="countyCode != null">
+        COUNTY_CODE,
+      </if>
+      <if test="massifPollute != null">
+        MASSIF_POLLUTE,
+      </if>
+      <if test="massifStage != null">
+        MASSIF_STAGE,
+      </if>
+      <if test="riskLevel != null">
+        RISK_LEVEL,
+      </if>
+      <if test="enterpriseName != null">
+        ENTERPRISE_NAME,
+      </if>
+      <if test="legalRepresentative != null">
+        LEGAL_REPRESENTATIVE,
+      </if>
+      <if test="businessLicense != null">
+        BUSINESS_LICENSE,
+      </if>
+      <if test="postalCode != null">
+        POSTAL_CODE,
+      </if>
+      <if test="massifAroundArea != null">
+        MASSIF_AROUND_AREA,
+      </if>
+      <if test="massifLongitude != null">
+        MASSIF_LONGITUDE,
+      </if>
+      <if test="massifLatitude != null">
+        MASSIF_LATITUDE,
+      </if>
+      <if test="coordinateDescription != null">
+        COORDINATE_DESCRIPTION,
+      </if>
+      <if test="accessUnitContacts != null">
+        ACCESS_UNIT_CONTACTS,
+      </if>
+      <if test="accessUnitPhone != null">
+        ACCESS_UNIT_PHONE,
+      </if>
+      <if test="contactFacsimile != null">
+        CONTACT_FACSIMILE,
+      </if>
+      <if test="mailbox != null">
+        MAILBOX,
+      </if>
+      <if test="fax != null">
+        FAX,
+      </if>
+      <if test="constructionUnit != null">
+        CONSTRUCTION_UNIT,
+      </if>
+      <if test="constructionPeople != null">
+        CONSTRUCTION_PEOPLE,
+      </if>
+      <if test="constructionPhone != null">
+        CONSTRUCTION_PHONE,
+      </if>
+      <if test="organizationCode != null">
+        ORGANIZATION_CODE,
+      </if>
+      <if test="landUse != null">
+        LAND_USE,
+      </if>
+      <if test="addPeople != null">
+        ADD_PEOPLE,
+      </if>
+      <if test="addTime != null">
+        ADD_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="reservedField1 != null">
+        RESERVED_FIELD1,
+      </if>
+      <if test="reservedField2 != null">
+        RESERVED_FIELD2,
+      </if>
+      <if test="reservedField3 != null">
+        RESERVED_FIELD3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lid != null">
+        #{lid,jdbcType=DECIMAL},
+      </if>
+      <if test="massifName != null">
+        #{massifName,jdbcType=VARCHAR},
+      </if>
+      <if test="massifCode != null">
+        #{massifCode,jdbcType=VARCHAR},
+      </if>
+      <if test="massifAddress != null">
+        #{massifAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="massifCovered != null">
+        #{massifCovered,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null">
+        #{countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="massifPollute != null">
+        #{massifPollute,jdbcType=VARCHAR},
+      </if>
+      <if test="massifStage != null">
+        #{massifStage,jdbcType=VARCHAR},
+      </if>
+      <if test="riskLevel != null">
+        #{riskLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null">
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalRepresentative != null">
+        #{legalRepresentative,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicense != null">
+        #{businessLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null">
+        #{postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="massifAroundArea != null">
+        #{massifAroundArea,jdbcType=VARCHAR},
+      </if>
+      <if test="massifLongitude != null">
+        #{massifLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="massifLatitude != null">
+        #{massifLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinateDescription != null">
+        #{coordinateDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="accessUnitContacts != null">
+        #{accessUnitContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="accessUnitPhone != null">
+        #{accessUnitPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactFacsimile != null">
+        #{contactFacsimile,jdbcType=VARCHAR},
+      </if>
+      <if test="mailbox != null">
+        #{mailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="constructionUnit != null">
+        #{constructionUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="constructionPeople != null">
+        #{constructionPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="constructionPhone != null">
+        #{constructionPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCode != null">
+        #{organizationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="landUse != null">
+        #{landUse,jdbcType=VARCHAR},
+      </if>
+      <if test="addPeople != null">
+        #{addPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="reservedField1 != null">
+        #{reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField2 != null">
+        #{reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField3 != null">
+        #{reservedField3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLANDExample" resultType="java.lang.Long">
+    select count(*) from T_BULIDING_LAND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_BULIDING_LAND
+    <set>
+      <if test="record.lid != null">
+        LID = #{record.lid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.massifName != null">
+        MASSIF_NAME = #{record.massifName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.massifCode != null">
+        MASSIF_CODE = #{record.massifCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.massifAddress != null">
+        MASSIF_ADDRESS = #{record.massifAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.massifCovered != null">
+        MASSIF_COVERED = #{record.massifCovered,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceCode != null">
+        PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null">
+        CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countyCode != null">
+        COUNTY_CODE = #{record.countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.massifPollute != null">
+        MASSIF_POLLUTE = #{record.massifPollute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.massifStage != null">
+        MASSIF_STAGE = #{record.massifStage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.riskLevel != null">
+        RISK_LEVEL = #{record.riskLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseName != null">
+        ENTERPRISE_NAME = #{record.enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalRepresentative != null">
+        LEGAL_REPRESENTATIVE = #{record.legalRepresentative,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessLicense != null">
+        BUSINESS_LICENSE = #{record.businessLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postalCode != null">
+        POSTAL_CODE = #{record.postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.massifAroundArea != null">
+        MASSIF_AROUND_AREA = #{record.massifAroundArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.massifLongitude != null">
+        MASSIF_LONGITUDE = #{record.massifLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.massifLatitude != null">
+        MASSIF_LATITUDE = #{record.massifLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coordinateDescription != null">
+        COORDINATE_DESCRIPTION = #{record.coordinateDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessUnitContacts != null">
+        ACCESS_UNIT_CONTACTS = #{record.accessUnitContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessUnitPhone != null">
+        ACCESS_UNIT_PHONE = #{record.accessUnitPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactFacsimile != null">
+        CONTACT_FACSIMILE = #{record.contactFacsimile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailbox != null">
+        MAILBOX = #{record.mailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fax != null">
+        FAX = #{record.fax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.constructionUnit != null">
+        CONSTRUCTION_UNIT = #{record.constructionUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.constructionPeople != null">
+        CONSTRUCTION_PEOPLE = #{record.constructionPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.constructionPhone != null">
+        CONSTRUCTION_PHONE = #{record.constructionPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationCode != null">
+        ORGANIZATION_CODE = #{record.organizationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landUse != null">
+        LAND_USE = #{record.landUse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addPeople != null">
+        ADD_PEOPLE = #{record.addPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addTime != null">
+        ADD_TIME = #{record.addTime,jdbcType=DATE},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=DATE},
+      </if>
+      <if test="record.reservedField1 != null">
+        RESERVED_FIELD1 = #{record.reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField2 != null">
+        RESERVED_FIELD2 = #{record.reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField3 != null">
+        RESERVED_FIELD3 = #{record.reservedField3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_BULIDING_LAND
+    set LID = #{record.lid,jdbcType=DECIMAL},
+      MASSIF_NAME = #{record.massifName,jdbcType=VARCHAR},
+      MASSIF_CODE = #{record.massifCode,jdbcType=VARCHAR},
+      MASSIF_ADDRESS = #{record.massifAddress,jdbcType=VARCHAR},
+      MASSIF_COVERED = #{record.massifCovered,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      COUNTY_CODE = #{record.countyCode,jdbcType=VARCHAR},
+      MASSIF_POLLUTE = #{record.massifPollute,jdbcType=VARCHAR},
+      MASSIF_STAGE = #{record.massifStage,jdbcType=VARCHAR},
+      RISK_LEVEL = #{record.riskLevel,jdbcType=VARCHAR},
+      ENTERPRISE_NAME = #{record.enterpriseName,jdbcType=VARCHAR},
+      LEGAL_REPRESENTATIVE = #{record.legalRepresentative,jdbcType=VARCHAR},
+      BUSINESS_LICENSE = #{record.businessLicense,jdbcType=VARCHAR},
+      POSTAL_CODE = #{record.postalCode,jdbcType=VARCHAR},
+      MASSIF_AROUND_AREA = #{record.massifAroundArea,jdbcType=VARCHAR},
+      MASSIF_LONGITUDE = #{record.massifLongitude,jdbcType=VARCHAR},
+      MASSIF_LATITUDE = #{record.massifLatitude,jdbcType=VARCHAR},
+      COORDINATE_DESCRIPTION = #{record.coordinateDescription,jdbcType=VARCHAR},
+      ACCESS_UNIT_CONTACTS = #{record.accessUnitContacts,jdbcType=VARCHAR},
+      ACCESS_UNIT_PHONE = #{record.accessUnitPhone,jdbcType=VARCHAR},
+      CONTACT_FACSIMILE = #{record.contactFacsimile,jdbcType=VARCHAR},
+      MAILBOX = #{record.mailbox,jdbcType=VARCHAR},
+      FAX = #{record.fax,jdbcType=VARCHAR},
+      CONSTRUCTION_UNIT = #{record.constructionUnit,jdbcType=VARCHAR},
+      CONSTRUCTION_PEOPLE = #{record.constructionPeople,jdbcType=VARCHAR},
+      CONSTRUCTION_PHONE = #{record.constructionPhone,jdbcType=VARCHAR},
+      ORGANIZATION_CODE = #{record.organizationCode,jdbcType=VARCHAR},
+      LAND_USE = #{record.landUse,jdbcType=VARCHAR},
+      ADD_PEOPLE = #{record.addPeople,jdbcType=VARCHAR},
+      ADD_TIME = #{record.addTime,jdbcType=DATE},
+      UPDATE_TIME = #{record.updateTime,jdbcType=DATE},
+      RESERVED_FIELD1 = #{record.reservedField1,jdbcType=VARCHAR},
+      RESERVED_FIELD2 = #{record.reservedField2,jdbcType=VARCHAR},
+      RESERVED_FIELD3 = #{record.reservedField3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLAND">
+    update T_BULIDING_LAND
+    <set>
+      <if test="massifName != null">
+        MASSIF_NAME = #{massifName,jdbcType=VARCHAR},
+      </if>
+      <if test="massifCode != null">
+        MASSIF_CODE = #{massifCode,jdbcType=VARCHAR},
+      </if>
+      <if test="massifAddress != null">
+        MASSIF_ADDRESS = #{massifAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="massifCovered != null">
+        MASSIF_COVERED = #{massifCovered,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countyCode != null">
+        COUNTY_CODE = #{countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="massifPollute != null">
+        MASSIF_POLLUTE = #{massifPollute,jdbcType=VARCHAR},
+      </if>
+      <if test="massifStage != null">
+        MASSIF_STAGE = #{massifStage,jdbcType=VARCHAR},
+      </if>
+      <if test="riskLevel != null">
+        RISK_LEVEL = #{riskLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null">
+        ENTERPRISE_NAME = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="legalRepresentative != null">
+        LEGAL_REPRESENTATIVE = #{legalRepresentative,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicense != null">
+        BUSINESS_LICENSE = #{businessLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null">
+        POSTAL_CODE = #{postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="massifAroundArea != null">
+        MASSIF_AROUND_AREA = #{massifAroundArea,jdbcType=VARCHAR},
+      </if>
+      <if test="massifLongitude != null">
+        MASSIF_LONGITUDE = #{massifLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="massifLatitude != null">
+        MASSIF_LATITUDE = #{massifLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="coordinateDescription != null">
+        COORDINATE_DESCRIPTION = #{coordinateDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="accessUnitContacts != null">
+        ACCESS_UNIT_CONTACTS = #{accessUnitContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="accessUnitPhone != null">
+        ACCESS_UNIT_PHONE = #{accessUnitPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactFacsimile != null">
+        CONTACT_FACSIMILE = #{contactFacsimile,jdbcType=VARCHAR},
+      </if>
+      <if test="mailbox != null">
+        MAILBOX = #{mailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="constructionUnit != null">
+        CONSTRUCTION_UNIT = #{constructionUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="constructionPeople != null">
+        CONSTRUCTION_PEOPLE = #{constructionPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="constructionPhone != null">
+        CONSTRUCTION_PHONE = #{constructionPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCode != null">
+        ORGANIZATION_CODE = #{organizationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="landUse != null">
+        LAND_USE = #{landUse,jdbcType=VARCHAR},
+      </if>
+      <if test="addPeople != null">
+        ADD_PEOPLE = #{addPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        ADD_TIME = #{addTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=DATE},
+      </if>
+      <if test="reservedField1 != null">
+        RESERVED_FIELD1 = #{reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField2 != null">
+        RESERVED_FIELD2 = #{reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField3 != null">
+        RESERVED_FIELD3 = #{reservedField3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where LID = #{lid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLAND">
+    update T_BULIDING_LAND
+    set MASSIF_NAME = #{massifName,jdbcType=VARCHAR},
+      MASSIF_CODE = #{massifCode,jdbcType=VARCHAR},
+      MASSIF_ADDRESS = #{massifAddress,jdbcType=VARCHAR},
+      MASSIF_COVERED = #{massifCovered,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      COUNTY_CODE = #{countyCode,jdbcType=VARCHAR},
+      MASSIF_POLLUTE = #{massifPollute,jdbcType=VARCHAR},
+      MASSIF_STAGE = #{massifStage,jdbcType=VARCHAR},
+      RISK_LEVEL = #{riskLevel,jdbcType=VARCHAR},
+      ENTERPRISE_NAME = #{enterpriseName,jdbcType=VARCHAR},
+      LEGAL_REPRESENTATIVE = #{legalRepresentative,jdbcType=VARCHAR},
+      BUSINESS_LICENSE = #{businessLicense,jdbcType=VARCHAR},
+      POSTAL_CODE = #{postalCode,jdbcType=VARCHAR},
+      MASSIF_AROUND_AREA = #{massifAroundArea,jdbcType=VARCHAR},
+      MASSIF_LONGITUDE = #{massifLongitude,jdbcType=VARCHAR},
+      MASSIF_LATITUDE = #{massifLatitude,jdbcType=VARCHAR},
+      COORDINATE_DESCRIPTION = #{coordinateDescription,jdbcType=VARCHAR},
+      ACCESS_UNIT_CONTACTS = #{accessUnitContacts,jdbcType=VARCHAR},
+      ACCESS_UNIT_PHONE = #{accessUnitPhone,jdbcType=VARCHAR},
+      CONTACT_FACSIMILE = #{contactFacsimile,jdbcType=VARCHAR},
+      MAILBOX = #{mailbox,jdbcType=VARCHAR},
+      FAX = #{fax,jdbcType=VARCHAR},
+      CONSTRUCTION_UNIT = #{constructionUnit,jdbcType=VARCHAR},
+      CONSTRUCTION_PEOPLE = #{constructionPeople,jdbcType=VARCHAR},
+      CONSTRUCTION_PHONE = #{constructionPhone,jdbcType=VARCHAR},
+      ORGANIZATION_CODE = #{organizationCode,jdbcType=VARCHAR},
+      LAND_USE = #{landUse,jdbcType=VARCHAR},
+      ADD_PEOPLE = #{addPeople,jdbcType=VARCHAR},
+      ADD_TIME = #{addTime,jdbcType=DATE},
+      UPDATE_TIME = #{updateTime,jdbcType=DATE},
+      RESERVED_FIELD1 = #{reservedField1,jdbcType=VARCHAR},
+      RESERVED_FIELD2 = #{reservedField2,jdbcType=VARCHAR},
+      RESERVED_FIELD3 = #{reservedField3,jdbcType=VARCHAR}
+    where LID = #{lid,jdbcType=DECIMAL}
+  </update>
+  <!--表格分页数据-->
+  <select id="selectByEntityPage" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLAND">
+    select * from (
+    select rownum rn,a.* from (
+    select
+    <include refid="Base_Column_List" />
+    from T_BULIDING_LAND
+    where 1=1
+    <if test="massifName != null">
+      and MASSIF_NAME like '%${massifName}%'
+    </if>
+    <if test="massifAddress != null">
+      and MASSIF_ADDRESS like '%${massifAddress}%'
+    </if>
+    <if test="organizationCode != null">
+      and ORGANIZATION_CODE like '%${organizationCode}%'
+    </if>
+
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+     order by LID DESC
+    )a )where  rn between #{pageNumber} and #{pageSize}
+  </select>
+  <!--表格数据总数-->
+  <select id="selectByCount" resultType="Integer" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLAND" >
+    select
+    count(*)
+    from T_BULIDING_LAND
+    where 1=1
+    <if test="massifName != null">
+      and MASSIF_NAME like '%${massifName}%'
+    </if>
+    <if test="massifAddress != null">
+      and MASSIF_ADDRESS like '%${massifAddress}%'
+    </if>
+    <if test="organizationCode != null">
+      and ORGANIZATION_CODE like '%${organizationCode}%'
+    </if>
+
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+
+  </select>
+  <!--批量导入-->
+  <insert id="insertBath" parameterType="java.util.Map">
+    insert into T_BULIDING_LAND(
+    MASSIF_NAME,MASSIF_CODE,MASSIF_ADDRESS，MASSIF_COVERED，COUNTY_CODE，
+    RISK_LEVEL，ENTERPRISE_NAME，LEGAL_REPRESENTATIVE，BUSINESS_LICENSE，POSTAL_CODE，
+    MASSIF_AROUND_AREA，MASSIF_LONGITUDE，MASSIF_LATITUDE，COORDINATE_DESCRIPTION，ACCESS_UNIT_CONTACTS，ACCESS_UNIT_PHONE，CONTACT_FACSIMILE，
+    MAILBOX，FAX,CONSTRUCTION_UNIT,CONSTRUCTION_PEOPLE,CONSTRUCTION_PHONE,ORGANIZATION_CODE,LAND_USE
+    ) select a.* from (
+    <foreach collection ="list" item="cd" separator ="union" close=")" open="(">
+      select
+      #{cd.MASSIF_NAME,jdbcType=VARCHAR},
+      #{cd.MASSIF_CODE,jdbcType=VARCHAR},
+      #{cd.MASSIF_ADDRESS,jdbcType=VARCHAR},
+      #{cd.MASSIF_COVERED,jdbcType=VARCHAR},
+      #{cd.COUNTY_CODE,jdbcType=VARCHAR},
+      #{cd.RISK_LEVEL,jdbcType=VARCHAR},
+      #{cd.ENTERPRISE_NAME,jdbcType=VARCHAR},
+      #{cd.LEGAL_REPRESENTATIVE,jdbcType=VARCHAR},
+      #{cd.BUSINESS_LICENSE,jdbcType=VARCHAR},
+      #{cd.POSTAL_CODE,jdbcType=VARCHAR},
+      #{cd.MASSIF_AROUND_AREA,jdbcType=VARCHAR},
+      #{cd.MASSIF_LONGITUDE,jdbcType=VARCHAR},
+      #{cd.MASSIF_LATITUDE,jdbcType=VARCHAR},
+      #{cd.COORDINATE_DESCRIPTION,jdbcType=VARCHAR},
+      #{cd.ACCESS_UNIT_CONTACTS,jdbcType=VARCHAR},
+      #{cd.ACCESS_UNIT_PHONE,jdbcType=VARCHAR},
+      #{cd.CONTACT_FACSIMILE,jdbcType=VARCHAR},
+      #{cd.MAILBOX,jdbcType=VARCHAR},
+      #{cd.FAX,jdbcType=VARCHAR},
+      #{cd.CONSTRUCTION_UNIT,jdbcType=VARCHAR},
+      #{cd.CONSTRUCTION_PEOPLE,jdbcType=VARCHAR},
+      #{cd.CONSTRUCTION_PHONE,jdbcType=VARCHAR},
+      #{cd.ORGANIZATION_CODE,jdbcType=VARCHAR},
+      #{cd.LAND_USE,jdbcType=VARCHAR}
+      from DUAL
+    </foreach>
+    ) a
+  </insert>
+  <!--批量查询-->
+  <select id="selectListByLids" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLAND">
+    SELECT
+    <include refid="Base_Column_List" />
+    from T_BULIDING_LAND
+    WHERE 1=1
+    <if test="massifName != null">
+      and MASSIF_NAME like '%${massifName}%'
+    </if>
+    <if test="massifAddress != null">
+      and MASSIF_ADDRESS like '%${massifAddress}%'
+    </if>
+    <if test="organizationCode != null">
+      and ORGANIZATION_CODE like '%${organizationCode}%'
+    </if>
+
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <!--查询所有的建设用地-->
+  <select id="selectAll" parameterType="hashMap" resultType="hashMap">
+    select LID,MASSIF_NAME from T_BULIDING_LAND where  1=1
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <!--根据县查询详细信息-->
+  <select id="selectByCounty" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLAND">
+    select
+   <include refid="Base_Column_List" />
+    from T_BULIDING_LAND
+    where 1=1
+	<if test="massifName != null">
+      and MASSIF_NAME like '%${massifName}%'
+    </if>
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+    <if test="massifPollute != null">
+      and MASSIF_POLLUTE = #{massifPollute,jdbcType=VARCHAR}
+    </if>
+    <if test="riskLevel != null">
+      and RISK_LEVEL = #{riskLevel,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <!--查询整个市的数据-->
+  <select id="selectAllCity" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLAND">
+    select
+   <include refid="Base_Column_List" />
+    from T_BULIDING_LAND
+    where 1=1
+    <if test="massifName != null">
+      and MASSIF_NAME like '%${massifName}%'
+    </if>
+    <if test="massifPollute != null">
+      and MASSIF_POLLUTE = #{massifPollute,jdbcType=VARCHAR}
+    </if>
+    <if test="riskLevel != null">
+      and RISK_LEVEL = #{riskLevel,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <!--根据市统计各个县信息-->
+  <select id="selectByCity" parameterType="hashMap" resultType="hashMap">
+    select * from (
+    select
+    count(*) count, COUNTY_CODE code
+    from T_BULIDING_LAND
+    where 1=1
+    <if test="massifName != null">
+      and MASSIF_NAME like '%${massifName}%'
+    </if>
+    <if test="massifPollute != null">
+      and MASSIF_POLLUTE = #{massifPollute,jdbcType=VARCHAR},
+    </if>
+    <if test="riskLevel != null">
+      and RISK_LEVEL = #{riskLevel,jdbcType=VARCHAR},
+    </if>
+     group by COUNTY_CODE)a left join  (select TC_LON LON,TC_LAT LAT,TC_NAME name,TC_CODE from  TB_CITY )b 
+     on a.code = b.TC_CODE ORDER BY COUNT
+  </select>
+  <!--已上图-->
+  <select id="alreadyShown" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLAND" resultType="java.lang.Integer">
+    select
+    count(*) count
+    from T_BULIDING_LAND
+    where 1=1
+    <if test="massifName != null">
+      and MASSIF_NAME like '%${massifName}%'
+    </if>
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR},
+    </if>
+    <if test="massifPollute != null">
+      and MASSIF_POLLUTE = #{massifPollute,jdbcType=VARCHAR},
+    </if>
+    <if test="riskLevel != null">
+      and RISK_LEVEL = #{riskLevel,jdbcType=VARCHAR},
+    </if>
+     and MASSIF_LONGITUDE is not null and MASSIF_LATITUDE is not null
+  </select>
+</mapper>

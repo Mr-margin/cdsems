@@ -1,0 +1,136 @@
+@charset "utf-8";
+.no-padding{
+	padding:0 !important;
+}
+.no-margin{
+	margin:0 !important;
+}
+.no-border{
+	border:none !important;
+}
+.pr0{
+	padding-right:0 !important;
+}
+.pl0{
+	padding-left:0 !important;
+}
+.p6-25{
+	padding:6px 25px !important;
+}
+.p0-30{
+	padding:0 30px !important;
+}
+.pt15{
+	padding-top:15px !important;
+}
+.pt50{
+	padding-top:50px !important;
+}
+.pb15{
+	padding-bottom:15px !important;
+}
+.ml0{
+	margin-left:0 !important;
+}
+.mr0{
+	margin-right:0 !important;
+}
+.mb0{
+	margin-bottom:0 !important;
+}
+.mb8{
+	margin-bottom:8px !important;
+}
+.mb20{
+	margin-bottom:20px !important;
+}
+.mr5{
+	margin-right:5px !important;
+}
+.mr8{
+	margin-right:8px !important;
+}
+.mr10{
+	margin-right:10px !important;
+}
+.mr20{
+	margin-right:20px !important;
+}
+.ml20{
+	margin-left:20px !important;
+}
+.mt10{
+	margin-top:10px !important;
+}
+.mt15{
+	margin-top:15px !important;
+}
+.mt50{
+	margin-top:50px !important;
+}
+.mt30{
+	margin-top:30px !important;
+}
+
+/*btn*/
+.btn-origin {
+	color: #fff;
+	background-color: #01946a;
+	border-color: #01946a
+}
+
+.btn-origin.focus, .btn-origin:focus {
+	color: #fff;
+	background-color: #116a51;
+	border-color: #116a51
+}
+
+.btn-origin:hover {
+	color: #fff;
+	background-color: #116a51;
+	border-color: #116a51
+}
+
+.btn-origin.active, .btn-origin:active, .open>.dropdown-toggle.btn-origin
+	{
+	color: #fff;
+	background-color: #116a51;
+	border-color: #116a51
+}
+
+.btn-origin.active.focus, .btn-origin.active:focus, .btn-origin.active:hover,
+	.btn-origin:active.focus, .btn-origin:active:focus, .btn-origin:active:hover,
+	.open>.dropdown-toggle.btn-origin.focus, .open>.dropdown-toggle.btn-origin:focus,
+	.open>.dropdown-toggle.btn-origin:hover {
+	color: #fff;
+	background-color: #116a51;
+	border-color: #116a51
+}
+
+.w-20{
+	width:20% !important;
+}
+.w-23{
+	width:23% !important;
+}
+.h-298{
+	height:298px !important;
+}
+.daoru .input_text {
+	width: 70%;
+	margin-right: 2%;
+	}
+.daoru .input_sub {
+	width: 28%;
+	}
+.daoru .input_file {
+	position: absolute;
+    top: 0;
+    left: 70%;
+    height: 34px;
+    _height: 34px;
+    filter: alpha(opacity : 0);
+    opacity: 0;
+    width: 28%;
+    margin-top:0;
+} 

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.SysRole" >
+    <id column="SR_ID" property="srId" jdbcType="DECIMAL" />
+    <result column="SR_NAME" property="srName" jdbcType="VARCHAR" />
+    <result column="SR_DESC" property="srDesc" jdbcType="VARCHAR" />
+    <result column="ADD_SU_ID" property="addSuId" jdbcType="DECIMAL" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="UPD_SU_ID" property="updSuId" jdbcType="DECIMAL" />
+    <result column="UPD_TIME" property="updTime" jdbcType="TIMESTAMP" />
+    <collection property="srSysRoleModule" ofType="com.gistone.cdsems.database.entity.SysRoleModule">
+        <id column="SRM_ID" property="srmId" jdbcType="DECIMAL" />
+    	<result column="SRM_SR_ID" property="srmSrId" jdbcType="DECIMAL" />
+    	<result column="SRM_SM_ID" property="srmSmId" jdbcType="DECIMAL" />
+    	<association property="srmSysModule" javaType="com.gistone.cdsems.database.entity.SysModule">
+    		<id column="SM_ID" property="smId" jdbcType="DECIMAL" />
+		    <result column="SM_NAME" property="smName" jdbcType="VARCHAR" />
+		    <result column="SM_DESC" property="smDesc" jdbcType="VARCHAR" />
+		    <result column="SM_ELE" property="smEle" jdbcType="VARCHAR" />
+		    <result column="SM_PID" property="smPid" jdbcType="DECIMAL" />
+    	</association>
+	</collection>
+	<collection property="srSysRoleYzt" ofType="com.gistone.cdsems.database.entity.SysRoleYzt">
+        <id column="SRY_ID" property="sryId" jdbcType="DECIMAL" />
+    	<result column="SRY_SR_ID" property="srySrId" jdbcType="DECIMAL" />
+    	<result column="SRY_SY_ID" property="srySyId" jdbcType="DECIMAL" />
+    	<association property="srySysYzt" javaType="com.gistone.cdsems.database.entity.SysYzt">
+    		<id column="SY_ID" property="syId" jdbcType="DECIMAL" />
+    		<result column="SY_NAME" property="syName" jdbcType="VARCHAR" />
+    		<result column="SY_PID" property="syPid" jdbcType="DECIMAL" />
+    	</association>
+	</collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SR_ID, SR_NAME, SR_DESC, ADD_SU_ID, ADD_TIME, UPD_SU_ID, UPD_TIME
+  </sql>
+  <sql id="Base_Column_List_Module" >
+    SR_ID, SR_NAME, SR_DESC, ADD_SU_ID, ADD_TIME, UPD_SU_ID, UPD_TIME,
+    <!-- 角色模块中间 -->
+    SRM_ID,SRM_SR_ID,SRM_SM_ID,
+    <!-- 模块 -->
+    SM_ID,SM_NAME,SM_ELE,SM_PID
+    <!-- 角色一张图中间 -->
+    <!-- SRY_ID, SRY_SR_ID, SRY_SY_ID, -->
+    <!-- 一张图 -->
+    <!-- SY_ID, SY_NAME, SY_PID -->
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+  	<!-- select
+  	<include refid="Base_Column_List_Module" />
+  	from (
+	    select 
+	    <include refid="Base_Column_List" />
+	    from SYS_ROLE
+	    where SR_ID = #{srId,jdbcType=DECIMAL}
+	) sr
+	left join SYS_ROLE_MODULE srm on sr.SR_ID=srm.SRM_SR_ID
+	left join SYS_MODULE sm on srm.SRM_SM_ID=sm.SM_ID
+	left join SYS_ROLE_YZT sry on sr.SR_ID=sry.SRY_SR_ID
+	left join SYS_YZT sy on sry.SRY_SY_ID=sy.SY_ID -->
+	select
+  	<include refid="Base_Column_List_Module" />
+  	from (
+	    select 
+	    <include refid="Base_Column_List" />
+	    from SYS_ROLE
+	    where SR_ID = #{srId,jdbcType=DECIMAL}
+	) sr
+	left join SYS_ROLE_MODULE srm on sr.SR_ID=srm.SRM_SR_ID
+	left join SYS_MODULE sm on srm.SRM_SM_ID=sm.SM_ID
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_ROLE
+    where SR_ID = #{srId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.SysRole" >
+    insert into SYS_ROLE (SR_ID, SR_NAME, SR_DESC, 
+      ADD_SU_ID, ADD_TIME, UPD_SU_ID, 
+      UPD_TIME)
+    values (SYS_ROLE_SEQ.nextval, #{srName,jdbcType=VARCHAR}, #{srDesc,jdbcType=VARCHAR}, 
+      #{addSuId,jdbcType=DECIMAL}, #{addTime,jdbcType=TIMESTAMP}, #{updSuId,jdbcType=DECIMAL}, 
+      #{updTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="false" keyProperty="srId" parameterType="com.gistone.cdsems.database.entity.SysRole" >
+  	<selectKey resultType="BigDecimal"   order="BEFORE" keyProperty="srId">  
+            SELECT SYS_ROLE_SEQ.NEXTVAL as srId from DUAL
+    </selectKey>
+    
+    insert into SYS_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="srId != null" >
+        SR_ID,
+      </if>
+      <if test="srName != null" >
+        SR_NAME,
+      </if>
+      <if test="srDesc != null" >
+        SR_DESC,
+      </if>
+      <if test="addSuId != null" >
+        ADD_SU_ID,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="updSuId != null" >
+        UPD_SU_ID,
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="srId != null" >
+        #{srId,jdbcType=DECIMAL},
+      </if>
+      <if test="srName != null" >
+        #{srName,jdbcType=VARCHAR},
+      </if>
+      <if test="srDesc != null" >
+        #{srDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="addSuId != null" >
+        #{addSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updSuId != null" >
+        #{updSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="updTime != null" >
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.SysRole" >
+    update SYS_ROLE
+    <set >
+      <if test="srName != null" >
+        SR_NAME = #{srName,jdbcType=VARCHAR},
+      </if>
+      <if test="srDesc != null" >
+        SR_DESC = #{srDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="addSuId != null" >
+        ADD_SU_ID = #{addSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updSuId != null" >
+        UPD_SU_ID = #{updSuId,jdbcType=DECIMAL},
+      </if>
+      <if test="updTime != null" >
+        UPD_TIME = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SR_ID = #{srId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.SysRole" >
+    update SYS_ROLE
+    set SR_NAME = #{srName,jdbcType=VARCHAR},
+      SR_DESC = #{srDesc,jdbcType=VARCHAR},
+      ADD_SU_ID = #{addSuId,jdbcType=DECIMAL},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPD_SU_ID = #{updSuId,jdbcType=DECIMAL},
+      UPD_TIME = #{updTime,jdbcType=TIMESTAMP}
+    where SR_ID = #{srId,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 所有角色 -->
+  <select id="listAll" resultMap="BaseResultMap">
+  		 select 
+	    <include refid="Base_Column_List" />
+	    from SYS_ROLE
+  </select>
+  
+  <!-- 列表 -->
+  <select id="list" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.SysRole" >
+  	select * from (select R.*,ROWNUM RN from (
+	select
+		*
+	from
+		SYS_ROLE 
+	where 1=1
+	<if test="srName != null" >
+		and SR_NAME like '%${srName}%'
+	</if>
+	order by ADD_TIME desc
+	)R)
+	where RN &gt; #{pageNumber,jdbcType=INTEGER} and RN  &lt;=(#{pageSize,jdbcType=INTEGER}+#{pageNumber,jdbcType=INTEGER})
+	
+  </select>
+  
+  <!-- 列表总数 -->
+  <select id="total" resultType="int" parameterType="com.gistone.cdsems.database.entity.SysRole" >
+	select
+		count(1)
+	from
+		SYS_ROLE 
+	where 1=1
+	<if test="srName != null" >
+		and SR_NAME like '%${srName}%'
+	</if>
+  </select>
+  
+  <select id="findRoleBySrName" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.SysRole">
+  		select 
+  			<include refid="Base_Column_List" />
+    	from SYS_ROLE
+    	where  SR_NAME = #{srName}
+    	<if test="srId != null" >
+			and SR_ID != #{srId}
+		</if>
+  </select>
+  
+</mapper>

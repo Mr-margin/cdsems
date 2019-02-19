@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.CompanyMapper">
+
+	<sql id="Base_Column_List">
+        ID,COMPANY_NAME,LEGAL_PERSON,ORGANIZING_CODE,PROVINCE_CODE,CITY_CODE,COUNTY_CODE,ADDRESS,LONGITUDE,LATITUDE,
+        SCALE,BUSNISS_TERM,INDUSTRY_TYPE,INDUSTRY_CODE,AREA,OWNERSHIP,USING_HISTORY,LAND_USAGE,STATUS,INDUSTRY_ZONE,
+        DATA_SOURCES,RANK,RISK_GRADE,CREATE_USER_ID,CREATE_TIME,UPDATE_USER_ID,UPDATE_TIME
+    </sql>
+    
+    <!-- 插入一条数据 -->
+    <insert id="save" parameterType="java.util.Map" keyProperty="pd.id">
+	    <selectKey resultType="BigDecimal" order="BEFORE" keyProperty="pd.id">
+	      	SELECT  SYS_RESOURCE_ID_SEQ.NEXTVAL FROM DUAL
+	   	</selectKey>
+    	insert into T_COMPANY_INFO(
+	    	ID,
+	    	COMPANY_NAME,
+	    	LEGAL_PERSON,
+	    	ORGANIZING_CODE,
+	    	PROVINCE_CODE,
+	    	CITY_CODE,
+	    	COUNTY_CODE,
+	    	ADDRESS,
+	    	LONGITUDE,
+	    	LATITUDE,
+	    	SCALE,
+	    	BUSNISS_TERM,
+	    	INDUSTRY_TYPE,
+	    	INDUSTRY_CODE,
+	    	AREA,
+	    	OWNERSHIP,
+	    	USING_HISTORY,
+	    	LAND_USAGE,
+	        STATUS,
+	        INDUSTRY_ZONE,
+	        DATA_SOURCES,
+	        RANK,
+	        RISK_GRADE,
+	        CREATE_USER_ID,
+	        CREATE_TIME
+    	)values(
+    		#{pd.id,jdbcType=NUMERIC},
+    		#{pd.COMPANY_NAME,jdbcType=VARCHAR},
+    		#{pd.LEGAL_PERSON,jdbcType=VARCHAR},
+    		#{pd.ORGANIZING_CODE,jdbcType=VARCHAR},
+	    	#{pd.PROVINCE_CODE,jdbcType=VARCHAR},
+	    	#{pd.CITY_CODE,jdbcType=VARCHAR},
+	    	#{pd.COUNTY_CODE,jdbcType=VARCHAR},
+	    	#{pd.ADDRESS,jdbcType=VARCHAR},
+	    	#{pd.LONGITUDE,jdbcType=NUMERIC},
+	    	#{pd.LATITUDE,jdbcType=NUMERIC},
+	        #{pd.SCALE,jdbcType=VARCHAR},
+	        #{pd.BUSNISS_TERM,jdbcType=VARCHAR},
+	        #{pd.INDUSTRY_TYPE,jdbcType=VARCHAR},
+	        #{pd.INDUSTRY_CODE,jdbcType=VARCHAR},
+	        #{pd.AREA,jdbcType=NUMERIC},
+	        #{pd.OWNERSHIP,jdbcType=VARCHAR},
+	        #{pd.USING_HISTORY,jdbcType=VARCHAR},
+	        #{pd.LAND_USAGE,jdbcType=VARCHAR},
+	        #{pd.STATUS,jdbcType=VARCHAR},
+	        #{pd.INDUSTRY_ZONE,jdbcType=VARCHAR},
+	       	#{pd.DATA_SOURCES,jdbcType=VARCHAR},
+	        #{pd.RANK,jdbcType=VARCHAR},
+	        #{pd.RISK_GRADE,jdbcType=VARCHAR},
+	        #{pd.CREATE_USER_ID,jdbcType=NUMERIC},
+	        sysdate
+    	)
+    </insert>
+    
+    <!-- 批量插入数据 -->
+    <insert id="saveBatch" parameterType="java.util.Map">
+    	insert into T_COMPANY_INFO(
+	    	ID,
+	    	COMPANY_NAME,
+	    	LEGAL_PERSON,
+	    	ORGANIZING_CODE,
+	    	PROVINCE_CODE,
+	    	CITY_CODE,
+	    	COUNTY_CODE,
+	    	ADDRESS,
+	    	LONGITUDE,
+	    	LATITUDE,
+	    	SCALE,
+	    	BUSNISS_TERM,
+	    	INDUSTRY_TYPE,
+	    	INDUSTRY_CODE,
+	    	AREA,
+	    	OWNERSHIP,
+	    	USING_HISTORY,
+	    	LAND_USAGE,
+	        STATUS,
+	        INDUSTRY_ZONE,
+	        DATA_SOURCES,
+	        RANK,
+	        RISK_GRADE,
+	        CREATE_USER_ID,
+	        CREATE_TIME
+    	)select SYS_RESOURCE_ID_SEQ.NEXTVAL,a.* from(
+    	<foreach collection ="list" item="pd" separator ="union" close=")" open="(">
+        select
+    		#{pd.COMPANY_NAME,jdbcType=VARCHAR},
+    		#{pd.LEGAL_PERSON,jdbcType=VARCHAR},
+    		#{pd.ORGANIZING_CODE,jdbcType=VARCHAR},
+	    	#{pd.PROVINCE_CODE,jdbcType=VARCHAR},
+	    	#{pd.CITY_CODE,jdbcType=VARCHAR},
+	    	#{pd.COUNTY_CODE,jdbcType=VARCHAR},
+	    	#{pd.ADDRESS,jdbcType=VARCHAR},
+	    	#{pd.LONGITUDE,jdbcType=NUMERIC},
+	    	#{pd.LATITUDE,jdbcType=NUMERIC},
+	        #{pd.SCALE,jdbcType=VARCHAR},
+	        #{pd.BUSNISS_TERM,jdbcType=VARCHAR},
+	        #{pd.INDUSTRY_TYPE,jdbcType=VARCHAR},
+	        #{pd.INDUSTRY_CODE,jdbcType=VARCHAR},
+	        #{pd.AREA,jdbcType=NUMERIC},
+	        #{pd.OWNERSHIP,jdbcType=VARCHAR},
+	        #{pd.USING_HISTORY,jdbcType=VARCHAR},
+	        #{pd.LAND_USAGE,jdbcType=VARCHAR},
+	        #{pd.STATUS,jdbcType=VARCHAR},
+	        #{pd.INDUSTRY_ZONE,jdbcType=VARCHAR},
+	       	#{pd.DATA_SOURCES,jdbcType=VARCHAR},
+	        #{pd.RANK,jdbcType=VARCHAR},
+	        #{pd.RISK_GRADE,jdbcType=VARCHAR},
+	        #{pd.CREATE_USER_ID,jdbcType=NUMERIC},
+	        sysdate
+    	from DUAL
+    	</foreach>
+    	) a
+    </insert>
+    
+    <!-- 根据id修改数据 -->
+    <update id="update" parameterType="java.util.Map">
+    	update T_COMPANY_INFO set
+    		COMPANY_NAME = #{pd.COMPANY_NAME,jdbcType=VARCHAR},
+    		LEGAL_PERSON = #{pd.LEGAL_PERSON,jdbcType=VARCHAR},
+    		ORGANIZING_CODE = #{pd.ORGANIZING_CODE,jdbcType=VARCHAR},
+	    	PROVINCE_CODE = #{pd.PROVINCE_CODE,jdbcType=VARCHAR},
+	    	CITY_CODE = #{pd.CITY_CODE,jdbcType=VARCHAR},
+	    	COUNTY_CODE = #{pd.COUNTY_CODE,jdbcType=VARCHAR},
+	    	ADDRESS = #{pd.ADDRESS,jdbcType=VARCHAR},
+	    	LONGITUDE = #{pd.LONGITUDE,jdbcType=NUMERIC},
+	    	LATITUDE = #{pd.LATITUDE,jdbcType=NUMERIC},
+	        SCALE = #{pd.SCALE,jdbcType=VARCHAR},
+	        BUSNISS_TERM = #{pd.BUSNISS_TERM,jdbcType=VARCHAR},
+	        INDUSTRY_TYPE = #{pd.INDUSTRY_TYPE,jdbcType=VARCHAR},
+	        INDUSTRY_CODE = #{pd.INDUSTRY_CODE,jdbcType=VARCHAR},
+	        AREA = #{pd.AREA,jdbcType=NUMERIC},
+	        OWNERSHIP = #{pd.OWNERSHIP,jdbcType=VARCHAR},
+	        USING_HISTORY = #{pd.USING_HISTORY,jdbcType=VARCHAR},
+	        LAND_USAGE = #{pd.LAND_USAGE,jdbcType=VARCHAR},
+	        STATUS = #{pd.STATUS,jdbcType=VARCHAR},
+	        INDUSTRY_ZONE = #{pd.INDUSTRY_ZONE,jdbcType=VARCHAR},
+	       	DATA_SOURCES = #{pd.DATA_SOURCES,jdbcType=VARCHAR},
+	        RANK = #{pd.RANK,jdbcType=VARCHAR},
+	        RISK_GRADE = #{pd.RISK_GRADE,jdbcType=VARCHAR},
+	        UPDATE_USER_ID = #{pd.UPDATE_USER_ID,jdbcType=NUMERIC},
+	        UPDATE_TIME = sysdate
+	    where ID=#{pd.ID}
+    </update>
+    
+    <!-- 根据id删除数据 -->
+    <delete id="delete" parameterType="java.lang.Long">
+    	delete from T_COMPANY_INFO 
+    	where ID=#{id}
+    </delete>
+    
+    <!-- 根据id删除其关联子表数据 -->
+    <delete id="deleteCorrelation" parameterType="java.lang.String">
+    	delete from ${tableName} 
+    	where COMPANY_ID=#{id}
+    </delete>
+    
+    <!-- 批量删除数据 -->
+    <delete id="deleteBatch" parameterType="java.lang.String">
+    	delete from T_COMPANY_INFO where ID in
+    	<foreach collection="ids" item="id" index="index" separator="," open="(" close=")">
+    		#{id}
+    	</foreach>
+    </delete>
+    
+    <!-- 批量删除其关联子表数据 -->
+    <delete id="deleteCorrelationBatch" parameterType="java.lang.String">
+    	delete from ${tableName} where COMPANY_ID in
+    	<foreach collection="ids" item="id" index="index" separator="," open="(" close=")">
+    		#{id}
+    	</foreach>
+    </delete>
+    
+    <!-- 根据企业名称查询数据 -->
+    <select id="getByName" parameterType="java.lang.String" resultType="java.util.Map">
+    	select <include refid="Base_Column_List"></include> 
+    	from T_COMPANY_INFO where COMPANY_NAME=#{companyName} and ROWNUM=1
+    </select>
+    
+    <!-- 查询分页数据 -->
+    <select id="listPage" parameterType="java.util.Map" resultType="java.util.Map">
+    	select * from 
+	    	(select <include refid="Base_Column_List"></include>,ROWNUM RN 
+	    	from T_COMPANY_INFO
+	    	where 1=1 
+	    	<if test='pd.company_name!=null and pd.company_name!=""'>
+	    		and COMPANY_NAME like '%${pd.company_name}%'
+	    	</if>
+	    	<if test='pd.organizing_code!=null and pd.organizing_code!=""'>
+	    		and ORGANIZING_CODE like '%${pd.organizing_code}%'
+	    	</if>
+	    	<if test='pd.legal_person!=null and pd.legal_person!=""'>
+	    		and LEGAL_PERSON like '%${pd.legal_person}%'
+	    	</if>
+	    	<if test='pd.address!=null and pd.address!=""'>
+	    		and ADDRESS like '%${pd.address}%'
+	    	</if>
+	    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==2 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+	    		and CITY_CODE = #{pd.suRegioncode}
+	    	</if>
+	    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==3 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+	    		and COUNTY_CODE = #{pd.suRegioncode}
+	    	</if>
+	    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==4 and pd.suCompanyname!=null and pd.suCompanyname!=""'>
+	    		and COMPANY_NAME = #{pd.suCompanyname}
+	    	</if>
+	    	and ROWNUM &lt;= #{pd.endrow} 
+    		order by ID)
+    	WHERE RN &gt; #{pd.startrow}  
+    </select>
+    
+    <!-- 查询分页数据总条数 -->
+    <select id="listPageTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+    	select count(ID) 
+    	from T_COMPANY_INFO
+    	where 1=1 
+    	<if test='pd.company_name!=null and pd.company_name!=""'>
+    		and COMPANY_NAME like '%${pd.company_name}%'
+    	</if>
+    	<if test='pd.organizing_code!=null and pd.organizing_code!=""'>
+    		and ORGANIZING_CODE like '%${pd.organizing_code}%'
+    	</if>
+    	<if test='pd.legal_person!=null and pd.legal_person!=""'>
+    		and LEGAL_PERSON like '%${pd.legal_person}%'
+    	</if>
+    	<if test='pd.address!=null and pd.address!=""'>
+    		and ADDRESS like '%${pd.address}%'
+    	</if>
+    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==2 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+    		and CITY_CODE = #{pd.suRegioncode}
+    	</if>
+    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==3 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+    		and COUNTY_CODE = #{pd.suRegioncode}
+    	</if>
+    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==4 and pd.suCompanyname!=null and pd.suCompanyname!=""'>
+    		and COMPANY_NAME = #{pd.suCompanyname}
+    	</if>
+    </select>
+    
+    <!-- 查询全部企业信息 -->
+    <select id="listAll" parameterType="java.util.Map" resultType="java.util.Map">
+    	select <include refid="Base_Column_List"></include>
+    	from T_COMPANY_INFO
+    	where 1=1 
+    	<if test='pd.company_name!=null and pd.company_name!=""'>
+    		and COMPANY_NAME like '%${pd.company_name}%'
+    	</if>
+    	<if test='pd.organizing_code!=null and pd.organizing_code!=""'>
+    		and ORGANIZING_CODE like '%${pd.organizing_code}%'
+    	</if>
+    	<if test='pd.legal_person!=null and pd.legal_person!=""'>
+    		and LEGAL_PERSON like '%${pd.legal_person}%'
+    	</if>
+    	<if test='pd.address!=null and pd.address!=""'>
+    		and ADDRESS like '%${pd.address}%'
+    	</if>
+    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==2 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+    		and CITY_CODE = #{pd.suRegioncode}
+    	</if>
+    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==3 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+    		and COUNTY_CODE = #{pd.suRegioncode}
+    	</if>
+    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==4 and pd.suCompanyname!=null and pd.suCompanyname!=""'>
+    		and COMPANY_NAME = #{pd.suCompanyname}
+    	</if>
+    	order by ID
+    </select>
+    
+    <!-- 查询全部工业园区 -->
+    <select id="listAllPark" resultType="java.util.Map">
+    	select ID,PARK_NAME
+    	from T_COMPANY_PARK_MANAGEMENT
+    	order by ID
+    </select>
+    
+    <!-- 查询全部行业 -->
+    <select id="listAllIndustry" resultType="java.util.Map">
+    	select ID,NAME,PID,CODE
+    	from T_INDUSTRY
+    	order by ID
+    </select>
+    
+    
+    <!-- 查询县的详细数据 -->
+    <select id="selectByCounty" parameterType="java.util.Map" resultType="java.util.Map">
+    	select <include refid="Base_Column_List"></include> 
+    	from T_COMPANY_INFO
+    	where 1=1 
+    	<if test='pd.company_name!=null and pd.company_name!=""'>
+    		and COMPANY_NAME like '%${pd.company_name}%'
+    	</if>
+    	<if test='pd.industry_type!=null and pd.industry_type!=""'>
+    		and INDUSTRY_TYPE = #{pd.industry_type}
+    	</if>
+    	<if test='pd.county_code!=null and pd.county_code!=""'>
+    		and COUNTY_CODE like '%${pd.county_code}%'
+    	</if>
+    </select>
+    
+    <!-- 查询各个县的计数数据 -->
+    <select id="selectByCity" parameterType="java.util.Map" resultType="java.util.Map">
+    	select * from (
+		    select
+		    count(*) count, COUNTY_CODE code
+		    from T_COMPANY_INFO
+		    where 1=1
+		    <if test='pd.company_name!=null and pd.company_name!=""'>
+		   		and COMPANY_NAME like '%${pd.company_name}%'
+		   	</if>
+		   	<if test='pd.industry_type!=null and pd.industry_type!=""'>
+		   		and INDUSTRY_TYPE = #{pd.industry_type}
+		   	</if>
+		     	group by COUNTY_CODE)a left join  
+		     (select TC_LON LON,TC_LAT LAT,TC_NAME name,TC_CODE from  TB_CITY )b on a.code = b.TC_CODE
+    		ORDER BY COUNT
+    </select>
+    
+    <!-- 查询全市数据  -->
+    <select id="selectAllCity" parameterType="java.util.Map" resultType="java.util.Map">
+    	select <include refid="Base_Column_List"></include> 
+    	from T_COMPANY_INFO
+    	where 1=1 
+    	<if test='pd.company_name!=null and pd.company_name!=""'>
+    		and COMPANY_NAME like '%${pd.company_name}%'
+    	</if>
+    	<if test='pd.industry_type!=null and pd.industry_type!=""'>
+    		and INDUSTRY_TYPE = #{pd.industry_type}
+    	</if>
+    </select>
+     <!-- 已上图 -->
+    <select id="alreadyShown" parameterType="java.util.Map" resultType="java.lang.Integer">
+	    select
+	    count(*) count
+	    from T_COMPANY_INFO
+	    where 1=1
+	    <if test='pd.company_name!=null and pd.company_name!=""'>
+	   		and COMPANY_NAME like '%${pd.company_name}%'
+	   	</if>
+	   	<if test='pd.industry_type!=null and pd.industry_type!=""'>
+	   		and INDUSTRY_TYPE = #{pd.industry_type}
+	   	</if>
+	   	<if test='pd.county_code!=null and pd.county_code!=""'>
+    		and COUNTY_CODE like '%${pd.county_code}%'
+    	</if>
+	   	and LONGITUDE is not null and LATITUDE is not null
+    </select>
+   <!--  查询行业类别 -->
+    <select id="selectIndustryType"  resultType="java.util.Map">
+	  select INDUSTRY_TYPE industryType from T_COMPANY_INFO where INDUSTRY_TYPE is not null group by INDUSTRY_TYPE 
+    </select>
+</mapper>

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.CompanyWaterSourceMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.CompanyWaterSource" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="COUNTY_CODE" property="countyCode" jdbcType="VARCHAR" />
+    <result column="WATER_SOURCE_NAME" property="waterSourceName" jdbcType="VARCHAR" />
+    <result column="WATER_SOURCE_CODE" property="waterSourceCode" jdbcType="VARCHAR" />
+    <result column="WATER_SOURCE_TYPE" property="waterSourceType" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <!-- 查询水源地列表 -->
+  <select id="SelectWaterMonitorList" resultType="hashMap" parameterType="hashMap">
+		SELECT ID,
+				WATER_ID,
+				NVL(THE_TOTAL_CHROMIUM,0) THE_TOTAL_CHROMIUM,
+				NVL(CADMIUM,0) CADMIUM,
+				NVL(MERCURY,0) MERCURY,
+				NVL(ARSENIC,0) ARSENIC,
+				NVL(LEAD,0) LEAD,
+				NVL(NICKEL,0) NICKEL,
+				NVL(COPPER,0) COPPER,
+				NVL(CREATE_USER_ID,0) CREATE_USER_ID,
+				NVL(CREATE_TIME,0) CREATE_TIME,
+				NVL(UPDATE_USER_ID,0) UPDATE_USER_ID,
+				NVL(UPDATE_TIME,0) UPDATE_TIME,
+				NVL(UPLOAD_TIME,0) UPLOAD_TIME 
+		FROM T_COMPANY_WATER_MONITOR WHERE WATER_ID = #{id}
+  </select>
+  <!-- 查询水源地列表 -->
+  <select id="SelectWaterSourceList" resultType="hashMap" parameterType="hashMap">
+		SELECT * FROM (SELECT ROWNUM RN,t5.TC_NAME COUNTY_NAME,t1.* FROM (
+				SELECT
+					*
+				FROM
+					T_COMPANY_WATER_SOURCE
+				ORDER BY CREATE_TIME DESC) t1
+				LEFT JOIN TB_CITY t5
+				ON t1.COUNTY_CODE = t5.TC_CODE
+			WHERE 1=1
+			<if test="countyCode!=null">
+				AND COUNTY_CODE = #{countyCode}
+			</if>
+			<if test="waterSourceName!=null">
+				AND WATER_SOURCE_NAME LIKE '%${waterSourceName}%'
+			</if>
+			<if test="id!=null">
+				AND id = #{id}
+			</if>
+			<if test="suRegioncode!=null">
+				AND COUNTY_CODE = #{suRegioncode}
+			</if>
+			
+		) WHERE 1=1
+		<if test="number!=null">
+			AND RN >=#{number} 
+		</if>
+		<if test="size!=null">
+			AND RN &lt;=#{size}
+		</if>
+  </select>
+  <!-- 查询水源地列表 -->
+  <select id="SelectWaterSourceListCount" resultType="hashMap" parameterType="hashMap">
+		SELECT COUNT(*) COUNT FROM (SELECT ROWNUM RN,t5.TC_NAME COUNTY_NAME,t1.* FROM (
+				SELECT
+					*
+				FROM
+					T_COMPANY_WATER_SOURCE
+				ORDER BY CREATE_TIME DESC) t1
+				LEFT JOIN TB_CITY t5
+				ON t1.COUNTY_CODE = t5.TC_CODE
+			WHERE 1=1
+			<if test="countyCode!=null">
+				AND COUNTY_CODE = #{countyCode}
+			</if>
+			<if test="parkName!=null">
+				AND WATER_SOURCE_NAME LIKE '%${waterSourceName}%'
+			</if>
+			<if test="id!=null">
+				AND id = #{id}
+			</if>
+			<if test="suRegioncode!=null">
+				AND COUNTY_CODE = #{suRegioncode}
+			</if>
+		)
+  </select>
+  <!-- 删除主表 -->
+  <delete id="delWaterSourceInfor" parameterType="java.lang.String">
+  	DELETE T_COMPANY_WATER_SOURCE WHERE ID in (${id})
+  </delete>
+  <!-- 删除检测表 -->
+  <delete id="delWaterMonitorInforBySourceId" parameterType="java.lang.String">
+  	DELETE T_COMPANY_WATER_MONITOR WHERE WATER_ID in (${id})
+  </delete>
+  <!-- 删除检测表 -->
+  <delete id="delWaterMonitorInfor" parameterType="java.lang.String">
+  	DELETE T_COMPANY_WATER_MONITOR WHERE ID in (${id})
+  </delete>
+   <!-- 查询工业园是否重名-->
+  <select id="SelectWaterSourceInfor" resultType="hashMap" parameterType="hashMap">
+	SELECT * FROM T_COMPANY_WATER_SOURCE WHERE WATER_SOURCE_NAME = #{waterSourceName}
+  </select>
+  
+  <!-- 批量插入数据 -->
+    <insert id="saveBatch" parameterType="java.util.Map">
+    	insert into T_COMPANY_WATER_SOURCE(
+    	    ID,
+			COUNTY_CODE,
+			WATER_SOURCE_NAME,
+			WATER_SOURCE_CODE,
+			WATER_SOURCE_TYPE,
+			CREATE_USER_ID,
+			CREATE_TIME
+    	)select WATER_SOURCE_ID.NEXTVAL,a.* from(
+    	<foreach collection ="list" item="item" separator ="union" close=")" open="(">
+        select
+				'${item.countyCode}' a1,
+				'${item.waterSourceName}' a2,
+				'${item.waterSourceCode}' a3,
+				'${item.waterSourceType}' a4,
+				'${item.createUserId}' a5,
+				'${item.createTime}' a6
+    	from DUAL
+    	</foreach>
+    	) a
+    </insert> 
+  
+  <insert id="insertWaterSourceInfor" parameterType="com.gistone.cdsems.database.entity.CompanyWaterSource" >
+		
+		<selectKey resultType="Long" order="AFTER" keyProperty="id"> 
+            SELECT WATER_SOURCE_ID.CURRVAL as id from DUAL
+        </selectKey>
+  	INSERT INTO T_COMPANY_WATER_SOURCE
+		(	ID,
+			COUNTY_CODE,
+			WATER_SOURCE_NAME,
+			WATER_SOURCE_CODE,
+			WATER_SOURCE_TYPE,
+			CREATE_USER_ID,
+			CREATE_TIME
+		)
+			 VALUES 
+		(	WATER_SOURCE_ID.nextval,
+			#{countyCode,jdbcType=VARCHAR},
+			#{waterSourceName,jdbcType=VARCHAR},
+			#{waterSourceCode,jdbcType=VARCHAR},
+			#{waterSourceType,jdbcType=VARCHAR},
+			#{createUserId,jdbcType=VARCHAR},
+			#{createTime,jdbcType=VARCHAR}
+		)
+  </insert>
+ 
+  <!-- 批量插入数据 -->
+    <insert id="insertWaterMonitorInfor" parameterType="java.util.Map">
+    	 insert into T_COMPANY_WATER_MONITOR(
+    	    ID, 
+			WATER_ID, 
+			THE_TOTAL_CHROMIUM, 
+			CADMIUM, 
+			MERCURY, 
+			ARSENIC, 
+			LEAD, 
+		    NICKEL, 
+		    COPPER, 
+		    CREATE_USER_ID, 
+		    CREATE_TIME,
+		    UPLOAD_TIME 
+    	)select WATER_MONITOR_ID.NEXTVAL,a.* from(
+    	<foreach collection ="list" item="item" separator ="union" close=")" open="(">
+        select
+				${item.WATER_ID} as a1,
+				'${item.THE_TOTAL_CHROMIUM}' as a2,
+				'${item.CADMIUM}' as a3,
+				'${item.MERCURY}' as a4,
+				'${item.ARSENIC}' as a5,
+				'${item.LEAD}' as a6,
+				'${item.NICKEL}' as a7,
+				'${item.COPPER}' as a8,
+				'${item.CREATE_USER_ID}' as a9,
+				'${item.CREATE_TIME}' as a10,
+				'${item.UPLOAD_TIME}' as a11
+    	from DUAL
+    	</foreach>
+    	) a
+    </insert>
+    
+    <update id="updateWaterMonitorInfor" parameterType="com.gistone.cdsems.database.entity.CompanyWaterSource" >
+    	UPDATE T_COMPANY_WATER_SOURCE SET
+    		WATER_SOURCE_NAME = '${waterSourceName}',
+			WATER_SOURCE_CODE = '${waterSourceCode}',
+			WATER_SOURCE_TYPE = '${waterSourceType}',
+			UPDATE_USER_ID = '${updateUserId}',
+			UPDATE_TIME = '${updateTime}'
+			WHERE ID = '${id}'
+    </update>
+    
+  <!-- 以上  自定义SQL -->
+  
+  <sql id="Base_Column_List" >
+    ID, COUNTY_CODE, WATER_SOURCE_NAME, WATER_SOURCE_CODE, WATER_SOURCE_TYPE, CREATE_USER_ID, 
+    CREATE_TIME, UPDATE_USER_ID, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_COMPANY_WATER_SOURCE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_COMPANY_WATER_SOURCE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.CompanyWaterSource" >
+    insert into T_COMPANY_WATER_SOURCE (ID, COUNTY_CODE, WATER_SOURCE_NAME, 
+      WATER_SOURCE_CODE, WATER_SOURCE_TYPE, CREATE_USER_ID, 
+      CREATE_TIME, UPDATE_USER_ID, UPDATE_TIME
+      )
+    values (#{id,jdbcType=DECIMAL}, #{countyCode,jdbcType=VARCHAR}, #{waterSourceName,jdbcType=VARCHAR}, 
+      #{waterSourceCode,jdbcType=VARCHAR}, #{waterSourceType,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{updateUserId,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.CompanyWaterSource" >
+    insert into T_COMPANY_WATER_SOURCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="countyCode != null" >
+        COUNTY_CODE,
+      </if>
+      <if test="waterSourceName != null" >
+        WATER_SOURCE_NAME,
+      </if>
+      <if test="waterSourceCode != null" >
+        WATER_SOURCE_CODE,
+      </if>
+      <if test="waterSourceType != null" >
+        WATER_SOURCE_TYPE,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="countyCode != null" >
+        #{countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="waterSourceName != null" >
+        #{waterSourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="waterSourceCode != null" >
+        #{waterSourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="waterSourceType != null" >
+        #{waterSourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.CompanyWaterSource" >
+    update T_COMPANY_WATER_SOURCE
+    <set >
+      <if test="countyCode != null" >
+        COUNTY_CODE = #{countyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="waterSourceName != null" >
+        WATER_SOURCE_NAME = #{waterSourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="waterSourceCode != null" >
+        WATER_SOURCE_CODE = #{waterSourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="waterSourceType != null" >
+        WATER_SOURCE_TYPE = #{waterSourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.CompanyWaterSource" >
+    update T_COMPANY_WATER_SOURCE
+    set COUNTY_CODE = #{countyCode,jdbcType=VARCHAR},
+      WATER_SOURCE_NAME = #{waterSourceName,jdbcType=VARCHAR},
+      WATER_SOURCE_CODE = #{waterSourceCode,jdbcType=VARCHAR},
+      WATER_SOURCE_TYPE = #{waterSourceType,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

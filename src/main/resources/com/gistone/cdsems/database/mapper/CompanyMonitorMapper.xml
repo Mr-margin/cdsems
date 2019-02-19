@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.CompanyMonitorMapper">
+
+	<sql id="Base_Column_List">
+        A.ID,A.COMPANY_ID,TO_CHAR(A.MONITOR_TIME,'yyyy-MM-dd') MONITOR_TIME,A.PH,A.CD,A.HG,A.PB,A.ARSENIC,A.CR,A.CU,A.ZN,A.NI,
+        A.CREATE_USER_ID,A.CREATE_TIME,A.UPDATE_USER_ID,A.UPDATE_TIME
+    </sql>
+    
+    <sql id="Base_Column_List_B">
+        B.COMPANY_NAME,B.LEGAL_PERSON,B.ORGANIZING_CODE,B.PROVINCE_CODE,B.CITY_CODE,B.COUNTY_CODE,B.ADDRESS
+    </sql>
+    
+    <!-- 插入一条数据 -->
+    <insert id="save" parameterType="java.util.Map" keyProperty="pd.id">
+	    <selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="pd.id">
+	      	SELECT  SYS_RESOURCE_ID_SEQ.NEXTVAL AS id FROM DUAL
+	   	</selectKey>
+    	insert into T_COMPANY_MONITOR(
+	    	ID,COMPANY_ID,MONITOR_TIME,PH,CD,HG,PB,ARSENIC,CR,CU,ZN,NI,CREATE_USER_ID,CREATE_TIME
+    	)values(
+    		#{pd.id},
+    		#{pd.COMPANY_ID,jdbcType=NUMERIC},
+    		#{pd.MONITOR_TIME,jdbcType=DATE},
+    		#{pd.PH,jdbcType=NUMERIC},
+    		#{pd.CD,jdbcType=NUMERIC},
+	    	#{pd.HG,jdbcType=NUMERIC},
+	    	#{pd.PB,jdbcType=NUMERIC},
+	    	#{pd.ARSENIC,jdbcType=NUMERIC},
+	    	#{pd.CR,jdbcType=NUMERIC},
+	    	#{pd.CU,jdbcType=NUMERIC},
+	    	#{pd.ZN,jdbcType=NUMERIC},
+	        #{pd.NI,jdbcType=NUMERIC},
+	        #{pd.CREATE_USER_ID,jdbcType=NUMERIC},
+	        sysdate
+    	)
+    </insert>
+    
+    <!-- 批量插入数据 -->
+    <insert id="saveBatch" parameterType="java.util.Map">
+    	insert into T_COMPANY_MONITOR(
+	    	ID,COMPANY_ID,MONITOR_TIME,PH,CD,HG,PB,ARSENIC,CR,CU,ZN,NI,CREATE_USER_ID,CREATE_TIME
+    	)select SYS_RESOURCE_ID_SEQ.NEXTVAL,a.* from(
+    	<foreach collection ="list" item="pd" separator ="union" close=")" open="(">
+        select
+    		#{pd.COMPANY_ID,jdbcType=NUMERIC},
+    		#{pd.MONITOR_TIME,jdbcType=DATE},
+    		#{pd.PH,jdbcType=NUMERIC},
+    		#{pd.CD,jdbcType=NUMERIC},
+	    	#{pd.HG,jdbcType=NUMERIC},
+	    	#{pd.PB,jdbcType=NUMERIC},
+	    	#{pd.ARSENIC,jdbcType=NUMERIC},
+	    	#{pd.CR,jdbcType=NUMERIC},
+	    	#{pd.CU,jdbcType=NUMERIC},
+	    	#{pd.ZN,jdbcType=NUMERIC},
+	        #{pd.NI,jdbcType=NUMERIC},
+	        #{pd.CREATE_USER_ID,jdbcType=NUMERIC},
+	        sysdate
+    	from dual
+    	</foreach>
+    	) a
+    </insert>
+    
+    <!-- 根据id修改数据 -->
+    <update id="update" parameterType="java.util.Map">
+    	update T_COMPANY_MONITOR set
+    		COMPANY_ID = #{pd.COMPANY_ID,jdbcType=NUMERIC},
+    		MONITOR_TIME = #{pd.MONITOR_TIME,jdbcType=DATE},
+    		PH = #{pd.PH,jdbcType=NUMERIC},
+    		CD = #{pd.CD,jdbcType=NUMERIC},
+	    	HG = #{pd.HG,jdbcType=NUMERIC},
+	    	PB = #{pd.PB,jdbcType=NUMERIC},
+	    	ARSENIC = #{pd.ARSENIC,jdbcType=NUMERIC},
+	    	CR = #{pd.CR,jdbcType=NUMERIC},
+	    	CU = #{pd.CU,jdbcType=NUMERIC},
+	    	ZN = #{pd.ZN,jdbcType=NUMERIC},
+	        NI = #{pd.NI,jdbcType=NUMERIC},
+	        UPDATE_USER_ID = #{pd.UPDATE_USER_ID,jdbcType=NUMERIC},
+	        UPDATE_TIME = sysdate
+	    where ID=#{pd.ID}
+    </update>
+    
+    <!-- 根据id删除数据 -->
+    <delete id="delete" parameterType="java.lang.Long">
+    	delete from T_COMPANY_MONITOR where ID=#{id}
+    </delete>
+    
+    <!-- 批量删除数据 -->
+    <delete id="deleteBatch" parameterType="java.lang.String">
+    	delete from T_COMPANY_MONITOR where ID in
+    	<foreach collection="ids" item="id" index="index" separator="," open="(" close=")">
+    		#{id}
+    	</foreach>
+    </delete>
+    
+    <!-- 查询分页数据 -->
+    <select id="listPage" parameterType="java.util.Map" resultType="java.util.Map">
+    	select * from 
+	    	(select <include refid="Base_Column_List"></include>,ROWNUM RN,
+				<include refid="Base_Column_List_B"></include>
+	    	from T_COMPANY_MONITOR A
+	    	left join T_COMPANY_INFO B on A.COMPANY_ID = B.ID
+	    	where 1=1 
+	    	<if test='pd.company_name!=null and pd.company_name!=""'>
+	    		and B.COMPANY_NAME like '%${pd.company_name}%'
+	    	</if>
+	    	<if test='pd.organizing_code!=null and pd.organizing_code!=""'>
+    			and B.ORGANIZING_CODE like '%${pd.organizing_code}%'
+	    	</if>
+	    	<if test='pd.legal_person!=null and pd.legal_person!=""'>
+	    		and B.LEGAL_PERSON like '%${pd.legal_person}%'
+	    	</if>
+	    	<if test='pd.address!=null and pd.address!=""'>
+	    		and B.ADDRESS like '%${pd.address}%'
+	    	</if>
+	    	<if test='pd.start_time!=null and pd.start_time!=""'>
+	    		and TO_CHAR(A.MONITOR_TIME,'yyyy-MM-dd') &gt;= #{pd.start_time}
+	    	</if>
+	    	<if test='pd.end_time!=null and pd.end_time!=""'>
+	    		and TO_CHAR(A.MONITOR_TIME,'yyyy-MM-dd') &lt;= #{pd.end_time}
+	    	</if>
+	    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==2 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+	    		and B.CITY_CODE = #{pd.suRegioncode}
+	    	</if>
+	    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==3 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+	    		and B.COUNTY_CODE = #{pd.suRegioncode}
+	    	</if>
+	    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==4 and pd.suCompanyname!=null and pd.suCompanyname!=""'>
+	    		and B.COMPANY_NAME = #{pd.suCompanyname}
+	    	</if>
+	    	and ROWNUM &lt;= #{pd.endrow} 
+    		order by A.ID)
+    	WHERE RN &gt; #{pd.startrow}  
+    </select>
+    
+    <!-- 查询分页数据总条数 -->
+    <select id="listPageTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+    	select count(A.ID) 
+    	from T_COMPANY_MONITOR A
+	    	left join T_COMPANY_INFO B on A.COMPANY_ID = B.ID
+	    where 1=1 
+	    	<if test='pd.company_name!=null and pd.company_name!=""'>
+	    		and B.COMPANY_NAME like '%${pd.company_name}%'
+	    	</if>
+	    	<if test='pd.organizing_code!=null and pd.organizing_code!=""'>
+    			and B.ORGANIZING_CODE like '%${pd.organizing_code}%'
+	    	</if>
+	    	<if test='pd.legal_person!=null and pd.legal_person!=""'>
+	    		and B.LEGAL_PERSON like '%${pd.legal_person}%'
+	    	</if>
+	    	<if test='pd.address!=null and pd.address!=""'>
+	    		and B.ADDRESS like '%${pd.address}%'
+	    	</if>
+	    	<if test='pd.start_time!=null and pd.start_time!=""'>
+	    		and TO_CHAR(A.MONITOR_TIME,'yyyy-MM-dd') &gt;= #{pd.start_time}
+	    	</if>
+	    	<if test='pd.end_time!=null and pd.end_time!=""'>
+	    		and TO_CHAR(A.MONITOR_TIME,'yyyy-MM-dd') &lt;= #{pd.end_time}
+	    	</if>
+	    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==2 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+	    		and B.CITY_CODE = #{pd.suRegioncode}
+	    	</if>
+	    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==3 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+	    		and B.COUNTY_CODE = #{pd.suRegioncode}
+	    	</if>
+	    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==4 and pd.suCompanyname!=null and pd.suCompanyname!=""'>
+	    		and B.COMPANY_NAME = #{pd.suCompanyname}
+	    	</if>
+    </select>
+    
+    <!-- 查询全部信息 -->
+    <select id="listAll" parameterType="java.util.Map" resultType="java.util.Map">
+    	select <include refid="Base_Column_List"></include>,
+			<include refid="Base_Column_List_B"></include>
+    	from T_COMPANY_MONITOR A
+    	left join T_COMPANY_INFO B on A.COMPANY_ID = B.ID
+    	where 1=1
+    		<if test='pd.company_name!=null and pd.company_name!=""'>
+	    		and B.COMPANY_NAME like '%${pd.company_name}%'
+	    	</if>
+	    	<if test='pd.organizing_code!=null and pd.organizing_code!=""'>
+    			and B.ORGANIZING_CODE like '%${pd.organizing_code}%'
+	    	</if>
+	    	<if test='pd.legal_person!=null and pd.legal_person!=""'>
+	    		and B.LEGAL_PERSON like '%${pd.legal_person}%'
+	    	</if>
+	    	<if test='pd.address!=null and pd.address!=""'>
+	    		and B.ADDRESS like '%${pd.address}%'
+	    	</if>
+	    	<if test='pd.start_time!=null and pd.start_time!=""'>
+	    		and TO_CHAR(A.MONITOR_TIME,'yyyy-MM-dd') &gt;= #{pd.start_time}
+	    	</if>
+	    	<if test='pd.end_time!=null and pd.end_time!=""'>
+	    		and TO_CHAR(A.MONITOR_TIME,'yyyy-MM-dd') &lt;= #{pd.end_time}
+	    	</if>
+	    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==2 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+	    		and B.CITY_CODE = #{pd.suRegioncode}
+	    	</if>
+	    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==3 and pd.suRegioncode!=null and pd.suRegioncode!=""'>
+	    		and B.COUNTY_CODE = #{pd.suRegioncode}
+	    	</if>
+	    	<if test='pd.suLevel!=null and pd.suLevel!="" and pd.suLevel==4 and pd.suCompanyname!=null and pd.suCompanyname!=""'>
+	    		and B.COMPANY_NAME = #{pd.suCompanyname}
+	    	</if>
+	    	order by A.ID
+    </select>
+</mapper>

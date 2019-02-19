@@ -1,0 +1,69 @@
+<div class=" box-body col-md-12">
+    <!-- 面包屑 -->
+    <div class="panel panel-default crumbs_box">
+        <div class="panel-body clearfix">
+            <p class="pull-left crumbs">
+            	<i class="iconfont">&#xe690;</i>当前位置：
+            	<span>系统管理</span><b> > </b><span>日志管理</span>
+            </p>
+            <div class="pull-right">
+            	<!-- <button type="button" id="sys_log_statics"  class="btn btn-success"  onclick="log_statistics()"><i class="iconfont  ml0 mr5">&#xe6ad;</i>统计</button> -->
+            </div>
+        </div>
+    </div>
+    <!-- 表格 -->
+    <div class="panel panel-default content">
+        <div class="panel-body">
+            <div class="col-lg-12 col-md-12 col-sm-12 no-padding clearfix">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 w-20 no-padding">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 no-padding">
+                        <div class="col-lg-3 col-md-3 col-sm-3  col-xs-3 no-padding text-right" >
+                            <label class="">用户名</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pr0">
+                            <input id="suUsername"  type="text" class="form-control " placeholder="请输入用户名，支持模糊匹配">
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 w-20 no-padding">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 no-padding">
+                        <div class="col-lg-3 col-md-3 col-sm-3  col-xs-3 no-padding text-right" >
+                            <label class="">操作类型</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pr0">
+                            <select name="slSltId" id="slSltId" class="form-control">
+								<option value="">全部</option>
+								<option value="1">登录</option>
+								<option value="2">退出</option>
+								<option value="3">添加</option>
+								<option value="4">修改</option>
+								<option value="5">删除</option>
+							</select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 no-padding">
+                        <div class="col-lg-2 col-md-2 col-sm-2  col-xs-2 no-padding text-right">
+                            <label class="">操作时间</label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 pr0">
+                        	<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 no-padding"  style="width: 45%;">
+	                            <input type="text"  id="startTime" class="form-control mydatetime"  placeholder="操作开始时间">
+	                        </div>
+	                        <div class="col-lg-2 no-padding  text-center"  style="width: 10%;line-height: 36px;">至</div>
+	                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 no-padding"  style="width: 45%;">
+	                            <input type="text"  id="endTime" class="form-control mydatetime"  placeholder="操作开始时间">
+	                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right no-padding pull-right">
+           			<button type="button"  class="btn btn-success  btn-search"  onclick="initLogTable()">查询<i class="iconfont  iconfont1">&#xea1b;</i></button>
+           		</div>
+            </div>
+             <table class="table text-center table-bordered" id="dataTable">  
+			</table>  
+        </div>
+    </div>
+</div>

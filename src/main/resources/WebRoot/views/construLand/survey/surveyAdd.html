@@ -1,0 +1,133 @@
+<div class=" box-body">
+    <!-- 面包屑 -->
+    <div class="panel panel-default  crumbs_box">
+        <div class="panel-body  clearfix">
+            <p class="crumbs  pull-left">
+            	<i class="iconfont">&#xe690;</i>当前位置：
+            	<span>建设用地准入</span><span> > </span><span>调查信息</span><span> > </span><span>添加</span>
+            </p>
+        	<div class="pull-right"></div>
+        </div>
+    </div>
+    <div class="panel panel-default  content">
+        <div class="panel-body pt50">
+         	<form class="form-horizontal  col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" role="form" id="dataForm">
+         		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label">建设用地名称<span style="color: red;">*</span></label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<select id="lid"  class="form-control"  ></select>
+						</div>
+					</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label">调查标题<span style="color: red;">*</span></label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control  required"   name="preliminaryTitle"  id="preliminaryTitle">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >调查公示网址</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control  preliminaryWebsite"   name="preliminaryWebsite"  id="preliminaryWebsite">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >调查报告编制单位</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control  preliminaryCompilingUnit"   name="preliminaryCompilingUnit"  id="preliminaryCompilingUnit">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >调查报告编制时间</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control  preliminaryCompilingTime  mydatetime"   name="preliminaryCompilingTime"  id="preliminaryCompilingTime">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >调查报告</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 daoru">
+							<input type="text" class="form-control input_text pull-left"  name="investigationReportPath"  id="investigationReportPath" disabled>
+                            <button class="btn btn-default input_sub"  style=" padding: 0;font-size: 12px;line-height: 32px;">选择文件</button>
+                            <input id="file" type="file" class="input_file" contenteditable="false" onchange="document.getElementById('investigationReportPath').value=this.value"  >
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6  mb0">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >检测报告</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 daoru">
+							<input type="text" class="form-control input_text pull-left"  name="testReportPath"  id="testReportPath" disabled>
+                            <button class="btn btn-default input_sub"  style=" padding: 0;font-size: 12px;line-height: 32px;">选择文件</button>
+                            <input id="file1" type="file" class="input_file" contenteditable="false" onchange="document.getElementById('testReportPath').value=this.value"  >
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >填报状态</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control  fillState"   name="fillState"  id="fillState">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label">是否为污染地块</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<select id="massifPollute"  class="form-control"  name="massifPollute"   >
+								<option value="是">是</option>
+								<option value="否">否</option>
+							</select>
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >评估单位</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control  evaluationUnit  no-margin"   name="evaluationUnit"  id="evaluationUnit">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >评估单位项目负责人</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control  evaluationPeople"   name="evaluationPeople"  id="evaluationPeople">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >联系电话</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control left " oninput="value=value.replace(/[^\d\-]/g,'')" maxlength="11" name="evaluationPhone" id="evaluationPhone"  autocomplete="off"  placeholder="">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >评估结论</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control  evaluationConclusion"   name="evaluationConclusion"  id="evaluationConclusion">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >备案意见</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control  opinion"   name="opinion"  id="opinion">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >经办人</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control  chargePerson"   name="chargePerson"  id="chargePerson">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >审核人</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control  auditor"   name="auditor"  id="auditor">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         				<label for="" class="col-lg-5 col-md-5 col-sm-5 col-xs-5 control-label"  >石油烃</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control  reservedField1"   name="reservedField1"  id="reservedField1">
+						</div>
+         			</div>
+         		</div>
+         	</form>
+         	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center  mt50">
+         		<button class="btn btn-warning mr10 p6-25"  onclick="add()">添加</button>
+            	<button class="btn btn-default p6-25"  onclick="back()">取消</button>
+			</div>
+    	</div>
+	</div>
+</div>

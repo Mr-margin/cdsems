@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<head>
+    <title>成都市土壤环境综合管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="renderer" content="webkit"/>
+	<meta name="force-rendering" content="webkit"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+	<!-- Bootstrap core CSS -->
+    <link href="css/plugins/bootstrap-table/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- font awesome -->
+    <link href="css/awesome/font-awesome.min.css" rel="stylesheet" />
+    
+    <!-- 提示插件 -->
+    <link rel="stylesheet" href="js/plugins/swal/sweetalert2.css">
+    
+    <!-- alifonts -->
+    <link href="css/aliFont/iconfont.css" rel="stylesheet">
+    <!-- 自定义 -->
+    <link href="css/public.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/measure.css" rel="stylesheet">
+</head>
+<body >
+	<div class="page-wrapper" >
+		<div class="page-header">
+			<div class="top">
+				<p></p>
+				<div  class="logout">
+					<p>您好,<span id="roleName"></span></p>
+					<a  href="javascript:void(0)"  class="mr10"  data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil-square-o"></i>修改密码</a>
+					<a  href="javascript:void(0)" onclick="logout()"  class="mr0"><i class="fa fa-power-off"></i>退出</a>
+				</div>
+			</div>
+			<div class="bottom row">
+				<ul class="col-lg-12 col-md-12 col-sm-12 clearfix  no-margin">
+					<li id="index" class="pull-left  li1 " style="display:none;"  data_src="views/index/indIndex.html"  data_href="index">
+						<div><a href="javascript:void(0);"></a></div>
+					</li>
+					<li id="yzt" class="pull-left li2 " style="display:none;" data_src="views/information/infoIndex.html" data_href="information">
+						<div><a href="javascript:void(0);"></a></div>
+					</li>
+					<li id="wrdk" class="pull-left li3 " style="display:none;" data_src="views/wrdk/wrdkIndex.html">
+						<div><a href="javascript:void(0);" ></a></div>
+					</li>
+					<!-- 农用地 -->
+					<li id="nyd" class="pull-left li11 " style="display:none;" data_src="views/nyd/nydIndex.html">
+						<div><a href="javascript:void(0);" ></a></div>
+					</li>
+					<li id="company" class="pull-left li4 " style="display:none;" data_src="views/enterprise/index.html">
+						<div><a href="javascript:void(0);"></a></div>
+					</li>
+					<li id="jsydzr" class="pull-left li5 " style="display:none;"  data_src="views/construLand/construIndex.html">
+						<div><a href="javascript:void(0);"></a></div>
+					</li>
+					<li id="gyyq" class="pull-left li6 " style="display:none;"  data_src="views/enterprise/companyParkManagement/yqIndex.html">
+						<div><a href="javascript:void(0);"></a></div>
+					</li>
+					<li id="yysyd" class="pull-left li7 " style="display:none;" data_src="views/water/waterIndex.html">
+						<div><a javascript:void(0);"></a></div>
+					</li>
+					<li id="soilRemediation_list" class="pull-left li8 " style="display:none;" data_src="views/soilRemediation/index.html">
+						<div><a href="javascript:void(0);"></a></div>
+					</li>
+					<li id="xxgk" class="pull-left li9 " style="display:none;" data_src="views/xxgk/xxIndex.html">
+						<div><a  href="javascript:void(0);"></a></div>
+					</li>
+					<li id="sys" class="pull-left li10 " style="display:none;"  data_src="views/sys/sysIndex.html">
+						<div><a href="javascript:void(0);"></a></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="page-container">
+			<iframe src="" id="informationIframe" frameborder="0" allowfullscreen="true" webkitallowfullscreen="true"mozallowfullscreen="true"  width="100%"  scrolling="no"></iframe>
+		</div>
+		<div class="page-footer" >
+			<p>建设单位：成都市环境保护信息中心</p>
+		</div>
+	</div>
+	
+	
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header  no-border">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+	            </div>
+	            <div class="modal-body">
+	            	<form class="form-horizontal" role="form" id="dataForm">
+						<div class="form-group">
+							<label for="" class="col-sm-3 control-label">旧密码<span style="color: red;">*</span></label>
+							<div class="col-sm-8">
+								<input type="password" class="form-control left required " minlength="6" maxlength="16"  name="suPassword" id="suPassword"  placeholder="请输入旧密码">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-3 control-label">新密码<span style="color: red;">*</span></label>
+							<div class="col-sm-8">
+								<input type="password" class="form-control left required suPassword" minlength="6" maxlength="16"  name="newSuPassword" id="newSuPassword"  placeholder="请输入新密码">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-3 control-label">确认密码<span style="color: red;">*</span></label>
+							<div class="col-sm-8">
+								<input type="password" class="form-control left required suPassword" minlength="6" maxlength="16"  name="newSuPassword2" id="newSuPassword2"  placeholder="请输入新密码">
+							</div>
+						</div>
+					</form>
+	            </div>
+	            <div class="modal-footer  no-border"  style="text-align:center">
+	            	<button type="button" class="btn btn-primary" onclick="updateSuPassword()">提交更改</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal"  style="padding: 6px 26px;">取消</button>
+	                
+	            </div>
+	        </div><!-- /.modal-content -->
+	   </div><!-- /.modal -->
+	</div>
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<!-- 提示插件 -->
+	<script src="js/plugins/es6-promise.auto.js"></script>
+	<script src="js/plugins/swal/sweetalert2.min.js"></script>
+	<!-- validata -->
+	<script src="js/plugins/validate/jquery.validate.min.js"></script>
+	<script src="js/plugins/validate/validate_expend.js"></script>
+	<script src="js/plugins/validate/messages_zh.min.js"></script>
+	<script src="js/plugins/form/formToObject.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/index.js"></script>
+</body>

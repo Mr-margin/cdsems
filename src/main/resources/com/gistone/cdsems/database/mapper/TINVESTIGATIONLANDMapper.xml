@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gistone.cdsems.database.mapper.TINVESTIGATIONLANDMapper">
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.TINVESTIGATIONLAND">
+    <id column="IID" jdbcType="DECIMAL" property="iid" />
+    <result column="LID" jdbcType="DECIMAL" property="lid" />
+    <result column="PRELIMINARY_TITLE" jdbcType="VARCHAR" property="preliminaryTitle" />
+    <result column="PRELIMINARY_WEBSITE" jdbcType="VARCHAR" property="preliminaryWebsite" />
+    <result column="PRELIMINARY_COMPILING_UNIT" jdbcType="VARCHAR" property="preliminaryCompilingUnit" />
+    <result column="PRELIMINARY_COMPILING_TIME" jdbcType="DATE" property="preliminaryCompilingTime" />
+    <result column="INVESTIGATION_REPORT_PATH" jdbcType="VARCHAR" property="investigationReportPath" />
+    <result column="TEST_REPORT_PATH" jdbcType="VARCHAR" property="testReportPath" />
+    <result column="FILL_STATE" jdbcType="VARCHAR" property="fillState" />
+    <result column="MASSIF_POLLUTE" jdbcType="VARCHAR" property="massifPollute" />
+    <result column="EVALUATION_UNIT" jdbcType="VARCHAR" property="evaluationUnit" />
+    <result column="EVALUATION_PEOPLE" jdbcType="VARCHAR" property="evaluationPeople" />
+    <result column="EVALUATION_PHONE" jdbcType="VARCHAR" property="evaluationPhone" />
+    <result column="EVALUATION_CONCLUSION" jdbcType="VARCHAR" property="evaluationConclusion" />
+    <result column="OPINION" jdbcType="VARCHAR" property="opinion" />
+    <result column="CHARGE_PERSON" jdbcType="VARCHAR" property="chargePerson" />
+    <result column="AUDITOR" jdbcType="VARCHAR" property="auditor" />
+    <result column="RESERVED_FIELD1" jdbcType="VARCHAR" property="reservedField1" />
+    <result column="RESERVED_FIELD2" jdbcType="VARCHAR" property="reservedField2" />
+    <result column="RESERVED_FIELD3" jdbcType="VARCHAR" property="reservedField3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    IID, LID, PRELIMINARY_TITLE, PRELIMINARY_WEBSITE, PRELIMINARY_COMPILING_UNIT, PRELIMINARY_COMPILING_TIME, 
+    INVESTIGATION_REPORT_PATH, TEST_REPORT_PATH, FILL_STATE, MASSIF_POLLUTE, EVALUATION_UNIT, 
+    EVALUATION_PEOPLE, EVALUATION_PHONE, EVALUATION_CONCLUSION, OPINION, CHARGE_PERSON, 
+    AUDITOR, RESERVED_FIELD1, RESERVED_FIELD2, RESERVED_FIELD3
+  </sql>
+  <select id="selectByExample" parameterType="com.gistone.cdsems.database.entity.TINVESTIGATIONLANDExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_INVESTIGATION_LAND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_INVESTIGATION_LAND
+    where IID = #{iid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from T_INVESTIGATION_LAND
+    where LID = #{lid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByPrimaryKeys" parameterType="java.lang.Long">
+    delete from T_INVESTIGATION_LAND
+    where IID = #{iid,jdbcType=DECIMAL}
+  </delete>
+
+  <delete id="deleteByExample" parameterType="com.gistone.cdsems.database.entity.TINVESTIGATIONLANDExample">
+    delete from T_INVESTIGATION_LAND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.TINVESTIGATIONLAND">
+    <selectKey resultType="java.lang.Long"   order="AFTER" keyProperty="iid">
+      SELECT T_INVESTIGATION_LAND_SEQ.NEXTVAL as iid from DUAL
+    </selectKey>
+    insert into T_INVESTIGATION_LAND (IID, LID, PRELIMINARY_TITLE,
+      PRELIMINARY_WEBSITE, PRELIMINARY_COMPILING_UNIT, 
+      PRELIMINARY_COMPILING_TIME, INVESTIGATION_REPORT_PATH, 
+      TEST_REPORT_PATH, FILL_STATE, MASSIF_POLLUTE, 
+      EVALUATION_UNIT, EVALUATION_PEOPLE, EVALUATION_PHONE, 
+      EVALUATION_CONCLUSION, OPINION, CHARGE_PERSON, 
+      AUDITOR, RESERVED_FIELD1, RESERVED_FIELD2, 
+      RESERVED_FIELD3)
+    values (#{iid,jdbcType=DECIMAL}, #{lid,jdbcType=DECIMAL}, #{preliminaryTitle,jdbcType=VARCHAR}, 
+      #{preliminaryWebsite,jdbcType=VARCHAR}, #{preliminaryCompilingUnit,jdbcType=VARCHAR}, 
+      #{preliminaryCompilingTime,jdbcType=DATE}, #{investigationReportPath,jdbcType=VARCHAR}, 
+      #{testReportPath,jdbcType=VARCHAR}, #{fillState,jdbcType=VARCHAR}, #{massifPollute,jdbcType=VARCHAR}, 
+      #{evaluationUnit,jdbcType=VARCHAR}, #{evaluationPeople,jdbcType=VARCHAR}, #{evaluationPhone,jdbcType=VARCHAR}, 
+      #{evaluationConclusion,jdbcType=VARCHAR}, #{opinion,jdbcType=VARCHAR}, #{chargePerson,jdbcType=VARCHAR}, 
+      #{auditor,jdbcType=VARCHAR}, #{reservedField1,jdbcType=VARCHAR}, #{reservedField2,jdbcType=VARCHAR}, 
+      #{reservedField3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.TINVESTIGATIONLAND">
+    insert into T_INVESTIGATION_LAND
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="iid != null">
+        IID,
+      </if>
+      <if test="lid != null">
+        LID,
+      </if>
+      <if test="preliminaryTitle != null">
+        PRELIMINARY_TITLE,
+      </if>
+      <if test="preliminaryWebsite != null">
+        PRELIMINARY_WEBSITE,
+      </if>
+      <if test="preliminaryCompilingUnit != null">
+        PRELIMINARY_COMPILING_UNIT,
+      </if>
+      <if test="preliminaryCompilingTime != null">
+        PRELIMINARY_COMPILING_TIME,
+      </if>
+      <if test="investigationReportPath != null">
+        INVESTIGATION_REPORT_PATH,
+      </if>
+      <if test="testReportPath != null">
+        TEST_REPORT_PATH,
+      </if>
+      <if test="fillState != null">
+        FILL_STATE,
+      </if>
+      <if test="massifPollute != null">
+        MASSIF_POLLUTE,
+      </if>
+      <if test="evaluationUnit != null">
+        EVALUATION_UNIT,
+      </if>
+      <if test="evaluationPeople != null">
+        EVALUATION_PEOPLE,
+      </if>
+      <if test="evaluationPhone != null">
+        EVALUATION_PHONE,
+      </if>
+      <if test="evaluationConclusion != null">
+        EVALUATION_CONCLUSION,
+      </if>
+      <if test="opinion != null">
+        OPINION,
+      </if>
+      <if test="chargePerson != null">
+        CHARGE_PERSON,
+      </if>
+      <if test="auditor != null">
+        AUDITOR,
+      </if>
+      <if test="reservedField1 != null">
+        RESERVED_FIELD1,
+      </if>
+      <if test="reservedField2 != null">
+        RESERVED_FIELD2,
+      </if>
+      <if test="reservedField3 != null">
+        RESERVED_FIELD3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="iid != null">
+        #{iid,jdbcType=DECIMAL},
+      </if>
+      <if test="lid != null">
+        #{lid,jdbcType=DECIMAL},
+      </if>
+      <if test="preliminaryTitle != null">
+        #{preliminaryTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="preliminaryWebsite != null">
+        #{preliminaryWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="preliminaryCompilingUnit != null">
+        #{preliminaryCompilingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="preliminaryCompilingTime != null">
+        #{preliminaryCompilingTime,jdbcType=DATE},
+      </if>
+      <if test="investigationReportPath != null">
+        #{investigationReportPath,jdbcType=VARCHAR},
+      </if>
+      <if test="testReportPath != null">
+        #{testReportPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fillState != null">
+        #{fillState,jdbcType=VARCHAR},
+      </if>
+      <if test="massifPollute != null">
+        #{massifPollute,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationUnit != null">
+        #{evaluationUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationPeople != null">
+        #{evaluationPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationPhone != null">
+        #{evaluationPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationConclusion != null">
+        #{evaluationConclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="opinion != null">
+        #{opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="chargePerson != null">
+        #{chargePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null">
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField1 != null">
+        #{reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField2 != null">
+        #{reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField3 != null">
+        #{reservedField3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gistone.cdsems.database.entity.TINVESTIGATIONLANDExample" resultType="java.lang.Long">
+    select count(*) from T_INVESTIGATION_LAND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_INVESTIGATION_LAND
+    <set>
+      <if test="record.iid != null">
+        IID = #{record.iid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lid != null">
+        LID = #{record.lid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.preliminaryTitle != null">
+        PRELIMINARY_TITLE = #{record.preliminaryTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preliminaryWebsite != null">
+        PRELIMINARY_WEBSITE = #{record.preliminaryWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preliminaryCompilingUnit != null">
+        PRELIMINARY_COMPILING_UNIT = #{record.preliminaryCompilingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preliminaryCompilingTime != null">
+        PRELIMINARY_COMPILING_TIME = #{record.preliminaryCompilingTime,jdbcType=DATE},
+      </if>
+      <if test="record.investigationReportPath != null">
+        INVESTIGATION_REPORT_PATH = #{record.investigationReportPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testReportPath != null">
+        TEST_REPORT_PATH = #{record.testReportPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fillState != null">
+        FILL_STATE = #{record.fillState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.massifPollute != null">
+        MASSIF_POLLUTE = #{record.massifPollute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluationUnit != null">
+        EVALUATION_UNIT = #{record.evaluationUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluationPeople != null">
+        EVALUATION_PEOPLE = #{record.evaluationPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluationPhone != null">
+        EVALUATION_PHONE = #{record.evaluationPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaluationConclusion != null">
+        EVALUATION_CONCLUSION = #{record.evaluationConclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opinion != null">
+        OPINION = #{record.opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chargePerson != null">
+        CHARGE_PERSON = #{record.chargePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditor != null">
+        AUDITOR = #{record.auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField1 != null">
+        RESERVED_FIELD1 = #{record.reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField2 != null">
+        RESERVED_FIELD2 = #{record.reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservedField3 != null">
+        RESERVED_FIELD3 = #{record.reservedField3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_INVESTIGATION_LAND
+    set IID = #{record.iid,jdbcType=DECIMAL},
+      LID = #{record.lid,jdbcType=DECIMAL},
+      PRELIMINARY_TITLE = #{record.preliminaryTitle,jdbcType=VARCHAR},
+      PRELIMINARY_WEBSITE = #{record.preliminaryWebsite,jdbcType=VARCHAR},
+      PRELIMINARY_COMPILING_UNIT = #{record.preliminaryCompilingUnit,jdbcType=VARCHAR},
+      PRELIMINARY_COMPILING_TIME = #{record.preliminaryCompilingTime,jdbcType=DATE},
+      INVESTIGATION_REPORT_PATH = #{record.investigationReportPath,jdbcType=VARCHAR},
+      TEST_REPORT_PATH = #{record.testReportPath,jdbcType=VARCHAR},
+      FILL_STATE = #{record.fillState,jdbcType=VARCHAR},
+      MASSIF_POLLUTE = #{record.massifPollute,jdbcType=VARCHAR},
+      EVALUATION_UNIT = #{record.evaluationUnit,jdbcType=VARCHAR},
+      EVALUATION_PEOPLE = #{record.evaluationPeople,jdbcType=VARCHAR},
+      EVALUATION_PHONE = #{record.evaluationPhone,jdbcType=VARCHAR},
+      EVALUATION_CONCLUSION = #{record.evaluationConclusion,jdbcType=VARCHAR},
+      OPINION = #{record.opinion,jdbcType=VARCHAR},
+      CHARGE_PERSON = #{record.chargePerson,jdbcType=VARCHAR},
+      AUDITOR = #{record.auditor,jdbcType=VARCHAR},
+      RESERVED_FIELD1 = #{record.reservedField1,jdbcType=VARCHAR},
+      RESERVED_FIELD2 = #{record.reservedField2,jdbcType=VARCHAR},
+      RESERVED_FIELD3 = #{record.reservedField3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.TINVESTIGATIONLAND">
+    update T_INVESTIGATION_LAND
+    <set>
+      <if test="lid != null">
+        LID = #{lid,jdbcType=DECIMAL},
+      </if>
+      <if test="preliminaryTitle != null">
+        PRELIMINARY_TITLE = #{preliminaryTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="preliminaryWebsite != null">
+        PRELIMINARY_WEBSITE = #{preliminaryWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="preliminaryCompilingUnit != null">
+        PRELIMINARY_COMPILING_UNIT = #{preliminaryCompilingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="preliminaryCompilingTime != null">
+        PRELIMINARY_COMPILING_TIME = #{preliminaryCompilingTime,jdbcType=DATE},
+      </if>
+      <if test="investigationReportPath != null">
+        INVESTIGATION_REPORT_PATH = #{investigationReportPath,jdbcType=VARCHAR},
+      </if>
+      <if test="testReportPath != null">
+        TEST_REPORT_PATH = #{testReportPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fillState != null">
+        FILL_STATE = #{fillState,jdbcType=VARCHAR},
+      </if>
+      <if test="massifPollute != null">
+        MASSIF_POLLUTE = #{massifPollute,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationUnit != null">
+        EVALUATION_UNIT = #{evaluationUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationPeople != null">
+        EVALUATION_PEOPLE = #{evaluationPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationPhone != null">
+        EVALUATION_PHONE = #{evaluationPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluationConclusion != null">
+        EVALUATION_CONCLUSION = #{evaluationConclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="opinion != null">
+        OPINION = #{opinion,jdbcType=VARCHAR},
+      </if>
+      <if test="chargePerson != null">
+        CHARGE_PERSON = #{chargePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null">
+        AUDITOR = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField1 != null">
+        RESERVED_FIELD1 = #{reservedField1,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField2 != null">
+        RESERVED_FIELD2 = #{reservedField2,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedField3 != null">
+        RESERVED_FIELD3 = #{reservedField3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where IID = #{iid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.TINVESTIGATIONLAND">
+    update T_INVESTIGATION_LAND
+    set LID = #{lid,jdbcType=DECIMAL},
+      PRELIMINARY_TITLE = #{preliminaryTitle,jdbcType=VARCHAR},
+      PRELIMINARY_WEBSITE = #{preliminaryWebsite,jdbcType=VARCHAR},
+      PRELIMINARY_COMPILING_UNIT = #{preliminaryCompilingUnit,jdbcType=VARCHAR},
+      PRELIMINARY_COMPILING_TIME = #{preliminaryCompilingTime,jdbcType=DATE},
+      INVESTIGATION_REPORT_PATH = #{investigationReportPath,jdbcType=VARCHAR},
+      TEST_REPORT_PATH = #{testReportPath,jdbcType=VARCHAR},
+      FILL_STATE = #{fillState,jdbcType=VARCHAR},
+      MASSIF_POLLUTE = #{massifPollute,jdbcType=VARCHAR},
+      EVALUATION_UNIT = #{evaluationUnit,jdbcType=VARCHAR},
+      EVALUATION_PEOPLE = #{evaluationPeople,jdbcType=VARCHAR},
+      EVALUATION_PHONE = #{evaluationPhone,jdbcType=VARCHAR},
+      EVALUATION_CONCLUSION = #{evaluationConclusion,jdbcType=VARCHAR},
+      OPINION = #{opinion,jdbcType=VARCHAR},
+      CHARGE_PERSON = #{chargePerson,jdbcType=VARCHAR},
+      AUDITOR = #{auditor,jdbcType=VARCHAR},
+      RESERVED_FIELD1 = #{reservedField1,jdbcType=VARCHAR},
+      RESERVED_FIELD2 = #{reservedField2,jdbcType=VARCHAR},
+      RESERVED_FIELD3 = #{reservedField3,jdbcType=VARCHAR}
+    where IID = #{iid,jdbcType=DECIMAL}
+  </update>
+  <!--表格分页-->
+  <select id="selectByEntityPage" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLAND">
+    select * from  (
+    select rownum rn,aa.* from (
+    select a.*,b.* from (
+    (select
+    <include refid="Base_Column_List"/>
+    from T_INVESTIGATION_LAND
+    where 1=1)a left join  (select MASSIF_NAME massifName ,MASSIF_ADDRESS,ORGANIZATION_CODE,COUNTY_CODE, LID LLID from T_BULIDING_LAND ) b
+    on a.LID=B.LLID )
+    where 1=1
+    <if test="massifName != null">
+      and massifName like '%${massifName}%'
+    </if>
+    <if test="massifAddress != null">
+      and MASSIF_ADDRESS like '%${massifAddress}%'
+    </if>
+    <if test="organizationCode != null">
+      and ORGANIZATION_CODE like '%${organizationCode}%'
+    </if>
+
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+     order by IID desc
+    )aa ) where  rn between #{pageNumber} and #{pageSize}
+  </select>
+  <!--表格数据总数-->
+  <select id="selectByCount" resultType="Integer" parameterType="com.gistone.cdsems.database.entity.TBULIDINGLAND" >
+    select count(*) from (
+    (select
+    <include refid="Base_Column_List"/>
+    from T_INVESTIGATION_LAND
+    where 1=1)a left join  (select MASSIF_NAME massifName ,MASSIF_ADDRESS,ORGANIZATION_CODE,COUNTY_CODE, LID LLID from T_BULIDING_LAND ) b
+    on a.LID=B.LLID )
+    where 1=1
+    <if test="massifName != null">
+      and massifName like '%${massifName}%'
+    </if>
+    <if test="massifAddress != null">
+      and MASSIF_ADDRESS like '%${massifAddress}%'
+    </if>
+    <if test="organizationCode != null">
+      and ORGANIZATION_CODE like '%${organizationCode}%'
+    </if>
+
+    <if test="countyCode != null">
+      and COUNTY_CODE = #{countyCode,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

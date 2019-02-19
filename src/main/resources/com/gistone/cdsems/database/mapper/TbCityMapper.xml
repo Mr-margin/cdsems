@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.TbCityMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.TbCity" >
+    <id column="TC_ID" property="tcId" jdbcType="DECIMAL" />
+    <result column="TC_CODE" property="tcCode" jdbcType="OTHER" />
+    <result column="TC_NAME" property="tcName" jdbcType="OTHER" />
+    <result column="TC_PARENT_ID" property="tcParentId" jdbcType="DECIMAL" />
+    <result column="TC_LEVEL" property="tcLevel" jdbcType="DECIMAL" />
+    <result column="TC_LON" property="tcLon" jdbcType="DECIMAL" />
+    <result column="TC_LAT" property="tcLat" jdbcType="DECIMAL" />
+    <result column="TC_BOUNDSW" property="tcBoundsw" jdbcType="DECIMAL" />
+    <result column="TC_BOUNDSN" property="tcBoundsn" jdbcType="DECIMAL" />
+    <result column="TC_BOUNDSE" property="tcBoundse" jdbcType="DECIMAL" />
+    <result column="TC_BOUNDSS" property="tcBoundss" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TC_ID, TC_CODE, TC_NAME, TC_PARENT_ID, TC_LEVEL, TC_LON, TC_LAT, TC_BOUNDSW, TC_BOUNDSN, 
+    TC_BOUNDSE, TC_BOUNDSS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from TB_CITY
+    where TC_ID = #{tcId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from TB_CITY
+    where TC_ID = #{tcId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.TbCity" >
+    insert into TB_CITY (TC_ID, TC_CODE, TC_NAME, 
+      TC_PARENT_ID, TC_LEVEL, TC_LON, 
+      TC_LAT, TC_BOUNDSW, TC_BOUNDSN, 
+      TC_BOUNDSE, TC_BOUNDSS)
+    values (#{tcId,jdbcType=DECIMAL}, #{tcCode,jdbcType=OTHER}, #{tcName,jdbcType=OTHER}, 
+      #{tcParentId,jdbcType=DECIMAL}, #{tcLevel,jdbcType=DECIMAL}, #{tcLon,jdbcType=DECIMAL}, 
+      #{tcLat,jdbcType=DECIMAL}, #{tcBoundsw,jdbcType=DECIMAL}, #{tcBoundsn,jdbcType=DECIMAL}, 
+      #{tcBoundse,jdbcType=DECIMAL}, #{tcBoundss,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.TbCity" >
+    insert into TB_CITY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tcId != null" >
+        TC_ID,
+      </if>
+      <if test="tcCode != null" >
+        TC_CODE,
+      </if>
+      <if test="tcName != null" >
+        TC_NAME,
+      </if>
+      <if test="tcParentId != null" >
+        TC_PARENT_ID,
+      </if>
+      <if test="tcLevel != null" >
+        TC_LEVEL,
+      </if>
+      <if test="tcLon != null" >
+        TC_LON,
+      </if>
+      <if test="tcLat != null" >
+        TC_LAT,
+      </if>
+      <if test="tcBoundsw != null" >
+        TC_BOUNDSW,
+      </if>
+      <if test="tcBoundsn != null" >
+        TC_BOUNDSN,
+      </if>
+      <if test="tcBoundse != null" >
+        TC_BOUNDSE,
+      </if>
+      <if test="tcBoundss != null" >
+        TC_BOUNDSS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tcId != null" >
+        #{tcId,jdbcType=DECIMAL},
+      </if>
+      <if test="tcCode != null" >
+        #{tcCode,jdbcType=OTHER},
+      </if>
+      <if test="tcName != null" >
+        #{tcName,jdbcType=OTHER},
+      </if>
+      <if test="tcParentId != null" >
+        #{tcParentId,jdbcType=DECIMAL},
+      </if>
+      <if test="tcLevel != null" >
+        #{tcLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="tcLon != null" >
+        #{tcLon,jdbcType=DECIMAL},
+      </if>
+      <if test="tcLat != null" >
+        #{tcLat,jdbcType=DECIMAL},
+      </if>
+      <if test="tcBoundsw != null" >
+        #{tcBoundsw,jdbcType=DECIMAL},
+      </if>
+      <if test="tcBoundsn != null" >
+        #{tcBoundsn,jdbcType=DECIMAL},
+      </if>
+      <if test="tcBoundse != null" >
+        #{tcBoundse,jdbcType=DECIMAL},
+      </if>
+      <if test="tcBoundss != null" >
+        #{tcBoundss,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.TbCity" >
+    update TB_CITY
+    <set >
+      <if test="tcCode != null" >
+        TC_CODE = #{tcCode,jdbcType=OTHER},
+      </if>
+      <if test="tcName != null" >
+        TC_NAME = #{tcName,jdbcType=OTHER},
+      </if>
+      <if test="tcParentId != null" >
+        TC_PARENT_ID = #{tcParentId,jdbcType=DECIMAL},
+      </if>
+      <if test="tcLevel != null" >
+        TC_LEVEL = #{tcLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="tcLon != null" >
+        TC_LON = #{tcLon,jdbcType=DECIMAL},
+      </if>
+      <if test="tcLat != null" >
+        TC_LAT = #{tcLat,jdbcType=DECIMAL},
+      </if>
+      <if test="tcBoundsw != null" >
+        TC_BOUNDSW = #{tcBoundsw,jdbcType=DECIMAL},
+      </if>
+      <if test="tcBoundsn != null" >
+        TC_BOUNDSN = #{tcBoundsn,jdbcType=DECIMAL},
+      </if>
+      <if test="tcBoundse != null" >
+        TC_BOUNDSE = #{tcBoundse,jdbcType=DECIMAL},
+      </if>
+      <if test="tcBoundss != null" >
+        TC_BOUNDSS = #{tcBoundss,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where TC_ID = #{tcId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.TbCity" >
+    update TB_CITY
+    set TC_CODE = #{tcCode,jdbcType=OTHER},
+      TC_NAME = #{tcName,jdbcType=OTHER},
+      TC_PARENT_ID = #{tcParentId,jdbcType=DECIMAL},
+      TC_LEVEL = #{tcLevel,jdbcType=DECIMAL},
+      TC_LON = #{tcLon,jdbcType=DECIMAL},
+      TC_LAT = #{tcLat,jdbcType=DECIMAL},
+      TC_BOUNDSW = #{tcBoundsw,jdbcType=DECIMAL},
+      TC_BOUNDSN = #{tcBoundsn,jdbcType=DECIMAL},
+      TC_BOUNDSE = #{tcBoundse,jdbcType=DECIMAL},
+      TC_BOUNDSS = #{tcBoundss,jdbcType=DECIMAL}
+    where TC_ID = #{tcId,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="getCountyByCityID" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.TbCity" >
+    select 
+    <include refid="Base_Column_List" />
+    from TB_CITY
+    where TC_PARENT_ID = #{tcId,jdbcType=DECIMAL}
+    <if test="tcCode != null" >
+        and TC_CODE = #{tcCode}
+      </if>
+  </select>
+  <!--查询县-->
+  <select id="selectCtiy"  parameterType="hashMap" resultType="hashMap">
+    select TC_CODE,TC_NAME
+    from TB_CITY
+    where TC_LEVEL = #{tcLevel}
+  </select>
+  
+</mapper>

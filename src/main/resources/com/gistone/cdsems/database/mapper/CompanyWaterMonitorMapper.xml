@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gistone.cdsems.database.mapper.CompanyWaterMonitorMapper" >
+  <resultMap id="BaseResultMap" type="com.gistone.cdsems.database.entity.CompanyWaterMonitor" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <id column="WATER_ID" property="waterId" jdbcType="DECIMAL" />
+    <result column="THE_TOTAL_CHROMIUM" property="theTotalChromium" jdbcType="VARCHAR" />
+    <result column="CADMIUM" property="cadmium" jdbcType="VARCHAR" />
+    <result column="MERCURY" property="mercury" jdbcType="VARCHAR" />
+    <result column="ARSENIC" property="arsenic" jdbcType="VARCHAR" />
+    <result column="LEAD" property="lead" jdbcType="VARCHAR" />
+    <result column="NICKEL" property="nickel" jdbcType="VARCHAR" />
+    <result column="COPPER" property="copper" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+    <result column="UPLOAD_TIME" property="uploadTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, WATER_ID, THE_TOTAL_CHROMIUM, CADMIUM, MERCURY, ARSENIC, LEAD, NICKEL, COPPER, 
+    CREATE_USER_ID, CREATE_TIME, UPDATE_USER_ID, UPDATE_TIME, UPLOAD_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.gistone.cdsems.database.entity.CompanyWaterMonitorKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_COMPANY_WATER_MONITOR
+    where ID = #{id,jdbcType=DECIMAL}
+      and WATER_ID = #{waterId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.CompanyWaterMonitorKey" >
+    delete from T_COMPANY_WATER_MONITOR
+    where ID = #{id,jdbcType=DECIMAL}
+      and WATER_ID = #{waterId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.gistone.cdsems.database.entity.CompanyWaterMonitor" >
+    insert into T_COMPANY_WATER_MONITOR (ID, WATER_ID, THE_TOTAL_CHROMIUM, 
+      CADMIUM, MERCURY, ARSENIC, 
+      LEAD, NICKEL, COPPER, 
+      CREATE_USER_ID, CREATE_TIME, UPDATE_USER_ID, 
+      UPDATE_TIME, UPLOAD_TIME)
+    values (#{id,jdbcType=DECIMAL}, #{waterId,jdbcType=DECIMAL}, #{theTotalChromium,jdbcType=VARCHAR}, 
+      #{cadmium,jdbcType=VARCHAR}, #{mercury,jdbcType=VARCHAR}, #{arsenic,jdbcType=VARCHAR}, 
+      #{lead,jdbcType=VARCHAR}, #{nickel,jdbcType=VARCHAR}, #{copper,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{updateUserId,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=VARCHAR}, #{uploadTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gistone.cdsems.database.entity.CompanyWaterMonitor" >
+    insert into T_COMPANY_WATER_MONITOR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="waterId != null" >
+        WATER_ID,
+      </if>
+      <if test="theTotalChromium != null" >
+        THE_TOTAL_CHROMIUM,
+      </if>
+      <if test="cadmium != null" >
+        CADMIUM,
+      </if>
+      <if test="mercury != null" >
+        MERCURY,
+      </if>
+      <if test="arsenic != null" >
+        ARSENIC,
+      </if>
+      <if test="lead != null" >
+        LEAD,
+      </if>
+      <if test="nickel != null" >
+        NICKEL,
+      </if>
+      <if test="copper != null" >
+        COPPER,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="uploadTime != null" >
+        UPLOAD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="waterId != null" >
+        #{waterId,jdbcType=DECIMAL},
+      </if>
+      <if test="theTotalChromium != null" >
+        #{theTotalChromium,jdbcType=VARCHAR},
+      </if>
+      <if test="cadmium != null" >
+        #{cadmium,jdbcType=VARCHAR},
+      </if>
+      <if test="mercury != null" >
+        #{mercury,jdbcType=VARCHAR},
+      </if>
+      <if test="arsenic != null" >
+        #{arsenic,jdbcType=VARCHAR},
+      </if>
+      <if test="lead != null" >
+        #{lead,jdbcType=VARCHAR},
+      </if>
+      <if test="nickel != null" >
+        #{nickel,jdbcType=VARCHAR},
+      </if>
+      <if test="copper != null" >
+        #{copper,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        #{uploadTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gistone.cdsems.database.entity.CompanyWaterMonitor" >
+    update T_COMPANY_WATER_MONITOR
+    <set >
+      <if test="theTotalChromium != null" >
+        THE_TOTAL_CHROMIUM = #{theTotalChromium,jdbcType=VARCHAR},
+      </if>
+      <if test="cadmium != null" >
+        CADMIUM = #{cadmium,jdbcType=VARCHAR},
+      </if>
+      <if test="mercury != null" >
+        MERCURY = #{mercury,jdbcType=VARCHAR},
+      </if>
+      <if test="arsenic != null" >
+        ARSENIC = #{arsenic,jdbcType=VARCHAR},
+      </if>
+      <if test="lead != null" >
+        LEAD = #{lead,jdbcType=VARCHAR},
+      </if>
+      <if test="nickel != null" >
+        NICKEL = #{nickel,jdbcType=VARCHAR},
+      </if>
+      <if test="copper != null" >
+        COPPER = #{copper,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        UPLOAD_TIME = #{uploadTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+      and WATER_ID = #{waterId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gistone.cdsems.database.entity.CompanyWaterMonitor" >
+    update T_COMPANY_WATER_MONITOR
+    set THE_TOTAL_CHROMIUM = #{theTotalChromium,jdbcType=VARCHAR},
+      CADMIUM = #{cadmium,jdbcType=VARCHAR},
+      MERCURY = #{mercury,jdbcType=VARCHAR},
+      ARSENIC = #{arsenic,jdbcType=VARCHAR},
+      LEAD = #{lead,jdbcType=VARCHAR},
+      NICKEL = #{nickel,jdbcType=VARCHAR},
+      COPPER = #{copper,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      UPLOAD_TIME = #{uploadTime,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+      and WATER_ID = #{waterId,jdbcType=DECIMAL}
+  </update>
+</mapper>

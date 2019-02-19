@@ -1,0 +1,73 @@
+<div class=" box-body">
+    <!-- 面包屑 -->
+    <div class="panel panel-default  crumbs_box">
+        <div class="panel-body  clearfix">
+            <p class="crumbs  pull-left">
+            	<i class="iconfont">&#xe690;</i>当前位置：
+            	<span>农用地</span><span> > </span><span>基础信息</span><span> > </span><span>添加</span>
+            </p>
+        	<div class="pull-right"></div>
+        </div>
+    </div>
+    <div class="panel panel-default  content">
+        <div class="panel-body pt50">
+         	<form class="form-horizontal  col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" role="form" id="dataForm">
+         		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+         			<div class="form-group col-lg-9 col-md-9 col-sm-9 col-xs-9">
+         				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+						<label for="" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">农用地名称<span style="color: red;">*</span></label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control required"   name="agricuturalName"  id="agricuturalName">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-9 col-md-9 col-sm-9 col-xs-9">
+         				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+						<label for="" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">农用地编码</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control"   name="agricuturalCode"  id="agricuturalCode">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-9 col-md-9 col-sm-9 col-xs-9">
+         				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+						<label for="" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">土地利用类型</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control"   name="agricuturalType"  id="agricuturalType">
+						</div>
+         			</div>
+         			<div class="form-group col-lg-9 col-md-9 col-sm-9 col-xs-9">
+         				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+						<label for="" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">区县</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<select id="countyCode"  class="form-control"  >
+					    		<option value="">请选择</option>
+					    	</select>
+						</div>
+         			</div>
+         			<div class="form-group col-lg-9 col-md-9 col-sm-9 col-xs-9">
+         				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+						<label for="" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">经纬度</label>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+							<input type="number" class="form-control valid" maxlength="12" name="longitude" id="longitude"  oninput="value=value.replace(/[^\d\.]/g,'')" autocomplete="off" placeholder="" aria-invalid="false" placeholder="经度">
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+							<!--<input type="text" class="form-control"   name="latitude"  id="latitude"  >-->
+							<input type="number" class="form-control valid" maxlength="12" name="latitude" id="latitude" oninput="value=value.replace(/[^\d\.]/g,'')" autocomplete="off" placeholder="" aria-invalid="false" placeholder="纬度">
+
+						</div>
+         			</div>
+         			<div class="form-group col-lg-9 col-md-9 col-sm-9 col-xs-9">
+         				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+						<label for="" class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">高程</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control"   name="altitude"  id="altitude">
+						</div>
+         			</div>
+         		</div>
+         	</form>
+         	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+         		<button class="btn btn-warning mr10 p6-25"  onclick="add()">添加</button>
+            	<button class="btn btn-default p6-25"  onclick="back()">取消</button>
+			</div>
+    	</div>
+	</div>
+</div>

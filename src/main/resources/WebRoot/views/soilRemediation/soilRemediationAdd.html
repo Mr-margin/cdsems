@@ -1,0 +1,101 @@
+<div class=" box-body">
+    <!-- 面包屑 -->
+    <div class="panel panel-default  crumbs_box">
+        <div class="panel-body  clearfix">
+            <p class="crumbs  pull-left">
+            	<i class="iconfont">&#xe690;</i>当前位置：
+            	<span>土壤治理与修复项目</span><span> > 基础信息管理</span><span> > </span><span>添加</span>
+            </p>
+        	<div class="pull-right"></div>
+        </div>
+    </div>
+    <div class="panel panel-default  content">
+        <div class="panel-body pt50">
+         	<form class="form-horizontal  col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" role="form" id="dataForm">
+         		<div class="form-group">
+					<label for="" class="col-sm-2 control-label">项目名称<span style="color: red;">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left required" maxlength="50" name="NAME" id="NAME" autocomplete="off" autocomplete="off"  placeholder="">
+					</div>
+					<label for="" class="col-sm-2 control-label">项目类型<span style="color: red;">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control required" name="TYPE" id="TYPE">
+							<option value="污染地块">污染地块</option>
+							<option value="农用地">农用地</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">区县<span style="color: red;">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control required" name="COUNTY" id="COUNTY"></select>
+					</div>
+					<label for="" class="col-sm-2 control-label">项目地址<span style="color: red;">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left required" maxlength="100"  name="ADDRESS" id="ADDRESS"  autocomplete="off"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">启动时间<span style="color: red;">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left date_day required" maxlength="10" name="START_DATE" id="START_DATE" readonly="readonly" autocomplete="off"  placeholder="">
+					</div>
+					<label for="" class="col-sm-2 control-label">截止时间<span style="color: red;">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left date_day required" maxlength="10" name="END_DATE" id="END_DATE"  readonly="readonly" autocomplete="off"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">总体资金</label>
+					<div class="col-sm-4">
+					  <input type="text" class="form-control left" maxlength="20" name="FUND" id="FUND"  autocomplete="off"  placeholder="">
+					</div>
+					<label for="" class="col-sm-2 control-label">资金来源</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left" maxlength="100"  name="FUND_SOURCE" id="FUND_SOURCE"  autocomplete="off"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">资金使用情况</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left" maxlength="100"  name="FUND_USE" id="FUND_USE"  autocomplete="off"  placeholder="">
+					</div>
+					<label for="" class="col-sm-2 control-label">当前实施进度</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left" maxlength="100"  name="PROGRESS" id="PROGRESS"  autocomplete="off"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">实施单位名称</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left " maxlength="12" name="IMPLEMENT" id="IMPLEMENT"  autocomplete="off"  placeholder="">
+					</div>
+					<label for="" class="col-sm-2 control-label">实施单位联系人</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left " maxlength="10"  name="CONTACTS" id="CONTACTS"  autocomplete="off"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">项目主要内容</label>
+					<div class="col-sm-4">
+						<textarea name="CONTENT" id="CONTENT" class="form-control" rows="3"></textarea>
+					</div>
+					<label for="" class="col-sm-2 control-label">联系人电话</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control left " oninput="value=value.replace(/[^\d\-]/g,'')" maxlength="15" name="PHONE" id="PHONE"  autocomplete="off"  placeholder="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">技术简介</label>
+					<div class="col-sm-4">
+						<textarea name="TECHNOLOGY" id="TECHNOLOGY" class="form-control" rows="3"></textarea>
+					</div>
+				</div>
+         	</form>
+         	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center  mt50">
+         		<button class="btn btn-warning mr10 p6-25"  onclick="add()">添加</button>
+            	<button class="btn btn-default p6-25"  onclick="back()">取消</button>
+			</div>
+    	</div>
+	</div>
+</div>
